@@ -1,10 +1,10 @@
 # Solid Shapes
 
-This repository contains the source code of Solid "shapes" in languages or expressions such as SHACL or SheX.
+This repository contains the source code of Solid *shapes* in languages or expressions such as SHACL, SheX, or other.
 
-## Process
+## Requirements
 
-* Shapes in this repository MUST be accomanpied by Solid specifications.
+* Shapes MUST express concepts or constructs defined in a [Solid Technical Report](https://solidproject.org/TR/).
 * Shapes MUST be available from `https://www.w3.org/ns/solid/shapes/{shortname}`.
 
 ## Contributing
