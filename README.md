@@ -5,6 +5,7 @@ This repository contains the source code of Solid *shapes* in languages or expre
 ## Requirements
 
 * Shapes MUST express concepts or constructs defined in a [Solid Technical Report](https://solidproject.org/TR/).
+* Shapes MUST use a concrete RDF syntax that is recommended by the [Solid Protocol](https://solidproject.org/TR/protocol).
 * Shapes MUST be available from `https://www.w3.org/ns/solid/shapes/{shortname}`.
 
 ## Contributing
