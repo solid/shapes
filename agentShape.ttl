@@ -1,0 +1,18 @@
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+@prefix ps: <https://solid.github.io/shapes/person#> .
+@prefix sas: <https://solid.github.io/shapes/softwareAgent#> .
+@prefix os: <https://solid.github.io/shapes/organization#> .
+
+@prefix as: <https://solid.github.io/shapes/Agent#> .
+
+as:AgentShape
+    a sh:NodeShape ;
+    sh:targetClass foaf:Agent ;
+
+    sh:xone (
+        [ sh:node ps:PersonShape ]
+        [ sh:node os:OrganizationShape ]
+        [ sh:node sas:SoftwareAgentShape ]
+    ) .

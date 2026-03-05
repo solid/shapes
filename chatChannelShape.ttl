@@ -1,0 +1,94 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix mee:  <http://www.w3.org/ns/pim/meeting#> .
+@prefix ui:   <http://www.w3.org/ns/ui#> .
+
+@prefix ccs:  <https://solid.github.io/shapes/ChatChannel#> .
+
+
+
+# Ontology-level description
+<> 
+    rdfs:label "Solid Chat SHACL Shapes" ;
+    rdfs:comment "This is a shape file defining validation rules for Solid Chat data." .
+
+# Chat Channel Shape
+ccs:ChatChannelShape a sh:NodeShape ;
+    rdfs:label "Chat Channel Shape" ;
+    rdfs:comment "SHACL NodeShape describing the properties and constraints for a Solid Chat LongChat." ;
+    sh:targetClass mee:LongChat ;
+    sh:property
+        [ sh:path rdf:type ;
+          sh:value mee:LongChat ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Type" ;
+          rdfs:comment "Specifies that the node must be of type LongChat." 
+        ],
+        [ sh:path dc:author ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Author" ;
+          rdfs:comment "The author of the chat channel." 
+        ],
+        [ sh:path dc:title ;
+          sh:datatype xsd:string ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Title" ;
+          rdfs:comment "The title of the chat channel." 
+        ],
+        [ sh:path dc:created ;
+          sh:datatype xsd:dateTime ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Created Date" ;
+          rdfs:comment "The creation date of the chat channel." 
+        ],
+        [ sh:path ui:sharedPreferences ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Shared Preferences" ;
+          rdfs:comment "References user interface preferences shared in the chat." 
+        ],
+        [ sh:path flow:participation ;
+          sh:minCount 0 ;
+          rdfs:label "Participation" ;
+          rdfs:comment "Indicates participants in the chat channel." 
+        ] .
+
+# Class and Property Annotations
+
+# mee:LongChat class
+mee:LongChat a rdfs:Class ;
+    rdfs:label "Long Chat" ;
+    rdfs:comment "A chat session that can span multiple messages and participants, typically a persistent chat channel." .
+
+# flow:participation property
+flow:participation a rdf:Property ;
+    rdfs:label "Participation" ;
+    rdfs:comment "Links a chat channel to its participants, indicating involvement in the chat." .
+
+# dc:author property
+dc:author a rdf:Property ;
+    rdfs:label "Author" ;
+    rdfs:comment "The person or agent who created or authored the resource." .
+
+# dc:title property
+dc:title a rdf:Property ;
+    rdfs:label "Title" ;
+    rdfs:comment "The name or title of the resource." .
+
+# dc:created property
+dc:created a rdf:Property ;
+    rdfs:label "Created Date" ;
+    rdfs:comment "The date and time when the resource was created." .
+
+# ui:sharedPreferences property
+ui:sharedPreferences a rdf:Property ;
+    rdfs:label "Shared Preferences" ;
+    rdfs:comment "Points to user interface preferences shared with other participants." .

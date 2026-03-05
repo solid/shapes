@@ -1,0 +1,61 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix gs:  <https://solid.github.io/shapes/Group#> .
+
+
+<> 
+    rdfs:label "Shape file for VCARD data in Solid"@en ;
+    rdfs:comment "SHACL shapes defining constraints for vCard Group data used in Solid applications."@en .
+
+################################################################
+# Group Shape
+################################################################
+
+gs:GroupShape
+    a sh:NodeShape ;
+    rdfs:label "Group Shape"@en ;
+    rdfs:comment "Defines constraints for a vCard Group including its name and members."@en ;
+    sh:targetClass vcard:Group ;
+
+    sh:property [
+        sh:path vcard:fn ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:label "Group Name"@en ;
+        rdfs:comment "The formatted name of the group."@en
+    ] ;
+
+    sh:property [
+        sh:path vcard:member ;
+        sh:minCount 0 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Group Member"@en ;
+        rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs."@en
+    ] .
+
+################################################################
+# Group Member Local Identifier Shape
+################################################################
+
+gs:GroupMemberLocalId
+    a sh:NodeShape ;
+    rdfs:label "Group Member Local Identifier Shape"@en ;
+    rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs."@en ;
+    sh:targetObjectsOf vcard:member ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Same As Individual"@en ;
+        rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource."@en
+    ] .
+
+# ends
+
+# Source file: ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl

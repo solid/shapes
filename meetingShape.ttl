@@ -1,0 +1,140 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix cal:  <http://www.w3.org/2002/12/cal/ical#> .
+@prefix meeting: <http://www.w3.org/ns/pim/meeting#> .
+@prefix ui:   <http://www.w3.org/ns/ui#> .
+@prefix ms:   <https://solid.github.io/shapes/Meeting#> .
+
+<> 
+  rdfs:label "SHACL shapes for Meeting data"@en ;
+  rdfs:comment "SHACL data shapes extracted from the SolidOS meeting pane UI form definition."@en .
+
+################################################################
+# Meeting Shape
+################################################################
+
+ms:MeetingShape
+    a sh:NodeShape ;
+    rdfs:label "Meeting Shape"@en ;
+    rdfs:comment "Defines constraints for meeting instances including title, location, time, comments, and display color."@en ;
+    sh:targetClass cal:Vevent ;
+
+    sh:property [
+
+        sh:path cal:summary ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:maxLength 256 ;
+        rdfs:label "Meeting Title"@en ;
+        rdfs:comment "The name or summary of the meeting."@en
+    ] ;
+
+    sh:property [
+
+        sh:path cal:location ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:maxLength 128 ;
+        rdfs:label "Location"@en ;
+        rdfs:comment "The location where the meeting takes place."@en
+    ] ;
+
+    sh:property [
+
+        sh:path cal:dtstart ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        rdfs:label "Start Time"@en ;
+        rdfs:comment "The start date and time of the meeting."@en
+    ] ;
+
+    sh:property [
+
+        sh:path cal:dtend ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        rdfs:label "End Time"@en ;
+        rdfs:comment "The end date and time of the meeting."@en
+    ] ;
+
+    sh:property [
+
+        sh:path cal:comment ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        rdfs:label "Comment"@en ;
+        rdfs:comment "Additional notes or comments about the meeting."@en
+    ] ;
+
+    sh:property [
+
+        sh:path ui:backgroundColor ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        rdfs:label "Tab Color"@en ;
+        rdfs:comment "UI background color associated with the meeting tab."@en
+    ] .
+
+################################################################
+# Meeting Settings Shape
+################################################################
+
+ms:MeetingSettingsShape
+    a sh:NodeShape ;
+    rdfs:label "Meeting Settings Shape"@en ;
+    rdfs:comment "Defines constraints for meeting tab configuration including label, target resource, view mode, and color."@en ;
+
+    sh:property [
+
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:maxLength 128 ;
+        rdfs:label "Tab Label"@en ;
+        rdfs:comment "Label shown on the meeting tab."@en
+    ] ;
+
+    sh:property [
+
+        sh:path meeting:target ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        rdfs:label "Target Resource"@en ;
+        rdfs:comment "IRI of the resource associated with the meeting."@en
+    ] ;
+
+    sh:property [
+
+        sh:path meeting:view ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:maxLength 128 ;
+        rdfs:label "View Mode"@en ;
+        rdfs:comment "Optional view mode configuration for advanced users."@en
+    ] ;
+
+    sh:property [
+
+        sh:path ui:backgroundColor ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        rdfs:label "Tab Color"@en ;
+        rdfs:comment "UI background color for the meeting tab."@en
+    ] .
+
+# Source file:
+# ../data/raw/shacl/SolidOS_meeting_pane_shapes_meeting_shapes_ttl.ttl
+
+# ends

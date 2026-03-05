@@ -1,0 +1,70 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+@prefix ps: <https://solid.github.io/shapes/Person#> .
+
+# Reference  ../data/raw/shacl/SolidOS_contacts_pane_shapes_contacts_shapes_ttl.ttl
+
+<> rdfs:label "Shape file for VCARD data in Solid";
+   rdfs:comment "This SHACL file defines shapes for validating personal names in VCARDs, including structured name components." .
+
+############################################################
+# Structured personal name
+############################################################
+
+ps:PersonalNameShape
+    a sh:NodeShape ;
+    rdfs:label "Structured Personal Name Shape"@en ;
+    rdfs:comment "Validates components of a person's structured name in VCARD data." ;
+    sh:targetObjectOf vcard:hasName ;
+    
+    # Family name (surname)
+    sh:property [
+        sh:path vcard:family-name ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Family Name"@en ;
+        rdfs:comment "The surname or family name of the individual."@en
+    ] ;
+
+    # Given name (first name)
+    sh:property [
+        sh:path vcard:given-name ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Given Name"@en ;
+        rdfs:comment "The given or first name of the individual."@en
+    ] ;
+
+    # Additional name (middle name)
+    sh:property [
+        sh:path vcard:additional-name ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Additional Name"@en ;
+        rdfs:comment "Any middle name(s) or additional name of the individual."@en
+    ] ;
+
+    # Honorific prefix (e.g., Dr., Mr., Ms.)
+    sh:property [
+        sh:path vcard:honorific-prefix ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Honorific Prefix"@en ;
+        rdfs:comment "Honorific prefix such as Dr., Mr., or Ms."@en
+    ] ;
+
+    # Honorific suffix (e.g., Jr., III)
+    sh:property [
+        sh:path vcard:honorific-suffix ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Honorific Suffix"@en ;
+        rdfs:comment "Honorific suffix such as Jr., III, or PhD."@en
+    ] ;
+
+    # Closed shape ensures no extra properties are allowed
+    sh:closed true ;
+    rdfs:comment "No other properties beyond the defined name components are allowed in this shape."@en .

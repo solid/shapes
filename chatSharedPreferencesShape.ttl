@@ -1,0 +1,40 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix solid: <http://www.w3.org/ns/solid/terms#> .
+@prefix ui:   <http://www.w3.org/ns/ui#> .
+
+@prefix ccs:   <https://solid.github.io/shapes/ChatChannel#> .
+
+<> 
+    rdfs:label "Solid Chat Shared Preferences Shapes" ;
+    rdfs:comment "This file defines SHACL validation rules for user shared preferences in Solid Chat." .
+
+################ Shared Preferences
+
+ccs:SharedPreferencesShape a sh:NodeShape ;
+    rdfs:label "Shared Preferences Shape" ;
+    rdfs:comment "NodeShape defining shared UI preferences for chat participants." ;
+    sh:targetObjectsOf ui:sharedPreferences ;
+    sh:property
+        [ sh:path solid:expandImagesInline ;
+          sh:datatype xsd:boolean ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Expand Images Inline" ;
+          rdfs:comment "Indicates whether images should be expanded inline in the chat UI." 
+        ],
+        [ sh:path solid:inlineImageHeightEms ;
+          sh:datatype xsd:integer ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Inline Image Height (ems)" ;
+          rdfs:comment "Preferred height for inline images in em units." 
+        ],
+        [ sh:path solid:newestFirst ;
+          sh:datatype xsd:boolean ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Newest First" ;
+          rdfs:comment "If true, messages are displayed newest first in the chat UI." 
+        ] .

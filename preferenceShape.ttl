@@ -1,0 +1,46 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix solid: <http://www.w3.org/ns/solid/terms#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ui: <http://www.w3.org/ns/ui#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pres:   <https://solid.github.io/shapes/Preference#> .
+
+# Source: Basic preferences UI form
+
+pres:PreferenceShape
+    a sh:NodeShape ;
+    rdfs:label "Basic Preferences Shape"@en ;
+    rdfs:comment "SHACL shape representing the basic preferences form, including personal information privacy and user categorization."@en ;
+    sh:targetClass solid:User ;
+
+    # Heading for personal information section
+    sh:property [
+        sh:path ui:contents ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Personal Information Heading"@en ;
+        rdfs:comment "Heading for the personal information section in the form."@en
+    ] ;
+
+    # Private comment
+    sh:property [
+        sh:path ui:contents ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Private Comment"@en ;
+        rdfs:comment "Comment indicating that the personal information is private."@en
+    ] ;
+
+    # User categorization/classifier
+    sh:property [
+        sh:path rdf:type ;
+        sh:class solid:User ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        rdfs:label "User Level"@en ;
+        rdfs:comment "Classifier field to indicate the level or type of user."@en
+    ] ;
+
+    sh:closed false ;
+    rdfs:comment "This shape allows additional properties beyond those defined above."@en .

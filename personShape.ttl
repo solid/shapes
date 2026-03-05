@@ -1,0 +1,130 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+@prefix as:  <https://solid.github.io/shapes/Address#> .
+@prefix es: <https://solid.github.io/shapes/Email#> .
+@prefix ts: <https://solid.github.io/shapes/Telephone#> .
+@prefix pers:  <https://solid.github.io/shapes/Person#> .
+
+################################################################
+# Person Contact Shape
+################################################################
+
+pers:PersonShape a sh:NodeShape ;
+    rdfs:label "Person Shape" ;
+    rdfs:comment "SHACL shape representing a person" ;
+    sh:targetClass foaf:Person ;  
+    sh:property
+        [ sh:path vcard:fn ;
+          sh:minCount 1 ;
+          sh:maxCount 1 ;
+          rdfs:label "Full Name" ;
+          sh:datatype xsd:string;
+         
+        ],
+        [ sh:path vcard:role ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Role" ;
+          rdfs:comment "The role or job title of the person." ;
+          sh:datatype xsd:string;
+        ],
+        [ sh:path vcard:organization-name ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Organization Name" ;
+          rdfs:comment "The organization the person belongs to.";
+          sh:datatype xsd:string; 
+        ],
+        [ sh:path vcard:hasAddress ;
+          sh:minCount 0 ;
+          sh:node as:AddressShape;
+          rdfs:label "Address" ;
+          rdfs:comment "The physical addresses of the contact." ;
+          sh:nodeKind sh:BlankNodeOrIRI ;
+
+        ],
+        [ sh:path vcard:hasEmail ;
+          sh:minCount 0 ;
+          sh:node es:EmailShape;
+          rdfs:label "Emails" ;
+          rdfs:comment "Email addresses of the contact." ;
+          sh:nodeKind sh:BlankNodeOrIRI ;
+        ],
+        [ sh:path vcard:hasTelephone ;
+          sh:node ts:TelephoneShape ;
+          rdfs:label "Telephones" ;
+          rdfs:comment "Telephone numbers of the contact." ;
+          sh:nodeKind sh:BlankNodeOrIRI ;
+        ],
+        [ sh:path vcard:bday ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          sh:datatype xsd:date ;
+          rdfs:label "Birthday" ;
+          rdfs:comment "Date of birth" 
+        ],
+        [ sh:path vcard:note ;
+          sh:minCount 0 ;
+          sh:maxCount 1 ;
+          rdfs:label "Notes" ;
+          rdfs:comment "General notes about the contact." ;
+          sh:datatype xsd:string;
+        ] .
+
+
+################################################################
+# SHACL shape for a person/contact (from core:PersonForm)
+# source https://github.com/SolidOS/issue-pane/blob/9c24db98fb810ad2139244f8f1552fc0f704c1ac/src/ontology/trackerSettingsForm.ttl
+# see also  Person contact shape at [person contact shape](../Contacts/personContactShape.ttl)
+################################################################
+
+pers:PersonShape2
+    a sh:NodeShape ;
+    sh:targetClass vcard:Individual ;
+    rdfs:label "Person Shape"@en ;
+    rdfs:comment "SHACL shape for validating new contact details."@en ;
+
+    # Solid ID
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        rdfs:label "Solid ID"@en ;
+        rdfs:comment "The WebID or URI identifying this person."@en
+    ] ;
+
+    # Name
+    sh:property [
+        sh:path vcard:fn ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        rdfs:label "Full Name"@en ;
+        rdfs:comment "The full name of the person/contact."@en
+    ] ;
+
+    # Phone
+    sh:property [
+        sh:path vcard:phone ;
+        sh:minCount 0 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Phone"@en ;
+        rdfs:comment "Phone number of the person."@en
+    ] ;
+
+    # Email
+    sh:property [
+        sh:path vcard:email ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        sh:pattern "^[^@]+@[^@]+\\.[^@]+$";
+        rdfs:label "Email"@en ;
+        rdfs:comment "Email address of the person."@en
+    ] .
