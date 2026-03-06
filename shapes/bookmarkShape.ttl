@@ -1,0 +1,33 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/bookmark#> a sh:NodeShape ;
+    rdfs:label "Bookmark"@en ;
+    rdfs:comment "A Bookmark node with label, URL, topic, and description"@en ;
+    sh:property [ rdfs:label "Label"@en ;
+            rdfs:comment "Human-readable name of the bookmark"@en ;
+            sh:datatype xsd:string ;
+            sh:minCount 0 ;
+            sh:name "Label"@en ;
+            sh:path rdfs:label ],
+        [ rdfs:label "URL"@en ;
+            rdfs:comment "The URL that the bookmark points to"@en ;
+            sh:datatype xsd:anyURI ;
+            sh:minCount 0 ;
+            sh:name "URL"@en ;
+            sh:path <http://www.w3.org/2002/01/bookmark#recalls> ],
+        [ rdfs:label "Topic"@en ;
+            rdfs:comment "Topic or category of the bookmark"@en ;
+            sh:datatype xsd:string ;
+            sh:minCount 0 ;
+            sh:name "Topic"@en ;
+            sh:path <http://www.w3.org/2002/01/bookmark#hasTopic> ],
+        [ rdfs:label "Description"@en ;
+            rdfs:comment "Optional description of the bookmark"@en ;
+            sh:datatype xsd:string ;
+            sh:minCount 0 ;
+            sh:name "Description"@en ;
+            sh:path rdfs:comment ] ;
+    sh:targetClass <http://www.w3.org/2002/01/bookmark#Bookmark> .
+

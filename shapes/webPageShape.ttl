@@ -1,0 +1,10 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/webpage#> a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#value> ;
+            sh:pattern "^https?:" ] ;
+    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#url> .
+

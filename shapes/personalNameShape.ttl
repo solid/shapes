@@ -1,0 +1,36 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/person#> a sh:NodeShape ;
+    rdfs:label "Structured Personal Name Shape"@en ;
+    rdfs:comment "Validates components of a person's structured name in VCARD data.",
+        "No other properties beyond the defined name components are allowed in this shape."@en ;
+    sh:closed true ;
+    sh:property [ rdfs:label "Family Name"@en ;
+            rdfs:comment "The surname or family name of the individual."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#family-name> ],
+        [ rdfs:label "Given Name"@en ;
+            rdfs:comment "The given or first name of the individual."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#given-name> ],
+        [ rdfs:label "Additional Name"@en ;
+            rdfs:comment "Any middle name(s) or additional name of the individual."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#additional-name> ],
+        [ rdfs:label "Honorific Prefix"@en ;
+            rdfs:comment "Honorific prefix such as Dr., Mr., or Ms."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#honorific-prefix> ],
+        [ rdfs:label "Honorific Suffix"@en ;
+            rdfs:comment "Honorific suffix such as Jr., III, or PhD."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#honorific-suffix> ] ;
+    sh:targetObjectOf <http://www.w3.org/2006/vcard/ns#hasName> .
+

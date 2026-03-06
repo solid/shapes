@@ -1,0 +1,63 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidos.github.io/profile-pane/src/ontology/profileForm.ttl#PersonProfileShape> a sh:NodeShape ;
+    rdfs:label "Person Profile Shape"@en ;
+    rdfs:comment "SHACL shape for validating the structure of a personal profile in Solid, including name, pronouns, CV, skills, languages, and social accounts."@en,
+        "This shape does not forbid additional properties beyond those defined above."@en ;
+    sh:closed false ;
+    sh:property [ rdfs:label "Nickname / Short name"@en ;
+            rdfs:comment "A short name used for chats or informal references."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path foaf:nick ],
+        [ rdfs:label "Profile highlight color"@en ;
+            rdfs:comment "Hex color code used for highlights in the public profile."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/ns/solid/terms#profileHighlightColor> ],
+        [ rdfs:label "Preferred subject pronoun"@en ;
+            rdfs:comment "Preferred pronoun for subject role (he/she/they)."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/ns/solid/terms#preferredSubjectPronoun> ],
+        [ rdfs:label "Preferred object pronoun"@en ;
+            rdfs:comment "Preferred pronoun for object role (him/her/them)."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/ns/solid/terms#preferredObjectPronoun> ],
+        [ rdfs:label "Preferred relative pronoun"@en ;
+            rdfs:comment "Preferred relative pronoun (his/hers/theirs)."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/ns/solid/terms#preferredRelativePronoun> ],
+        [ rdfs:label "Role / Organization involvement"@en ;
+            rdfs:comment "Memberships or roles in organizations, linking to past, current, or future roles."@en ;
+            sh:minCount 0 ;
+            sh:nodeKind sh:IRI ;
+            sh:path org:member ],
+        [ rdfs:label "Skills"@en ;
+            rdfs:comment "Professional or personal skills of the individual, possibly linked to ESCO ontology."@en ;
+            sh:minCount 0 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://schema.org/skills> ],
+        [ rdfs:label "Languages"@en ;
+            rdfs:comment "Languages known by the individual, ordered by preference."@en ;
+            sh:minCount 0 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://schema.org/knowsLanguage> ],
+        [ rdfs:label "Online accounts"@en ;
+            rdfs:comment "Links to social media accounts such as Twitter, Mastodon, Github, LinkedIn, etc."@en ;
+            sh:minCount 0 ;
+            sh:nodeKind sh:IRI ;
+            sh:path foaf:account ],
+        [ rdfs:label "Profile background color"@en ;
+            rdfs:comment "Hex color code used as background for the public profile."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path <http://www.w3.org/ns/solid/terms#profileBackgroundColor> ] ;
+    sh:targetClass foaf:Person .
+

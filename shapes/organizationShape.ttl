@@ -1,0 +1,166 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/organization#> a sh:NodeShape ;
+    rdfs:label "Organization Shape"@en ;
+    rdfs:comment "SHACL shape for validating organization contact and classification details."@en ;
+    sh:property [ rdfs:label "Organization Name"@en ;
+            rdfs:comment "The official name of the organization."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:maxLength 200 ;
+            sh:minCount 1 ;
+            sh:path <http://schema.org/name> ],
+        [ rdfs:label "Homepage URL"@en ;
+            rdfs:comment "The homepage or primary web address of the organization."@en ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://schema.org/url> ],
+        [ rdfs:label "Organization Type / Category"@en ;
+            rdfs:comment "Classification of the organization as one of the predefined types."@en ;
+            sh:in ( <http://schema.org/Corporation> <http://schema.org/EducationalOrganization> <http://schema.org/GovernmentOrganization> <http://schema.org/NGO> <http://schema.org/PerformingGroup> <http://schema.org/Project> <http://schema.org/SportsOrganization> ) ;
+            sh:minCount 0 ;
+            sh:nodeKind sh:IRI ;
+            sh:path rdf:type ] ;
+    sh:targetClass <http://www.w3.org/2006/vcard/ns#Organization> .
+
+<https://solidproject.org/shapes/organization2#> a sh:NodeShape ;
+    rdfs:label "Organization Shape"@en ;
+    rdfs:comment "SHACL shape defining data constraints for an organization "@en ;
+    sh:property [ rdfs:label "Organization Name"@en ;
+            rdfs:comment "The official name of the organization."@en ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://schema.org/name> ],
+        [ rdfs:label "Homepage URL"@en ;
+            rdfs:comment "The homepage or primary website of the organization."@en ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://schema.org/url> ],
+        [ rdfs:label "Organization Type"@en ;
+            rdfs:comment "The classification or type of organization (e.g., interesting organization category)."@en ;
+            sh:minCount 1 ;
+            sh:path rdf:type ],
+        [ rdfs:label "Address"@en ;
+            rdfs:comment "Physical addresses."@en ;
+            sh:minCount 0 ;
+            sh:node <https://solidproject.org/shapes/address#> ;
+            sh:path <http://www.w3.org/2006/vcard/ns#hasAddress> ],
+        [ rdfs:label "Email Addresses"@en ;
+            rdfs:comment "Email addresses."@en ;
+            sh:minCount 0 ;
+            sh:node <https://solidproject.org/shapes/email#> ;
+            sh:path <http://www.w3.org/2006/vcard/ns#hasEmail> ],
+        [ rdfs:label "Telephone Numbers"@en ;
+            rdfs:comment "Telephone numbers associated with the organization."@en ;
+            sh:minCount 0 ;
+            sh:node <https://solidproject.org/shapes/telephone#> ;
+            sh:path <http://www.w3.org/2006/vcard/ns#hasTelephone> ],
+        [ rdfs:label "Notes"@en ;
+            rdfs:comment "General notes about the organization."@en ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#note> ] ;
+    sh:targetClass foaf:Organization .
+
+<https://solidproject.org/shapes/telephone#> a sh:NodeShape ;
+    sh:property [ rdfs:label "Phone Type" ;
+            rdfs:comment "Type of phone (cell/mobile/home/work)." ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#TelephoneType> ],
+        [ rdfs:label "Phone Number" ;
+            rdfs:comment "The telephone number of the contact." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#value> ] ;
+    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#hasTelephone> .
+
+<https://solidproject.org/shapes/vcard#> a sh:NodeShape ;
+    rdfs:label "vCard Shape" ;
+    rdfs:comment "RFC 6350 based vCard validation." ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#fn> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#organization-name> ],
+        [ sh:maxCount 1 ;
+            sh:node <https://solidproject.org/shapes/vcard#> ;
+            sh:nodeKind sh:BlankNode ;
+            sh:path <http://www.w3.org/2006/vcard/ns#n> ],
+        [ sh:maxCount 3 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.w3.org/2006/vcard/ns#hasEmail> ],
+        [ sh:maxCount 3 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.w3.org/2006/vcard/ns#hasTelephone> ],
+        [ sh:node <https://solidproject.org/shapes/vcard#> ;
+            sh:nodeKind sh:BlankNode ;
+            sh:path <http://www.w3.org/2006/vcard/ns#hasAddress> ] ;
+    sh:targetClass <http://www.w3.org/2006/vcard/ns#VCard> .
+
+<https://solidproject.org/shapes/email#> a sh:NodeShape ;
+    rdfs:label "Email Shape"@en ;
+    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type."@en ;
+    sh:property [ rdfs:label "Email Address"@en ;
+            rdfs:comment "The email address value (e.g., user@example.org)."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#value> ;
+            sh:pattern "^mailto:" ],
+        [ rdfs:label "Email Type"@en ;
+            rdfs:comment "The classification of the email (e.g., home or work)."@en ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path rdf:type ] ;
+    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#hasEmail> .
+
+<https://solidproject.org/shapes/telephone#> a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path <http://www.w3.org/2006/vcard/ns#value> ;
+            sh:pattern "^tel:" ] ;
+    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#hasTelephone> .
+
+<https://solidproject.org/shapes/vcard#> a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#street-address> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#extended-address> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#locality> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#region> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#postal-code> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#country-name> ] .
+
+<https://solidproject.org/shapes/vcard#> a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#family-name> ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#given-name> ],
+        [ sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#additional-name> ],
+        [ sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#honorific-prefix> ],
+        [ sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+            sh:path <http://www.w3.org/2006/vcard/ns#honorific-suffix> ] .
+

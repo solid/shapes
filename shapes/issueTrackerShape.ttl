@@ -1,0 +1,82 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/issuetracker#> a sh:NodeShape ;
+    rdfs:label "Issue Tracker Configuration Shape"@en ;
+    rdfs:comment "Defines data constraints for configuring an issue tracker including title, description, workflow states, classification systems, assignment rules, and optional forms."@en ;
+    sh:property [ rdfs:label "Tracker Title"@en ;
+            rdfs:comment "The human-readable title of the issue tracker."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path dcterms:title ],
+        [ rdfs:label "Tracker Description"@en ;
+            rdfs:comment "A description explaining the purpose or scope of the issue tracker."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2005/01/wf/flow#description> ],
+        [ rdfs:label "Issue State Class"@en ;
+            rdfs:comment "The superclass defining the set of possible states an issue may be in (e.g., Task)."@en ;
+            sh:class rdfs:Class ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2005/01/wf/flow#issueClass> ],
+        [ rdfs:label "Issue Category Classification"@en ;
+            rdfs:comment "Optional classification systems used to categorize issues."@en ;
+            sh:class rdfs:Class ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2005/01/wf/flow#issueCategory> ],
+        [ rdfs:label "Allow Sub-Issues"@en ;
+            rdfs:comment "Indicates whether issues may contain sub-issues."@en ;
+            sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2005/01/wf/flow#allowSubIssues> ],
+        [ rdfs:label "Additional Properties"@en ;
+            rdfs:comment "An ordered list of additional properties to display in table views of issues."@en ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2005/01/wf/flow#propertyList> ],
+        [ rdfs:label "Assignee Group"@en ;
+            rdfs:comment "The contact group from which issues may be assigned to individuals."@en ;
+            sh:class <http://www.w3.org/2006/vcard/ns#Group> ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2005/01/wf/flow#assigneeGroup> ],
+        [ rdfs:label "Extras Entry Form"@en ;
+            rdfs:comment "An optional form defining additional structured data captured for each issue."@en ;
+            sh:class <http://www.w3.org/ns/ui#Form> ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2005/01/wf/flow#extrasEntryForm> ] ;
+    sh:targetClass <http://www.w3.org/2005/01/wf/flow#Tracker> .
+
+<https://solidproject.org/shapes/issuetracker#> a sh:NodeShape ;
+    rdfs:label "Workflow State Class Shape"@en ;
+    rdfs:comment "Defines constraints for a class representing a set of issue states."@en ;
+    sh:property [ rdfs:label "State Options"@en ;
+            rdfs:comment "Defines the set of mutually exclusive issue states."@en ;
+            sh:minCount 1 ;
+            sh:path owl:disjointUnionOf ],
+        [ rdfs:label "State Set Name"@en ;
+            rdfs:comment "The human-readable name of the set of issue states."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ] ;
+    sh:targetObjectsOf <http://www.w3.org/2005/01/wf/flow#issueClass> .
+
+<https://solidproject.org/shapes/issuetracker#> a sh:NodeShape ;
+    rdfs:label "Workflow State Shape"@en ;
+    rdfs:comment "Defines constraints for an individual issue state."@en ;
+    sh:property [ rdfs:label "State Name"@en ;
+            rdfs:comment "The name of the workflow state."@en ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path rdfs:label ] ;
+    sh:targetSubjectsOf rdfs:label .
+

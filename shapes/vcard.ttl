@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
 
 #################################################################
@@ -30,7 +31,7 @@ vcard-shape:VCardShape
     sh:property [
         sh:path vcard:n ;
         sh:maxCount 1 ;
-        sh:node vcs:NameShape ;
+        sh:node vcard-shape:NameShape ;
         sh:nodeKind sh:BlankNode ;
     ] ;
 
@@ -48,7 +49,7 @@ vcard-shape:VCardShape
 
     sh:property [
         sh:path vcard:hasAddress ;
-        sh:node vcs:AddressShape ;
+        sh:node vcard-shape:AddressShape ;
         sh:nodeKind sh:BlankNode ;
     ] ;
 

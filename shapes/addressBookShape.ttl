@@ -1,0 +1,40 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/addressbook#> a sh:NodeShape ;
+    rdfs:label "AddressBook"@en ;
+    rdfs:comment "Represents a collection of vCard people and/or vCard groups"@en,
+        "This class is not part of vCard as defined by the IETF"@en ;
+    sh:property [ rdfs:label "Formatted name"@en ;
+            sh:datatype xsd:string ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#fn> ],
+        [ rdfs:label "Name Email Index"@en ;
+            rdfs:comment "Links an AddressBook to a document containing Individuals that appear in it"@en,
+                "This property is not part of vCard as defined by the IETF"@en ;
+            sh:datatype xsd:anyURI ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#nameEmailIndex> ],
+        [ rdfs:label "Group Index"@en ;
+            rdfs:comment "Links an AddressBook to a document containing all its includesGroup properties"@en,
+                "This property is not part of vCard as defined by the IETF"@en ;
+            sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#groupIndex> ],
+        [ rdfs:label "Includes Group"@en ;
+            rdfs:comment "This property is not part of vCard as defined by the IETF"@en,
+                "When included in the group index document of an AddressBook, adds the group to the AddressBook"@en ;
+            sh:datatype xsd:anyURI ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#includesGroup> ],
+        [ rdfs:label "in AddressBook"@en ;
+            rdfs:comment "Indicates that an Individual appears in an AddressBook"@en,
+                "This property is not part of vCard as defined by the IETF"@en ;
+            sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#inAddressBook> ] ;
+    sh:targetClass <http://www.w3.org/2006/vcard/ns#AddressBook> .
+

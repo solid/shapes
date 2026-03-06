@@ -1,0 +1,27 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/chatchannel#> a sh:NodeShape ;
+    rdfs:label "Shared Preferences Shape" ;
+    rdfs:comment "NodeShape defining shared UI preferences for chat participants." ;
+    sh:property [ rdfs:label "Expand Images Inline" ;
+            rdfs:comment "Indicates whether images should be expanded inline in the chat UI." ;
+            sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/ns/solid/terms#expandImagesInline> ],
+        [ rdfs:label "Inline Image Height (ems)" ;
+            rdfs:comment "Preferred height for inline images in em units." ;
+            sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/ns/solid/terms#inlineImageHeightEms> ],
+        [ rdfs:label "Newest First" ;
+            rdfs:comment "If true, messages are displayed newest first in the chat UI." ;
+            sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path <http://www.w3.org/ns/solid/terms#newestFirst> ] ;
+    sh:targetObjectsOf <http://www.w3.org/ns/ui#sharedPreferences> .
+

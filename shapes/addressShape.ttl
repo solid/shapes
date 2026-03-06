@@ -1,0 +1,40 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://solidproject.org/shapes/address#> a sh:NodeShape ;
+    rdfs:label "Address"@en ;
+    sh:codeIdentifier "Address" ;
+    sh:property [ rdfs:label "Street Address"@en ;
+            sh:codeIdentifier "streetAddress" ;
+            sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:maxLength 128 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#street-address> ],
+        [ rdfs:label "Locality"@en ;
+            sh:codeIdentifier "locality" ;
+            sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:maxLength 128 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#locality> ],
+        [ rdfs:label "Postal Code"@en ;
+            sh:codeIdentifier "postalCode" ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:maxLength 25 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#postal-code> ],
+        [ rdfs:label "Region"@en ;
+            sh:codeIdentifier "region" ;
+            sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:maxLength 128 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#region> ],
+        [ rdfs:label "Country Name"@en ;
+            sh:codeIdentifier "countryName" ;
+            sh:datatype rdf:langString ;
+            sh:maxCount 1 ;
+            sh:maxLength 128 ;
+            sh:path <http://www.w3.org/2006/vcard/ns#country-name> ] ;
+    sh:targetClass <http://www.w3.org/2006/vcard/ns#Address> .
+
