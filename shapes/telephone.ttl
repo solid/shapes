@@ -1,25 +1,46 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
 
-<https://solidproject.org/shapes/telephone#> a sh:NodeShape ;
-    sh:property [ sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:path <http://www.w3.org/2006/vcard/ns#value> ;
-            sh:pattern "^tel:" ] ;
-    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#hasTelephone> .
+@prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
 
-<https://solidproject.org/shapes/telephone#> a sh:NodeShape ;
-    sh:property [ rdfs:label "Phone Type" ;
-            rdfs:comment "Type of phone (cell/mobile/home/work)." ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#TelephoneType> ],
-        [ rdfs:label "Phone Number" ;
-            rdfs:comment "The telephone number of the contact." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#value> ] ;
-    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#hasTelephone> .
+## Shape source: https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
 
+telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
+  sh:targetObjectsOf vcard:hasTelephone;
+  sh:property [
+    sh:path vcard:value;
+    sh:nodeKind sh:IRI;  
+    sh:pattern "^tel:" ;    # starts with tel:
+    sh:minCount 1;
+    sh:maxCount 1;
+  ].
+
+
+# Shape source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+
+telephone-shape:TelephoneShape a sh:NodeShape;
+  sh:targetObjectsOf vcard:hasTelephone;
+  sh:property  [ 
+    sh:path vcard:TelephoneType ;
+    sh:minCount 0 ;
+    sh:maxCount 1 ;
+    rdfs:label "Phone Type" ;
+    rdfs:comment "Type of phone (cell/mobile/home/work)." 
+  ],
+  [ 
+    sh:path vcard:value ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:label "Phone Number" ;
+    rdfs:comment "The telephone number of the contact." 
+  ]
+ .
+
+
+
+
+
+
+
+             
