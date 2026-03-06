@@ -37,9 +37,9 @@ Shapes are organised by semantic domain and validation purpose.
 
 
 
-### Core Shapes
+### Domain Shapes
 
-Core shapes define the semantic model of data — they describe what the data represents.
+Domain shapes define the semantic model of data — they describe what the data represents.
 
 Example domains include:
 
@@ -51,7 +51,7 @@ Example domains include:
 Example path:
 
 ```
-/shapes/core/address.ttl
+/shapes/address.ttl
 ```
 
 
@@ -67,11 +67,8 @@ Example vocabularies include:
 Example path:
 
 ```
-/shapes/vocab/vcard.ttl
+/shapes/vcard.ttl
 ```
-
-Vocabulary mapping improves interoperability between semantic models.
-
 
 
 ## Guidelines for Contributing
@@ -95,16 +92,10 @@ Each domain in the repository should have its own `{domain}.ttl` file.
 
 If a domain file exists, add your shape to that file where appropriate.
 
-If a domain file does not exist, create a new file using:
+If a domain file does not exist, create a new file e.g.:
 
 ```
-/shapes/core/{domain}.ttl
-```
-
-or
-
-```
-/shapes/vocab/{domain}.ttl
+/shapes/{domain}.ttl
 ```
 
 Rules:
@@ -115,7 +106,6 @@ Rules:
 If using vocabularies, follow community ontology naming conventions. Check [https://prefix.cc](https://prefix.cc) if unsure.
 
 
-
 ## Naming Conventions
 
 ### Namespace Structure
@@ -123,14 +113,14 @@ If using vocabularies, follow community ontology naming conventions. Check [http
 Use the pattern:
 
 ```
-https://solid.github.io/shapes/{layer}/{domain}#
+https://solidproject.org/shapes/{domain}#
 ```
 
 Examples:
 
 ```
-https://solid.github.io/shapes/core/address#
-https://solid.github.io/shapes/vocab/vcard#
+https://solidproject.org/shapes/address#
+https://solidproject.org/shapes/vcard#
 ```
 
 
@@ -142,12 +132,10 @@ Prefix labels may use lowercase letters, hyphens, or underscores, but must begin
 Example:
 
 ```turtle
-@prefix core-address: <https://solid.github.io/shapes/core/address#> .
-@prefix vocab-vcard: <https://solid.github.io/shapes/vocab/vcard#> .
+@prefix address-shape: <https://solidproject.org/shapes/address#> .
+@prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 ```
-
-
 
 ### Shape Naming
 
@@ -156,21 +144,10 @@ Use descriptive PascalCase names ending in `Shape`.
 Examples:
 
 ```
-AddressShape
-AddressMinimalShape
-AddressStrictShape
-VCardAddressShape
+address-shape:AddressShape
+address-shape:AddressMinimalShape
+vcard-shape:VCardAddressShape
 ```
-
-Avoid ambiguous or numeric naming such as:
-
-```
-Address1
-AddrFinal
-VCard2
-```
-
-
 
 ## Multiple Shapes per Domain
 
@@ -181,30 +158,154 @@ This should be handled using semantic variation rather than new namespaces.
 Example:
 
 ```
-core-address:AddressShape
-core-address:AddressMinimalShape
-core-address:AddressStrictShape
+address-shape:AddressShape
+address-shape:AddressMinimalShape
 ```
 
 ## Validation Rules
 
 Follow these guidelines:
 
-* Prefer optional validation to maximise Pod interoperability
-* Use `sh:minCount 0` when possible
-* Keep constraints focused on structural validation
-* Do not mix application business logic into core semantic shapes
+- Prefer optional validation to maximise Pod interoperability
+- Use `sh:minCount 0` when possible
+- Keep constraints focused on structural validation
+- Do not mix application business logic into core semantic shapes
+
+## Shape Immutability Policy
+
+Shapes published to this catalogue are treated as immutable.
+
+Once a shape is merged into the repository and published:
+
+- Shapes must not be modified in place
+- Validation rules must not be changed retrospectively
+- Structural or semantic changes must be introduced via new shapes
+
+This ensures predictable behaviour for applications using Solid Pods.
+
+### Why Shapes Are Immutable
+
+Shapes function as contracts between applications and user data. Modifying a published shape could cause:
+
+- Validation inconsistencies across applications
+- Silent breaking changes in decentralized clients
+- Data interoperability failures
+
+Immutability ensures that applications can safely cache and reuse shapes.
+
+### How to Evolve Shapes
+
+If validation rules must change, create a new shape rather than modifying an existing one.
+
+Recommended approaches:
+
+#### Option 1 — Create a New Shape Variant
+
+Example:
+
+```
+address-shape:AddressShape
+address-shape:AddressStrictShape
+
+```
+
+### When Adding New Constraints
+
+Do not:
+
+- Add new mandatory fields to existing shapes
+- Change cardinality rules of existing properties
+- Change target class mappings
+
+Instead:
+
+- Introduce a new shape version or variant
+
+Allowed changes:
+
+- Adding new optional properties
+- Adding documentation
+- Adding new shapes
+
+
+Below is a **Design Principles** section that fits naturally in your document (typically placed after **Purpose** or before **Repository Structure**). It stays consistent with the philosophy you already described (immutability, interoperability, domain organisation).
+
+You can paste it directly.
 
 
 ## Design Principles
 
-The catalogue is built on the following principles:
+The Solid Shapes Catalogue follows a set of design principles to support interoperability, reuse, and long-term stability across the Solid ecosystem.
 
-* Core shapes define semantic meaning
-* Vocabulary shapes provide ontology compatibility
-* Shapes should be reusable across applications
-* Validation should favour interoperability over strict enforcement
+### Interoperability First
 
+Shapes should prioritise interoperability between applications rather than strict validation.
+
+Where possible:
+
+- Prefer optional properties over mandatory ones
+- Avoid over-constraining data structures
+- Allow applications flexibility in how data is produced and consumed
+
+The goal is to enable different Solid applications to safely read and write shared user data.
+
+### Domain-Oriented Organisation
+
+Shapes are organised by semantic domain rather than by application or implementation.
+
+Each domain file represents a conceptual data entity such as:
+
+- address
+- person
+- organisation
+- meeting
+
+This approach keeps shapes discoverable and avoids fragmentation across the catalogue.
+
+### Vocabulary Reuse
+
+Shapes should reuse existing well-known vocabularies wherever possible rather than inventing new terms.
+
+Examples include:
+
+- [vCard](https://www.w3.org/TR/vcard-rdf/)
+- [FOAF](http://xmlns.com/foaf/spec/)
+- [Schema.org](https://schema.org/)
+
+Reusing existing vocabularies improves compatibility with the broader Linked Data ecosystem.
+
+### Self-Contained Shapes
+
+Shapes should be self-contained and understandable without requiring external dependencies whenever possible.
+
+A shape definition should clearly describe:
+
+- the target class
+- the properties being validated
+- the intended structure of the data
+
+This makes shapes easier to reuse across applications.
+
+### Shape Immutability
+
+Published shapes are treated as immutable contracts. Once a shape has been merged into the catalogue:
+
+- Its validation rules should not be modified
+- Breaking changes must be introduced through new shapes
+- Existing shapes remain available for backward compatibility
+
+This ensures predictable behaviour for applications that depend on specific shapes.
+
+### Evolution Through New Shapes
+
+When validation requirements change, new shapes should be introduced rather than modifying existing ones. 
+
+### Decentralised Application Compatibility
+
+- Shapes should avoid embedding application-specific logic.
+- A shape should describe **data structure**, not **application behaviour**.
+- Business rules specific to an application should be implemented outside the shared catalogue.
+- This ensures that shapes remain reusable across the broader Solid ecosystem.
 
 
 ## License
