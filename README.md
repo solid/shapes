@@ -1,6 +1,6 @@
-# Solid Shapes Catalogue
+# Solid SHACL Shapes Catalogue
 
-The Solid Shapes Catalogue is a collection of domain-specific SHACL validation shapes used across the Solid ecosystem.
+The *Solid SHACL Shapes Catalogue* is a collection of domain-specific **SHACL** validation shapes used across the Solid ecosystem.
 
 **Application developers are invited to find, modify, and submit their own SHACL shapes to this repository for existing and new domains through a guided GitHub peer review (PR) process.**
 
@@ -15,7 +15,7 @@ Solid aims to decouple applications from user data. SHACL shapes act as contract
 
 ## Purpose
 
-The Solid Shapes Catalogue supports interoperability by:
+The *Solid SHACL Shapes Catalogue* supports interoperability by:
 
 * Allowing applications to validate user data before reading or writing to Pods
 * Enabling discovery of common semantic models
@@ -27,15 +27,11 @@ The catalogue acts as a coordination layer for decentralized data exchange witho
 
 ## Repository Structure
 
-Shapes are organised by semantic domain and validation purpose.
+SHACL Shapes are all contained in a single flat organisational structure in .ttl files under the /shapes directory.
 
-```
-/shapes
-   /core
-   /vocab
-```
-
-
+- SHACL shape files are contain in the [/shapes](/shapes/) folder 
+- Shapes are separated by domain or vocabulary identifier into separate .ttl files
+- There should be no sub-folders
 
 ### Domain Shapes
 
@@ -48,13 +44,9 @@ Example domains include:
 * organisation
 * contact
 
-Example path:
+Example path for the address domain in this catalogue:
 
-```
-/shapes/address.ttl
-```
-
-
+[/shapes/address.ttl](/shapes/address.ttl)
 
 ### Vocabulary Mapping Shapes
 
@@ -66,10 +58,7 @@ Example vocabularies include:
 
 Example path:
 
-```
-/shapes/vcard.ttl
-```
-
+[/shapes/vcard.ttl](/shapes/vcard.ttl)
 
 ## Guidelines for Contributing
 
@@ -81,8 +70,6 @@ When contributing:
 2. Follow naming conventions
 3. Include documentation using the GitHub PR template provided
 4. Ensure shapes validate before submitting
-
-
 
 ## Adding Shapes
 
@@ -145,7 +132,6 @@ Examples:
 
 ```
 address-shape:AddressShape
-address-shape:AddressMinimalShape
 vcard-shape:VCardAddressShape
 ```
 
@@ -206,7 +192,6 @@ Example:
 ```
 address-shape:AddressShape
 address-shape:AddressStrictShape
-
 ```
 
 ### When Adding New Constraints
