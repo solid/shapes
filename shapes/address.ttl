@@ -1,40 +1,63 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-<https://solidproject.org/shapes/address#> a sh:NodeShape ;
-    rdfs:label "Address"@en ;
-    sh:codeIdentifier "Address" ;
-    sh:property [ rdfs:label "Street Address"@en ;
-            sh:codeIdentifier "streetAddress" ;
-            sh:datatype rdf:langString ;
-            sh:maxCount 1 ;
-            sh:maxLength 128 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#street-address> ],
-        [ rdfs:label "Locality"@en ;
-            sh:codeIdentifier "locality" ;
-            sh:datatype rdf:langString ;
-            sh:maxCount 1 ;
-            sh:maxLength 128 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#locality> ],
-        [ rdfs:label "Postal Code"@en ;
-            sh:codeIdentifier "postalCode" ;
-            sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:maxLength 25 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#postal-code> ],
-        [ rdfs:label "Region"@en ;
-            sh:codeIdentifier "region" ;
-            sh:datatype rdf:langString ;
-            sh:maxCount 1 ;
-            sh:maxLength 128 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#region> ],
-        [ rdfs:label "Country Name"@en ;
-            sh:codeIdentifier "countryName" ;
-            sh:datatype rdf:langString ;
-            sh:maxCount 1 ;
-            sh:maxLength 128 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#country-name> ] ;
-    sh:targetClass <http://www.w3.org/2006/vcard/ns#Address> .
+@prefix address-shape: <https://solidproject.org/shapes/address#> .
+
+
+
+### Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+
+address-shape:AddressShape
+    rdfs:label "Address"@en;
+    sh:targetClass vcard:Address;
+    a sh:NodeShape ;
+    sh:codeIdentifier "Address";
+
+    sh:property [
+        rdfs:label "Street Address"@en;
+        sh:path vcard:street-address ;
+        sh:datatype rdf:langString ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "streetAddress"
+    ] ;
+
+    sh:property [
+        rdfs:label "Locality"@en;
+        sh:path vcard:locality ;
+        sh:datatype rdf:langString ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "locality";
+    ] ;
+
+    sh:property [
+        rdfs:label "Postal Code"@en;
+        sh:path vcard:postal-code ;
+        sh:datatype xsd:string ;
+        sh:maxLength 25 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "postalCode";
+    ] ;
+
+    sh:property [
+        rdfs:label "Region"@en;
+        sh:path vcard:region ;
+        sh:datatype rdf:langString ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "region";
+    ] ;
+
+    sh:property [
+        rdfs:label "Country Name"@en;
+        sh:path vcard:country-name ;
+        sh:datatype rdf:langString ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "countryName";
+    ] .
 
