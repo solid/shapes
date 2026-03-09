@@ -1,33 +1,60 @@
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://solidproject.org/shapes/bookmark#> a sh:NodeShape ;
+@prefix bookmark: <http://www.w3.org/2002/01/bookmark#> .
+@prefix bookmark-shape: <https://solidproject.org/shapes/bookmark#> .
+
+
+# Source for this SHACL shape: https://github.com/SolidOS/solid-web-components/blob/main/documentation/data/dashboard-forms.ttl
+# Source file references http://www.w3.org/2002/01/bookmark#Bookmark a class in the W3C Bookmark vocabulary (the Annotea Bookmark ontology)
+# Specification document describing the Annotea Bookmark schema - https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707
+# Note - there are bookmark properties that are not included in this shape - http://purl.org/dc/elements/1.1/#description, http://purl.org/dc/elements/1.1/#creator, http://www.w3.org/2000/10/annotation-ns#created, http://purl.org/dc/elements/1.1/#date
+
+
+bookmark-shape:BookmarkShape
+    a sh:NodeShape ;
+    sh:targetClass bookmark:Bookmark ;
     rdfs:label "Bookmark"@en ;
     rdfs:comment "A Bookmark node with label, URL, topic, and description"@en ;
-    sh:property [ rdfs:label "Label"@en ;
-            rdfs:comment "Human-readable name of the bookmark"@en ;
-            sh:datatype xsd:string ;
-            sh:minCount 0 ;
-            sh:name "Label"@en ;
-            sh:path rdfs:label ],
-        [ rdfs:label "URL"@en ;
-            rdfs:comment "The URL that the bookmark points to"@en ;
-            sh:datatype xsd:anyURI ;
-            sh:minCount 0 ;
-            sh:name "URL"@en ;
-            sh:path <http://www.w3.org/2002/01/bookmark#recalls> ],
-        [ rdfs:label "Topic"@en ;
-            rdfs:comment "Topic or category of the bookmark"@en ;
-            sh:datatype xsd:string ;
-            sh:minCount 0 ;
-            sh:name "Topic"@en ;
-            sh:path <http://www.w3.org/2002/01/bookmark#hasTopic> ],
-        [ rdfs:label "Description"@en ;
-            rdfs:comment "Optional description of the bookmark"@en ;
-            sh:datatype xsd:string ;
-            sh:minCount 0 ;
-            sh:name "Description"@en ;
-            sh:path rdfs:comment ] ;
-    sh:targetClass <http://www.w3.org/2002/01/bookmark#Bookmark> .
 
+    # Label property
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:label "Label"@en ;
+        sh:name "Label"@en ;
+        rdfs:comment "Human-readable name of the bookmark"@en ;
+    ] ;
+
+    # URL property
+    sh:property [
+        sh:path bookmark:recalls ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 0 ;
+        rdfs:label "URL"@en ;
+        sh:name "URL"@en ;
+        rdfs:comment "The URL that the bookmark points to"@en ;
+    ] ;
+
+    # Topic property
+    sh:property [
+        sh:path bookmark:hasTopic ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:label "Topic"@en ;
+        sh:name "Topic"@en ;
+        rdfs:comment "Topic or category of the bookmark"@en ;
+    ] ;
+
+    # Description property
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype xsd:string ;
+        sh:minCount 0 ;
+        rdfs:label "Description"@en ;
+        sh:name "Description"@en ;
+        rdfs:comment "Optional description of the bookmark"@en ;
+    ] .
