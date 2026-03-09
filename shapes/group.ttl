@@ -1,31 +1,58 @@
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix group-shape:  <https://solidproject.org/shapes/group#> .
 
-<https://solidproject.org/shapes/group#> a sh:NodeShape ;
-    rdfs:label "Group Member Local Identifier Shape"@en ;
-    rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs."@en ;
-    sh:property [ rdfs:label "Same As Individual"@en ;
-            rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource."@en ;
-            sh:class <http://www.w3.org/2006/vcard/ns#Individual> ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path owl:sameAs ] ;
-    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#member> .
 
-<https://solidproject.org/shapes/group#> a sh:NodeShape ;
+<> 
+    rdfs:label "Shape file for VCARD data in Solid"@en ;
+    rdfs:comment "SHACL shapes defining constraints for vCard Group data used in Solid applications."@en .
+
+
+# Group Shape
+# Source -  https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
+
+group-shape:GroupShape
+    a sh:NodeShape ;
     rdfs:label "Group Shape"@en ;
     rdfs:comment "Defines constraints for a vCard Group including its name and members."@en ;
-    sh:property [ rdfs:label "Group Name"@en ;
-            rdfs:comment "The formatted name of the group."@en ;
-            sh:datatype xsd:string ;
-            sh:minCount 1 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#fn> ],
-        [ rdfs:label "Group Member"@en ;
-            rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs."@en ;
-            sh:class <http://www.w3.org/2006/vcard/ns#Individual> ;
-            sh:minCount 0 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#member> ] ;
-    sh:targetClass <http://www.w3.org/2006/vcard/ns#Group> .
+    sh:targetClass vcard:Group ;
+
+    sh:property [
+        sh:path vcard:fn ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        rdfs:label "Group Name"@en ;
+        rdfs:comment "The formatted name of the group."@en
+    ] ;
+
+    sh:property [
+        sh:path vcard:member ;
+        sh:minCount 0 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Group Member"@en ;
+        rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs."@en
+    ] .
+
+
+# Group Member Local Identifier Shape
+# Source -  https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
+
+group-shape:GroupMemberLocalId
+    a sh:NodeShape ;
+    rdfs:label "Group Member Local Identifier Shape"@en ;
+    rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs."@en ;
+    sh:targetObjectsOf vcard:member ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Same As Individual"@en ;
+        rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource."@en
+    ] .
 
