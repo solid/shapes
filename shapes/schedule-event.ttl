@@ -1,29 +1,77 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cal: <http://www.w3.org/2002/12/cal/ical#> .
+@prefix sched: <http://www.w3.org/ns/pim/schedule#> .
 
-<https://solidproject.org/shapes/personalname#> a sh:NodeShape ;
+@prefix schedule-event-shape:   <https://solidproject.org/shapes/schedule-event#> .
+
+
+
+# source - https://github.com/SolidOS/solid-panes/blob/main/src/schedule/formsForSchedule.ttl
+
+
+# Reference: Schedule event forms (single form / multi-step)
+
+schedule-event-shape:ScheduleEventShape
+    a sh:NodeShape ;
     rdfs:label "Schedule Event Shape" ;
     rdfs:comment "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees." ;
-    sh:property [ rdfs:label "Event Title" ;
-            rdfs:comment "The title or summary of the event." ;
-            sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:path <http://www.w3.org/2002/12/cal/ical#summary> ],
-        [ rdfs:label "Event Location" ;
-            rdfs:comment "The location where the event takes place." ;
-            sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:path <http://www.w3.org/2002/12/cal/ical#location> ],
-        [ rdfs:label "All-day Event" ;
-            rdfs:comment "Indicates whether the event lasts all day or has a specific time." ;
-            sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:path <http://www.w3.org/ns/pim/schedule#allDay> ],
-        [ rdfs:label "Duration in Days" ;
-            rdfs:comment "Duration of the event in days for all-day events." ;
-            sh:datatype xsd:integer ;
-            sh:minCount 1 ;
-            sh:path <http://www.w3.org/ns/pim/schedule#durationInDays> ] ;
-    sh:targetClass <http://www.w3.org/2002/12/cal/ical#Vevent> .
+    sh:targetClass cal:Vevent ;
 
+    # Event title
+    sh:property [
+        sh:path cal:summary ;
+        sh:datatype xsd:string ;
+        rdfs:label "Event Title" ;
+        rdfs:comment "The title or summary of the event."
+    ] ;
+
+    # Event location
+    sh:property [
+        sh:path cal:location ;
+        sh:datatype xsd:string ;
+        rdfs:label "Event Location" ;
+        rdfs:comment "The location where the event takes place."
+    ] ;
+
+    # Event type: all day or not
+    sh:property [
+        sh:path sched:allDay ;
+        sh:datatype xsd:boolean ;
+        sh:maxCount 1 ;
+        rdfs:label "All-day Event" ;
+        rdfs:comment "Indicates whether the event lasts all day or has a specific time."
+    ] ;
+
+    # Duration in days
+    sh:property [
+        sh:path sched:durationInDays ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        rdfs:label "Duration in Days" ;
+        rdfs:comment "Duration of the event in days for all-day events."
+
+    ];
+
+    sh:property [
+        sh:path sched:durationInMinutes ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        rdfs:label "Duration in Minutes" ;
+        rdfs:comment "Duration of the event in minutes for single day events."
+
+    ];
+    
+    sh:property [
+        sh:path cal:comment ;
+        sh:datatype xsd:string ;
+        rdfs:label "Event Comment" ;
+        rdfs:comment "Comment about the the event."
+    ] ;
+    
+    .
+
+    
+        <#eventComment>
+        <#eventAuthor>
