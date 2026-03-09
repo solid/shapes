@@ -1,22 +1,54 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
 
-<https://solidproject.org/shapes/email#> a sh:NodeShape ;
+@prefix email-shape:  <https://solidproject.org/shapes/email#> .
+
+
+############################################################
+# Email SHACL Shapes
+############################################################
+
+#  Source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl 
+
+email-shape:EmailShape a sh:NodeShape;
     rdfs:label "Email Shape"@en ;
     rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type."@en ;
-    sh:property [ rdfs:label "Email Address"@en ;
-            rdfs:comment "The email address value (e.g., user@example.org)."@en ;
+    sh:targetObjectsOf vcard:hasEmail;
+    sh:property [
+    sh:path vcard:value;
+        sh:pattern "^mailto:" ;    # starts with mailto
+    sh:minCount 1;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    rdfs:label "Email Address"@en ;
+    rdfs:comment "The email address value (e.g., user@example.org)."@en
+  ].
+
+
+#  Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+
+email-shape:EmailWithTypeShape a sh:NodeShape ;
+    sh:targetObjectsOf vcard:hasEmail;
+    rdfs:label "Email Shape"@en ;
+    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type."@en ;
+
+    sh:property
+        [
+            sh:path vcard:value ;
             sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path <http://www.w3.org/2006/vcard/ns#value> ;
-            sh:pattern "^mailto:" ],
-        [ rdfs:label "Email Type"@en ;
-            rdfs:comment "The classification of the email (e.g., home or work)."@en ;
-            sh:maxCount 1 ;
+            rdfs:label "Email Address"@en ;
+            rdfs:comment "The email address value (e.g., user@example.org)."@en
+        ],
+        [
+            sh:path rdf:type ; # target vcard:Type
             sh:minCount 0 ;
-            sh:path rdf:type ] ;
-    sh:targetObjectsOf <http://www.w3.org/2006/vcard/ns#hasEmail> .
+            rdfs:label "Email Type"@en ;
+            rdfs:comment "The classification of the email (e.g., home or work)."@en
+        ] .
+
+
 
