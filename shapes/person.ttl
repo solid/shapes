@@ -1,5 +1,6 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
@@ -8,6 +9,8 @@
 @prefix email-shape: <https://solidproject.org/shapes/email#> .
 @prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
 @prefix person-shape:  <https://solidproject.org/shapes/person#> .
+
+
 
 ################################################################
 # Person Contact Shape
@@ -54,7 +57,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
     sh:property [ 
         sh:path vcard:hasEmail ;
         sh:minCount 0 ;
-        sh:node email-shape:EmailShape;
+        sh:node email-shape:EmailWithTypeShape;
         rdfs:label "Emails" ;
         rdfs:comment "Email addresses of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
@@ -113,4 +116,200 @@ person-shape:IssueTrackerPersonShape
         sh:class vcard:Individual ;
         rdfs:label "Solid ID" ;
         rdfs:comment "The Solid WebID of the person, if available."
+    ] .
+
+
+
+# source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
+
+person-shape:ContactPersonShape a sh:NodeShape ;
+    rdfs:label "Person Shape" ;
+    rdfs:comment "SHACL shape representing a person" ;
+    sh:targetClass vcard:Individual ;  
+    
+    sh:property [
+	    sh:path rdf:type ;
+        sh:value vcard:Individual;
+        sh:count 1;
+	];
+
+    sh:property [ 
+        sh:path vcard:fn ;
+        sh:minCount 0 ;
+        sh:pattern ".* .*" ;
+        rdfs:label "Full Name" ;
+        sh:datatype xsd:string; 
+    ];
+
+    sh:property [ 
+        sh:path vcard:hasUID ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^urn:uuid:" ;
+    ];
+
+    sh:property [ 
+        sh:path vcard:hasName ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ];
+
+    sh:property [ 
+        sh:path vcard:hasPhoto ;
+    ];
+
+    sh:property [ 
+        sh:path vcard:hasRelated ;
+    ];
+
+    sh:property [ 
+        sh:path vcard:url ;
+    ];
+
+    sh:property [ 
+        sh:path vcard:hasAddress ;
+    ];
+
+    sh:property [ 
+        sh:path vcard:bday ;
+        sh:datatype xsd:dateTime;
+        sh:maxCount 1;
+    ];
+
+    sh:property [ 
+        sh:path vcard:hasEmail ;
+        sh:targetNode email-shape:EmailShape; 
+    ];
+
+    sh:property [ 
+        sh:path vcard:hasTelephone;
+    ];
+
+    sh:property [ 
+        sh:path vcard:organization-name ;
+        sh:datatype xsd:string;
+        sh:maxCount 1;
+    ];
+
+    sh:property [ 
+        sh:path vcard:role ;
+        sh:minCount 0 ;
+        sh:datatype xsd:string;
+        sh:maxCount 1;
+        rdfs:label "Role" ;
+        rdfs:comment "The role or job title of the person." ;
+    ];
+
+    sh:property [ 
+        sh:path vcard:title;
+        sh:datatype xsd:string;
+        sh:maxCount 1;
+    ];
+
+    sh:property [
+		sh:path vcard:note;
+        sh:datatype xsd:string;
+        sh:maxCount 1;
+	];
+
+    sh:property [
+		sh:path owl:sameAs; # Other IDs we have found for this person
+        # But see also webids store as vcard:URI type vcard WebId
+        sh:dataType vcard:Individual;
+	];
+
+    sh:property [
+		sh:path vcard:inAddressBook; # Must be the same book
+        a sh:BackwardLink;  # Must be stored at least in the book
+        sh:minCount 1;
+        sh:maxCount 1;   
+	] .
+
+
+    
+
+
+email-shape:EmailShape a sh:NodeShape;
+    rdfs:label "Email Shape" ;
+    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
+    sh:targetObjectsOf vcard:hasEmail;
+    sh:property [
+    sh:path vcard:value;
+        sh:pattern "^mailto:" ;    # starts with mailto
+    sh:minCount 1;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string ;
+    rdfs:label "Email Address" ;
+    rdfs:comment "The email address value (e.g., user@example.org)."
+  ] .
+
+email-shape:EmailWithTypeShape
+    a sh:NodeShape ;
+    sh:targetObjectsOf vcard:hasEmail ;
+    rdfs:label "Email Shape" ;
+    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
+    sh:property [
+        sh:path vcard:value ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Email Address" ;
+        rdfs:comment "The email address value (e.g., user@example.org)."
+    ] ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 0 ;
+        rdfs:label "Email Type" ;
+        rdfs:comment "The classification of the email (e.g., home or work)."
+    ] .
+
+address-shape:AddressShape
+    rdfs:label "Address";
+    sh:targetClass vcard:Address;
+    a sh:NodeShape ;
+    sh:codeIdentifier "Address";
+
+    sh:property [
+        rdfs:label "Street Address";
+        sh:path vcard:street-address ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "streetAddress"
+    ] ;
+
+    sh:property [
+        rdfs:label "Locality";
+        sh:path vcard:locality ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "locality";
+    ] ;
+
+    sh:property [
+        rdfs:label "Postal Code";
+        sh:path vcard:postal-code ;
+        sh:datatype xsd:string ;
+        sh:maxLength 25 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "postalCode";
+    ] ;
+
+    sh:property [
+        rdfs:label "Region";
+        sh:path vcard:region ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "region";
+    ] ;
+
+    sh:property [
+        rdfs:label "Country Name";
+        sh:path vcard:country-name ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1;
+        sh:codeIdentifier "countryName";
     ] .

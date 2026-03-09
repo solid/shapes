@@ -24,7 +24,7 @@ vcard-shape:VCardShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -58,7 +58,7 @@ vcard-shape:VCardShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 .
@@ -75,7 +75,7 @@ vcard-shape:NameShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -84,7 +84,7 @@ vcard-shape:NameShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -92,7 +92,7 @@ vcard-shape:NameShape
         sh:path vcard:additional-name ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -100,7 +100,7 @@ vcard-shape:NameShape
         sh:path vcard:honorific-prefix ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -108,7 +108,7 @@ vcard-shape:NameShape
         sh:path vcard:honorific-suffix ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 .
@@ -125,7 +125,7 @@ vcard-shape:AddressShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -134,7 +134,7 @@ vcard-shape:AddressShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -143,7 +143,7 @@ vcard-shape:AddressShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -152,7 +152,7 @@ vcard-shape:AddressShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -161,7 +161,7 @@ vcard-shape:AddressShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 
@@ -170,7 +170,7 @@ vcard-shape:AddressShape
         sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
-            [ sh:datatype rdf:langString ]
+            [ sh:datatype xsd:string ]
         ) ;
     ] ;
 .

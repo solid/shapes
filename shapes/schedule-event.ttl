@@ -3,25 +3,25 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://solidproject.org/shapes/personalname#> a sh:NodeShape ;
-    rdfs:label "Schedule Event Shape"@en ;
-    rdfs:comment "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees."@en ;
-    sh:property [ rdfs:label "Event Title"@en ;
-            rdfs:comment "The title or summary of the event."@en ;
+    rdfs:label "Schedule Event Shape" ;
+    rdfs:comment "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees." ;
+    sh:property [ rdfs:label "Event Title" ;
+            rdfs:comment "The title or summary of the event." ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:path <http://www.w3.org/2002/12/cal/ical#summary> ],
-        [ rdfs:label "Event Location"@en ;
-            rdfs:comment "The location where the event takes place."@en ;
+        [ rdfs:label "Event Location" ;
+            rdfs:comment "The location where the event takes place." ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:path <http://www.w3.org/2002/12/cal/ical#location> ],
-        [ rdfs:label "All-day Event"@en ;
-            rdfs:comment "Indicates whether the event lasts all day or has a specific time."@en ;
+        [ rdfs:label "All-day Event" ;
+            rdfs:comment "Indicates whether the event lasts all day or has a specific time." ;
             sh:datatype xsd:boolean ;
             sh:maxCount 1 ;
             sh:path <http://www.w3.org/ns/pim/schedule#allDay> ],
-        [ rdfs:label "Duration in Days"@en ;
-            rdfs:comment "Duration of the event in days for all-day events."@en ;
+        [ rdfs:label "Duration in Days" ;
+            rdfs:comment "Duration of the event in days for all-day events." ;
             sh:datatype xsd:integer ;
             sh:minCount 1 ;
             sh:path <http://www.w3.org/ns/pim/schedule#durationInDays> ] ;

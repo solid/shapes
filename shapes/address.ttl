@@ -9,31 +9,31 @@
 # Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
 
 address-shape:AddressShape
-    rdfs:label "Address"@en;
+    rdfs:label "Address";
     sh:targetClass vcard:Address;
     a sh:NodeShape ;
     sh:codeIdentifier "Address";
 
     sh:property [
-        rdfs:label "Street Address"@en;
+        rdfs:label "Street Address";
         sh:path vcard:street-address ;
-        sh:datatype rdf:langString ;
+        sh:datatype xsd:string ;
         sh:maxLength 128 ;
         sh:maxCount 1;
         sh:codeIdentifier "streetAddress"
     ] ;
 
     sh:property [
-        rdfs:label "Locality"@en;
+        rdfs:label "Locality";
         sh:path vcard:locality ;
-        sh:datatype rdf:langString ;
+        sh:datatype xsd:string ;
         sh:maxLength 128 ;
         sh:maxCount 1;
         sh:codeIdentifier "locality";
     ] ;
 
     sh:property [
-        rdfs:label "Postal Code"@en;
+        rdfs:label "Postal Code";
         sh:path vcard:postal-code ;
         sh:datatype xsd:string ;
         sh:maxLength 25 ;
@@ -42,18 +42,18 @@ address-shape:AddressShape
     ] ;
 
     sh:property [
-        rdfs:label "Region"@en;
+        rdfs:label "Region";
         sh:path vcard:region ;
-        sh:datatype rdf:langString ;
+        sh:datatype xsd:string ;
         sh:maxLength 128 ;
         sh:maxCount 1;
         sh:codeIdentifier "region";
     ] ;
 
     sh:property [
-        rdfs:label "Country Name"@en;
+        rdfs:label "Country Name";
         sh:path vcard:country-name ;
-        sh:datatype rdf:langString ;
+        sh:datatype xsd:string ;
         sh:maxLength 128 ;
         sh:maxCount 1;
         sh:codeIdentifier "countryName";

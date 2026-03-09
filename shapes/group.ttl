@@ -13,24 +13,24 @@
 
 group-shape:GroupShape
     a sh:NodeShape ;
-    rdfs:label "Group Shape"@en ;
-    rdfs:comment "Defines constraints for a vCard Group including its name and members."@en ;
+    rdfs:label "Group Shape" ;
+    rdfs:comment "Defines constraints for a vCard Group including its name and members." ;
     sh:targetClass vcard:Group ;
 
     sh:property [
         sh:path vcard:fn ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        rdfs:label "Group Name"@en ;
-        rdfs:comment "The formatted name of the group."@en
+        rdfs:label "Group Name" ;
+        rdfs:comment "The formatted name of the group."
     ] ;
 
     sh:property [
         sh:path vcard:member ;
         sh:minCount 0 ;
         sh:class vcard:Individual ;
-        rdfs:label "Group Member"@en ;
-        rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs."@en
+        rdfs:label "Group Member" ;
+        rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs."
     ] .
 
 
@@ -40,8 +40,8 @@ group-shape:GroupShape
 
 group-shape:GroupMemberLocalId
     a sh:NodeShape ;
-    rdfs:label "Group Member Local Identifier Shape"@en ;
-    rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs."@en ;
+    rdfs:label "Group Member Local Identifier Shape" ;
+    rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs." ;
     sh:targetObjectsOf vcard:member ;
 
     sh:property [
@@ -49,8 +49,8 @@ group-shape:GroupMemberLocalId
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:class vcard:Individual ;
-        rdfs:label "Same As Individual"@en ;
-        rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource."@en
+        rdfs:label "Same As Individual" ;
+        rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource."
     ] .
 
 
