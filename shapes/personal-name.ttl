@@ -3,8 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 
-@prefix personal-name: <https://solidproject.org/shapes/personal-name#> . <http://www.w3.org/2006/vcard/ns#> .
-
+@prefix personal-name: <https://solidproject.org/shapes/personal-name#> .
 
 # Source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
 
