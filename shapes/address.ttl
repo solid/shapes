@@ -6,9 +6,7 @@
 
 @prefix address-shape: <https://solidproject.org/shapes/address#> .
 
-
-
-### Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+# Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
 
 address-shape:AddressShape
     rdfs:label "Address"@en;
