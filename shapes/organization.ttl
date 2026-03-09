@@ -4,16 +4,14 @@
 @prefix schema: <http://schema.org/> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 @prefix email-shape: <https://solidproject.org/shapes/email#> .
 @prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
 @prefix address-shape: <https://solidproject.org/shapes/address#> .
 @prefix organization-shape: <https://solidproject.org/shapes/Organization#> .
 
-
-
 ################################################################
+# Basic organization shape
 # Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl
 ################################################################
 
@@ -26,7 +24,6 @@ organization-shape:OrganizationContactShape
     # Organization Name
     sh:property [
         sh:path schema:name ;
-        sh:minCount 0 ;
         sh:datatype xsd:string ;
         sh:maxLength 200 ;
         rdfs:label "Organization Name" ;
@@ -36,7 +33,6 @@ organization-shape:OrganizationContactShape
     # Homepage URL
     sh:property [
         sh:path schema:url ;
-        sh:minCount 0 ;
         sh:nodeKind sh:IRI ;
         rdfs:label "Homepage URL" ;
         rdfs:comment "The homepage or primary web address of the organization."
@@ -45,14 +41,15 @@ organization-shape:OrganizationContactShape
     # Organization Type / Classification
     sh:property [
         sh:path rdf:type ;
-        sh:minCount 0 ;
         sh:nodeKind sh:IRI ;
         sh:in (
             schema:Corporation
             schema:EducationalOrganization
+            schema:ResearchOrganization
             schema:GovernmentOrganization
+            schema:MedicalOrganization
             schema:NGO
-            schema:PerformingGroup
+            schema:MusicGroup
             schema:Project
             schema:SportsOrganization
         ) ;
@@ -60,71 +57,187 @@ organization-shape:OrganizationContactShape
         rdfs:comment "Classification of the organization as one of the predefined types."
     ] .
 
+################################################################
+# Detailed contact shape with nested shapes
+# Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl 
+# Forms documentation: https://github.com/SolidOS/solid-ui/blob/main/docs/FormsReadme.md
+################################################################
 
-
-
-
-# - https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
-
-organization-shape:OrganizationContactDetailedShape
+organization-shape:OrganizationContactDetailsShape
     a sh:NodeShape ;
-    sh:targetClass foaf:Organization ;
-    rdfs:label "Organization Shape" ;
-    rdfs:comment "SHACL shape defining data constraints for an organization " ;
-    
+    sh:targetClass vcard:Organization ;
+    rdfs:label "Organization contact details Shape" ;
+    rdfs:comment "SHACL shape defining data constraints for an organization contact." ;
 
-    sh:property
-        # Organization Name
-        [ sh:path schema:name ;
-          sh:minCount 1 ;
-          sh:maxCount 1 ;
-          rdfs:label "Organization Name" ;
-          rdfs:comment "The official name of the organization."
-        ],
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:in (
+            schema:Corporation
+            schema:EducationalOrganization
+            schema:ResearchOrganization
+            schema:GovernmentOrganization
+            schema:MedicalOrganization
+            schema:NGO
+            schema:MusicGroup
+            schema:Project
+            schema:SportsOrganization
+        ) ;
+        rdfs:label "Organization Type" ;
+        rdfs:comment "The classification or type of organization."
+    ] ;
 
-        # Homepage
-        [ sh:path schema:url ;
-          sh:minCount 0 ;
-          sh:maxCount 1 ;
-          rdfs:label "Homepage URL" ;
-          rdfs:comment "The homepage or primary website of the organization."
-        ],
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 0 ;
+        sh:datatype xsd:string ;
+        sh:maxLength 200 ;
+        rdfs:label "Organization Name" ;
+        rdfs:comment "The official name of the organization."
+    ] ;
 
-        # Organization Type / Classification
-        [ sh:path rdf:type ;
-          sh:minCount 1 ;
-          rdfs:label "Organization Type" ;
-          rdfs:comment "The classification or type of organization (e.g., interesting organization category)."
-        ],
+    sh:property [
+        sh:path schema:url ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+        rdfs:label "Homepage URL" ;
+        rdfs:comment "The homepage or primary website of the organization."
+    ] ;
 
-        # Addresses
-        [ sh:path vcard:hasAddress ;
-          sh:minCount 0 ;
-          rdfs:label "Address" ;
-          rdfs:comment "Physical addresses." ;
-          sh:node address-shape:AddressShape;
-        ],
+    sh:property [
+        sh:path vcard:hasAddress ;
+        sh:minCount 0 ;
+        rdfs:label "Address" ;
+        rdfs:comment "Address details" ;
+        sh:node address-shape:AddressShape ;
+    ] ;
 
-        # Emails
-        [ sh:path vcard:hasEmail ;
-          sh:minCount 0 ;
-          rdfs:label "Email Addresses" ;
-          rdfs:comment "Email addresses." ;
-          sh:node email-shape:EmailShape;
-        ],
+    sh:property [
+        sh:path vcard:hasEmail ;
+        sh:minCount 0 ;
+        rdfs:label "Email Addresses" ;
+        rdfs:comment "Email addresses." ;
+        sh:node email-shape:EmailWithTypeShape ;
+    ] ;
 
-        # Telephones
-        [ sh:path vcard:hasTelephone ;
-          sh:minCount 0 ;
-          rdfs:label "Telephone Numbers" ;
-          rdfs:comment "Telephone numbers associated with the organization." ;
-          sh:node telephone-shape:TelephoneShape;
-        ],
+    sh:property [
+        sh:path vcard:hasTelephone ;
+        sh:minCount 0 ;
+        rdfs:label "Telephone Numbers" ;
+        rdfs:comment "Telephone numbers associated with the organization." ;
+        sh:node telephone-shape:TelephoneShape ;
+    ] ;
 
-        # Notes
-        [ sh:path vcard:note ;
-          sh:minCount 0 ;
-          sh:maxCount 1 ;
-          rdfs:label "Notes" ;
-          rdfs:comment "General notes about the organization."
-        ] .
+    sh:property [
+        sh:path vcard:note ;
+        sh:minCount 0 ;
+        rdfs:label "Notes" ;
+        rdfs:comment "General notes about the organization." ;
+    ] .
+
+################################################################
+# Telephone shape
+################################################################
+
+telephone-shape:TelephoneShape
+    a sh:NodeShape ;
+    sh:targetObjectsOf vcard:hasTelephone ;
+
+    # Phone Type (optional, restricted to vCard types)
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
+        rdfs:label "Phone Type" ;
+        rdfs:comment "The classification of the phone (cell, home, work)." 
+    ] ;
+
+    # Phone Number (required)
+    sh:property [
+        sh:path vcard:value ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        rdfs:label "Phone Number" ;
+        rdfs:comment "The telephone number of the contact." 
+    ] .
+
+################################################################
+# Email shape
+################################################################
+
+email-shape:EmailWithTypeShape
+    a sh:NodeShape ;
+    sh:targetObjectsOf vcard:hasEmail ;
+    rdfs:label "Email Shape" ;
+    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
+    sh:property [
+        sh:path vcard:value ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Email Address" ;
+        rdfs:comment "The email address value (e.g., user@example.org)."
+    ] ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 0 ;
+        rdfs:label "Email Type" ;
+        rdfs:comment "The classification of the email (e.g., home or work)."
+    ] .
+
+################################################################
+# Address shape
+################################################################
+
+address-shape:AddressShape
+    a sh:NodeShape ;
+    sh:targetClass vcard:Address ;
+    sh:codeIdentifier "Address" ;
+    rdfs:label "Address" ;
+
+    sh:property [
+        sh:path vcard:street-address ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1 ;
+        rdfs:label "Street Address" ;
+        sh:codeIdentifier "streetAddress" ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:locality ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1 ;
+        rdfs:label "Locality" ;
+        sh:codeIdentifier "locality" ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:postal-code ;
+        sh:datatype xsd:string ;
+        sh:maxLength 25 ;
+        sh:maxCount 1 ;
+        rdfs:label "Postal Code" ;
+        sh:codeIdentifier "postalCode" ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:region ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1 ;
+        rdfs:label "Region" ;
+        sh:codeIdentifier "region" ;
+    ] ;
+
+    sh:property [
+        sh:path vcard:country-name ;
+        sh:datatype xsd:string ;
+        sh:maxLength 128 ;
+        sh:maxCount 1 ;
+        rdfs:label "Country Name" ;
+        sh:codeIdentifier "countryName" ;
+    ] .

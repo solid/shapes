@@ -1,7 +1,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
-
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
 
 ## Shape source: https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
@@ -19,24 +19,28 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
 
 # Shape source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
 
-telephone-shape:TelephoneShape a sh:NodeShape;
-  sh:targetObjectsOf vcard:hasTelephone;
-  sh:property  [ 
-    sh:path vcard:TelephoneType ;
-    sh:minCount 0 ;
-    sh:maxCount 1 ;
-    rdfs:label "Phone Type" ;
-    rdfs:comment "Type of phone (cell/mobile/home/work)." 
-  ],
-  [ 
-    sh:path vcard:value ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-    rdfs:label "Phone Number" ;
-    rdfs:comment "The telephone number of the contact." 
-  ]
- .
+telephone-shape:TelephoneShape
+    a sh:NodeShape ;
+    sh:targetObjectsOf vcard:hasTelephone ;
 
+    # Phone Type (optional, restricted to vCard types)
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
+        rdfs:label "Phone Type" ;
+        rdfs:comment "The classification of the phone (cell, home, work)." 
+    ] ;
+
+    # Phone Number (required)
+    sh:property [
+        sh:path vcard:value ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        rdfs:label "Phone Number" ;
+        rdfs:comment "The telephone number of the contact." 
+    ] .
 
 
 
