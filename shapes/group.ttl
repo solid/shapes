@@ -5,11 +5,7 @@
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix group-shape:  <https://solidproject.org/shapes/group#> .
-
-
-<> 
-    rdfs:label "Shape file for VCARD data in Solid"@en ;
-    rdfs:comment "SHACL shapes defining constraints for vCard Group data used in Solid applications."@en .
+@prefix person-shape:  <https://solidproject.org/shapes/person#> .
 
 
 # Group Shape
@@ -80,4 +76,26 @@ group-shape:IssueTrackerGroupShape
         sh:node person-shape:IssueTrackerPersonShape ;
         rdfs:label "Group Member" ;
         rdfs:comment "Each member of the group represented as a vCard Individual."
+    ] .
+
+
+person-shape:IssueTrackerPersonShape
+    a sh:NodeShape ;
+    rdfs:label "Person Shape" ;
+    rdfs:comment "Defines constraints for an individual person in a group." ;
+
+    sh:property [
+        sh:path vcard:fn ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Person Name" ;
+        rdfs:comment "The human-readable name of the person."
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Solid ID" ;
+        rdfs:comment "The Solid WebID of the person, if available."
     ] .

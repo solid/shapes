@@ -15,7 +15,7 @@
 # Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl
 ################################################################
 
-organization-shape:OrganizationContactShape
+organization-shape:ContactOrganizationShape
     a sh:NodeShape ;
     sh:targetClass vcard:Organization ;
     rdfs:label "Organization Shape" ;
@@ -63,7 +63,7 @@ organization-shape:OrganizationContactShape
 # Forms documentation: https://github.com/SolidOS/solid-ui/blob/main/docs/FormsReadme.md
 ################################################################
 
-organization-shape:OrganizationContactDetailsShape
+organization-shape:ContactDetailsOrganizationShape
     a sh:NodeShape ;
     sh:targetClass vcard:Organization ;
     rdfs:label "Organization contact details Shape" ;
