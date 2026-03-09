@@ -1,0 +1,11 @@
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix software-agent-shape: <https://solidproject.org/shapes/software-agent#> .
+
+
+
+# source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+
+software-agent-shape:ContactSoftwareAgentShape
+    a sh:NodeShape ;
+    sh:targetClass prov:SoftwareAgent .
