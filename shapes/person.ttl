@@ -5,6 +5,30 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
+
+person-shape:IssueTrackerPersonShape
+    a sh:NodeShape ;
+    rdfs:label "Person Shape" ;
+    rdfs:comment "Defines constraints for an individual person in a group." ;
+
+    sh:property [
+        sh:path vcard:fn ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Person Name" ;
+        rdfs:comment "The human-readable name of the person."
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Solid ID" ;
+        rdfs:comment "The Solid WebID of the person, if available."
+    ] .
+
+
 <https://solidproject.org/shapes/person#> a sh:NodeShape ;
     rdfs:label "Person Shape" ;
     rdfs:comment "SHACL shape representing a person" ;
