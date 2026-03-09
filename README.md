@@ -27,10 +27,10 @@ The catalogue acts as a coordination layer for decentralized data exchange witho
 
 ## Repository Structure
 
-SHACL Shapes are all contained in a single flat organisational structure in .ttl files under the /shapes directory.
+SHACL shapes are organised in a single flat directory structure.
 
-- SHACL shape files are contain in the [/shapes](/shapes/) folder 
-- Shapes are separated by domain or vocabulary identifier into separate .ttl files
+- SHACL shape files are contained in the [/shapes](/shapes/) folder 
+- Each file corresponds to a semantic domain or vocabulary
 - There should be no sub-folders
 
 ### Domain Shapes
@@ -155,7 +155,6 @@ Follow these guidelines:
 - Prefer optional validation to maximise Pod interoperability
 - Use `sh:minCount 0` when possible
 - Keep constraints focused on structural validation
-- Do not mix application business logic into core semantic shapes
 
 ## Shape Immutability Policy
 
@@ -212,27 +211,15 @@ Allowed changes:
 - Adding documentation
 - Adding new shapes
 
-
-Below is a **Design Principles** section that fits naturally in your document (typically placed after **Purpose** or before **Repository Structure**). It stays consistent with the philosophy you already described (immutability, interoperability, domain organisation).
-
-You can paste it directly.
-
-
 ## Design Principles
 
 The Solid Shapes Catalogue follows a set of design principles to support interoperability, reuse, and long-term stability across the Solid ecosystem.
 
 ### Interoperability First
 
-Shapes should prioritise interoperability between applications rather than strict validation.
+Shapes should prioritise interoperability between Solid applications rather than strict validation.
 
-Where possible:
-
-- Prefer optional properties over mandatory ones
-- Avoid over-constraining data structures
-- Allow applications flexibility in how data is produced and consumed
-
-The goal is to enable different Solid applications to safely read and write shared user data.
+Overly strict validation can prevent applications from reading or writing compatible data across Pods. Shapes should therefore favour flexible structures that allow different clients to operate safely on shared data.
 
 ### Domain-Oriented Organisation
 
@@ -245,23 +232,23 @@ Each domain file represents a conceptual data entity such as:
 - organisation
 - meeting
 
-This approach keeps shapes discoverable and avoids fragmentation across the catalogue.
+This keeps shapes discoverable and avoids fragmentation across the catalogue.
 
 ### Vocabulary Reuse
 
-Shapes should reuse existing well-known vocabularies wherever possible rather than inventing new terms.
+Shapes should reuse well-known vocabularies wherever possible rather than inventing new terms.
 
 Examples include:
 
-- [vCard](https://www.w3.org/TR/vcard-rdf/)
-- [FOAF](http://xmlns.com/foaf/spec/)
-- [Schema.org](https://schema.org/)
+- vCard
+- FOAF
+- Schema.org
 
-Reusing existing vocabularies improves compatibility with the broader Linked Data ecosystem.
+Reusing established vocabularies improves compatibility with the broader Linked Data ecosystem.
 
 ### Self-Contained Shapes
 
-Shapes should be self-contained and understandable without requiring external dependencies whenever possible.
+Shapes should be understandable without requiring extensive external context.
 
 A shape definition should clearly describe:
 
@@ -271,27 +258,19 @@ A shape definition should clearly describe:
 
 This makes shapes easier to reuse across applications.
 
-### Shape Immutability
+### Application Neutrality
 
-Published shapes are treated as immutable contracts. Once a shape has been merged into the catalogue:
+Shapes should describe **data structure**, not **application behaviour**.
 
-- Its validation rules should not be modified
-- Breaking changes must be introduced through new shapes
-- Existing shapes remain available for backward compatibility
+Application-specific business rules should be implemented by individual clients rather than embedded in shared validation shapes.
 
-This ensures predictable behaviour for applications that depend on specific shapes.
+This ensures that shapes remain reusable across the Solid ecosystem.
 
-### Evolution Through New Shapes
+### Stable Contracts
 
-When validation requirements change, new shapes should be introduced rather than modifying existing ones. 
+Shapes function as contracts between applications and user data. Once published they should remain stable so that applications can rely on consistent validation behaviour.
 
-### Decentralised Application Compatibility
-
-- Shapes should avoid embedding application-specific logic.
-- A shape should describe **data structure**, not **application behaviour**.
-- Business rules specific to an application should be implemented outside the shared catalogue.
-- This ensures that shapes remain reusable across the broader Solid ecosystem.
-
+See the **Shape Immutability Policy** section for details on how shapes evolve over time.
 
 ## License
 
