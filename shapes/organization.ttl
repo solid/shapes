@@ -66,7 +66,7 @@ organization-shape:OrganizationContactShape
 
 # - https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
 
-organization-shape:OrganizationShape2
+organization-shape:OrganizationContactDetailedShape
     a sh:NodeShape ;
     sh:targetClass foaf:Organization ;
     rdfs:label "Organization Shape" ;
