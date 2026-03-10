@@ -12,6 +12,7 @@
 @prefix terms:      <http://purl.org/dc/terms/> .
 @prefix ui:         <http://www.w3.org/ns/ui#> .
 @prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
 
 <> 
     rdfs:label "Solid Chat SHACL Shapes" ;
