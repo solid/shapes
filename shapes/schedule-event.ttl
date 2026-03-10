@@ -73,5 +73,3 @@ schedule-event-shape:ScheduleEventShape
     .
 
     
-        <#eventComment>
-        <#eventAuthor>
