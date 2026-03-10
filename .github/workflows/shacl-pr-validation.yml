@@ -1,0 +1,48 @@
+name: Validate SHACL Shapes on PR
+
+on:
+  pull_request:
+    paths:
+      - 'shapes/**/*.ttl'  # only run on PRs touching TTL files
+
+jobs:
+  shacl-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyshacl rdflib rich
+
+      - name: Validate only changed TTL files
+        run: |
+          changed_files=$(git diff --name-only origin/main...HEAD | grep '\.ttl$' || true)
+
+          if [ -z "$changed_files" ]; then
+            echo "No TTL files added or modified in this PR."
+          else
+            echo "Validating changed TTL files:"
+            echo "$changed_files"
+            ok=true
+            for file in $changed_files; do
+              echo "───────────────────────────────"
+              echo "Validating $file..."
+              python shapes/scripts/validate-shacl-shapes-file.py "$file" || ok=false
+            done
+            $ok || exit 1
+          fi
+
+      - name: Metadata & immutability checks
+        run: |
+          python scripts/check-metadata-and-immutability.py
+
+      - name: Namespace & naming checks
+        run: |
+          python scripts/check-namespaces-and-names.py

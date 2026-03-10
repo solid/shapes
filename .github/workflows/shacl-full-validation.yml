@@ -1,0 +1,35 @@
+name: Validate All SHACL Shapes
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # allows manual triggering
+
+jobs:
+  shacl-validation-full:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyshacl rdflib rich
+
+      - name: Validate all TTL files
+        run: |
+          bash shapes/scripts/validate-shacl-shapes-dir.sh
+
+      - name: Metadata & immutability checks
+        run: |
+          python scripts/check-metadata-and-immutability.py
+
+      - name: Namespace & naming checks
+        run: |
+          python scripts/check-namespaces-and-names.py
