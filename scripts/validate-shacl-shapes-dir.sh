@@ -1,6 +1,6 @@
 #!/bin/bash
 # -----------------------------------------------
-# Script: validate_shapes.sh
+# Script: validate-shacl-shapes-dir.sh
 # Purpose: Validate all Turtle (TTL) files in a directory against SHACL shapes using pySHACL.
 # -----------------------------------------------
 # HOW TO USE THIS SCRIPT:
@@ -13,7 +13,7 @@
 #    chmod +x validate_shapes.sh
 #
 # 3. Run the script:
-#    ./validate_shapes.sh
+#    ./validate-shacl-shapes-dir.sh
 #
 # 4. Script behavior:
 #    - Searches for all .ttl files in the SHAPES_DIR
