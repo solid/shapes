@@ -2,20 +2,24 @@ name: Validate SHACL Shapes on PR
 
 on:
   pull_request:
+    branches:
+      - main
     paths:
-      - 'shapes/**/*.ttl'  # only run on PRs touching TTL files
+      - 'shapes/**/*.ttl'
 
 jobs:
   shacl-validation:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -23,7 +27,8 @@ jobs:
 
       - name: Validate only changed TTL files
         run: |
-          changed_files=$(git diff --name-only origin/main...HEAD | grep '\.ttl$' || true)
+          git fetch origin main
+          changed_files=$(git diff --name-only origin/main...HEAD -- '*.ttl')
 
           if [ -z "$changed_files" ]; then
             echo "No TTL files added or modified in this PR."
