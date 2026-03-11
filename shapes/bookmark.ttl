@@ -20,7 +20,9 @@ bookmark-shape:BookmarkShape
     sh:targetClass bookmark:Bookmark ;
     rdfs:label "Bookmark" ;
     rdfs:comment "A Bookmark node with label, URL, topic, and description" ;
-
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
+    
     # Label property
     sh:property [
         sh:path rdfs:label ;

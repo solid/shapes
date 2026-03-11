@@ -23,6 +23,8 @@ issue-tracker-shape:IssueTrackerShape
     rdfs:label "Issue Tracker Configuration Shape" ;
     rdfs:comment "Defines data constraints for configuring an issue tracker including title, description, workflow states, classification systems, assignment rules, optional forms, and additional properties." ;
     sh:targetClass wf:Tracker ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
 
     sh:property
         [ sh:path dct:title ;
@@ -88,7 +90,9 @@ issue-tracker-shape:PropertyListShape
     a sh:NodeShape ;
     rdfs:label "Property List Item Shape" ;
     rdfs:comment "Defines constraints for each property included in the propertyList of an issue tracker." ;
-
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
+    
     sh:property [
         sh:path rdfs:label ;
         sh:minCount 1 ;
@@ -98,51 +102,3 @@ issue-tracker-shape:PropertyListShape
         rdfs:comment "The human-readable name of the property."
     ] .
 
-################################################################
-# Nested Assignee Group Shape
-################################################################
-
-group-shape:IssueTrackerGroupShape
-    a sh:NodeShape ;
-    rdfs:label "Assignee Group Shape" ;
-    rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;
-
-    sh:property [
-        sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Group Name" ;
-        rdfs:comment "The formatted name of the group."
-    ] ;
-    sh:property [
-        sh:path vcard:member ;
-        sh:minCount 0 ;
-        sh:node person-shape:IssueTrackerPersonShape ;
-        rdfs:label "Group Member" ;
-        rdfs:comment "Each member of the group represented as a vCard Individual."
-    ] .
-
-################################################################
-# Nested Person Shape for Group Members
-################################################################
-
-person-shape:IssueTrackerPersonShape
-    a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "Defines constraints for an individual person in a group." ;
-
-    sh:property [
-        sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Person Name" ;
-        rdfs:comment "The human-readable name of the person."
-    ] ;
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-        sh:class vcard:Individual ;
-        rdfs:label "Solid ID" ;
-        rdfs:comment "The Solid WebID of the person, if available."
-    ] .

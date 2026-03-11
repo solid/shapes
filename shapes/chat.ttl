@@ -16,9 +16,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
-<> 
-    rdfs:label "Solid Chat SHACL Shapes" ;
-    rdfs:comment "This is a shape file defining validation rules for Solid Chat data." .
 
 # Chat Shape
 # Source: https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex
@@ -27,6 +24,9 @@ chat-shape:ChatChannelShape a sh:NodeShape ;
     rdfs:label "Chat Channel Shape" ;
     rdfs:comment "SHACL NodeShape describing the properties and constraints for a Solid Chat LongChat." ;
     sh:targetClass mee:LongChat ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
+
     sh:property
         [ sh:path rdf:type ;
           sh:value mee:LongChat ;
@@ -73,6 +73,8 @@ chat-shape:ChatMessageShape a sh:NodeShape ;
     rdfs:label "Chat Message Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for messages in Solid Chat." ;
     sh:targetObjectsOf flow:message ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property
         [ sh:path terms:created ; 
           sh:minCount 1 ; 
@@ -108,6 +110,8 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
     rdfs:label "Participation Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for a participant in a Solid Chat." ;
     sh:targetObjectsOf flow:participation ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property
         [ sh:path ical:dtstart ;
           sh:datatype xsd:dateTime ;
@@ -167,6 +171,8 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
     rdfs:label "Chat Shared Preferences Shape" ;
     rdfs:comment "NodeShape defining shared UI preferences for chat participants." ;
     sh:targetObjectsOf ui:sharedPreferences ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property
         [ sh:path solid:expandImagesInline ;
           sh:datatype xsd:boolean ;
@@ -197,8 +203,9 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
 # Instead of modifying a message directly, Solid Chat represents reactions as separate action resources.
 # Examples: Agreeing with a message, Liking a message, Reacting to a message, Acknowledging a message, These actions are based on Schema.org actions.
 
-chat-shape:ActionShape
-    a sh:NodeShape ;
+chat-shape:ActionShape a sh:NodeShape ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property [
         sh:path rdf:type ;  # object Must be subclass of schema:Action 
        # sh:class schema:Action ; commented out will only validate subclasses of schema:Action if SHACL engine is OWL-aware

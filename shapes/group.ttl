@@ -17,6 +17,8 @@ group-shape:GroupShape
     rdfs:label "Group Shape" ;
     rdfs:comment "Defines constraints for a vCard Group including its name and members." ;
     sh:targetClass vcard:Group ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
 
     sh:property [
         sh:path vcard:fn ;
@@ -44,6 +46,8 @@ group-shape:GroupMemberLocalId
     rdfs:label "Group Member Local Identifier Shape" ;
     rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs." ;
     sh:targetObjectsOf vcard:member ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
 
     sh:property [
         sh:path owl:sameAs ;
@@ -63,6 +67,8 @@ group-shape:IssueTrackerGroupShape
     a sh:NodeShape ;
     rdfs:label "Assignee Group Shape" ;
     rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
 
     sh:property [
         sh:path vcard:fn ;
@@ -80,23 +86,4 @@ group-shape:IssueTrackerGroupShape
     ] .
 
 
-person-shape:IssueTrackerPersonShape
-    a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "Defines constraints for an individual person in a group." ;
 
-    sh:property [
-        sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Person Name" ;
-        rdfs:comment "The human-readable name of the person."
-    ] ;
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-        sh:class vcard:Individual ;
-        rdfs:label "Solid ID" ;
-        rdfs:comment "The Solid WebID of the person, if available."
-    ] .

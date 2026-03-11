@@ -19,6 +19,9 @@ email-shape:EmailShape a sh:NodeShape;
     rdfs:label "Email Shape" ;
     rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
     sh:targetObjectsOf vcard:hasEmail;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
+
     sh:property [
     sh:path vcard:value;
         sh:pattern "^mailto:" ;    # starts with mailto
@@ -37,6 +40,9 @@ email-shape:EmailWithTypeShape
     sh:targetObjectsOf vcard:hasEmail ;
     rdfs:label "Email Shape" ;
     rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
+    dct:created "2026-11-03"^^xsd:date ;
+    vs:term_status "testing" ;
+    
     sh:property [
         sh:path vcard:value ;
         sh:minCount 1 ;
