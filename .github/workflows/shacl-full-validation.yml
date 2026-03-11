@@ -24,7 +24,7 @@ jobs:
 
       - name: Validate all TTL files
         run: |
-          bash shapes/scripts/validate-shacl-shapes-dir.sh
+          bash scripts/validate-shacl-shapes-dir.sh
 
       - name: Metadata & immutability checks
         run: |

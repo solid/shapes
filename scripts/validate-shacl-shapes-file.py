@@ -13,7 +13,7 @@
 #      pip install pyshacl rdflib rich
 #
 # 2. Run the script on one or more TTL files:
-#      python ./validate-shacl-shapes-file.py shapes/shape1.ttl shapes/shape2.ttl
+#      python ./scripts/validate-shacl-shapes-file.py shapes/shape1.ttl shapes/shape2.ttl
 #
 # 3. Exit codes:
 #      0 → all files valid
