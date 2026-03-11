@@ -3,14 +3,14 @@
 check_metadata_and_immutability.py
 
 Validates SHACL shapes for:
-- Required metadata
-- Immutability of stable/archaic shapes
-- Versioning link consistency
+- Required metadata - rdfs:label, dct:created, vs:term_status
+- Immutability of stable/archaic shapes - no changes allowed without proper versioning and status update
+- Versioning link consistency - if a shape is modified, it should have a new version and appropriate status change
 """
 
 import sys
-from rdflib import Graph, URIRef, Namespace
-from rdflib.namespace import RDF, RDFS, XSD
+from rdflib import Graph, Namespace
+from rdflib.namespace import RDF, RDFS
 
 # Namespaces
 SH = Namespace("http://www.w3.org/ns/shacl#")
