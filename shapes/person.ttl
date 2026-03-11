@@ -4,7 +4,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
-
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix address-shape:  <https://solidproject.org/shapes/address#> .
 @prefix email-shape: <https://solidproject.org/shapes/email#> .
 @prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .

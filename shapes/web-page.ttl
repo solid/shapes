@@ -1,6 +1,7 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
-
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix web-page-shape: <https://solidproject.org/shapes/web-page#> .
 
 # source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl

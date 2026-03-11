@@ -3,7 +3,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cal: <http://www.w3.org/2002/12/cal/ical#> .
 @prefix sched: <http://www.w3.org/ns/pim/schedule#> .
-
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix schedule-event-shape:   <https://solidproject.org/shapes/schedule-event#> .
 
 

@@ -11,7 +11,7 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # Ensures compatibility with Node.js 24 for JavaScript-based actions 
   
 jobs:
-  shacl-validation-full:
+  main-push-validation:
     runs-on: ubuntu-latest
 
     steps:

@@ -4,7 +4,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
-
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 #################################################################
 # Main vCard Shape
 # The vCard shapes have been created with ref to the vCard format spec https://datatracker.ietf.org/doc/html/rfc6350
