@@ -4,7 +4,8 @@
 # Purpose: Validate all Turtle (TTL) files in a directory against SHACL shapes using pySHACL.
 # -----------------------------------------------
 
-set -e
+set -o pipefail
+set +e
 
 SHAPES_DIR="./shapes"
 

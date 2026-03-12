@@ -6,10 +6,6 @@ on:
       - main
   workflow_dispatch:  # allows manual triggering
 
-
-env: 
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # Ensures compatibility with Node.js 24 for JavaScript-based actions 
-  
 jobs:
   main-push-validation:
     runs-on: ubuntu-latest
