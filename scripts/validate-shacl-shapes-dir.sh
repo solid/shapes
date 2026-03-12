@@ -3,117 +3,116 @@
 # Script: validate-shacl-shapes-dir.sh
 # Purpose: Validate all Turtle (TTL) files in a directory against SHACL shapes using pySHACL.
 # -----------------------------------------------
-# HOW TO USE THIS SCRIPT:
-# 1. Prerequisites:
-#    - Python 3 installed
-#    - pySHACL installed (run: pip install pyshacl)
-#    - TTL files to validate placed in ./shapes (or change SHAPES_DIR below)
-#
-# 2. Make the script executable:
-#    chmod +x validate_shapes.sh
-#
-# 3. Run the script:
-#    ./validate-shacl-shapes-dir.sh
-#
-# 4. Script behavior:
-#    - Searches for all .ttl files in the SHAPES_DIR
-#    - Validates each file against SHACL shapes using pySHACL
-#    - Reports for each file:
-#        ✅ Conforms to SHACL
-#        ❌ Does NOT conform or has syntax errors
-#    - Prints a summary at the end with total, valid, and failed files
-#    - Exit codes:
-#        0 → all files valid
-#        1 → at least one file failed validation
-# -----------------------------------------------
 
-set -e  # Exit immediately if any command returns a non-zero status
+set -e
 
-SHAPES_DIR="./shapes"  # Directory containing TTL files to validate
+SHAPES_DIR="./shapes"
 
-# Initialize counters for reporting
-total=0       # Total TTL files found
-valid=0       # Number of files that pass validation
-invalid=0     # Number of files that fail validation
+# Initialize counters
+total=0
+valid=0
+invalid=0
 
 echo "Searching for TTL files in $SHAPES_DIR..."
-files=($SHAPES_DIR/*.ttl)  # Get a list of all .ttl files in the directory
 
-# Check if there are any TTL files
-if [ ${#files[@]} -eq 0 ]; then
-    echo "❌ No TTL files found in $SHAPES_DIR"
+# Ensure directory exists
+if [ ! -d "$SHAPES_DIR" ]; then
+    echo "ERROR: Directory '$SHAPES_DIR' does not exist."
+    echo "Current repository structure:"
+    ls -R
     exit 1
 fi
 
+# Prevent *.ttl from expanding to literal string if no files exist
+shopt -s nullglob
+
+files=($SHAPES_DIR/*.ttl)
+
+# Check if there are any TTL files
+if [ ${#files[@]} -eq 0 ]; then
+    echo "ERROR: No TTL files found in '$SHAPES_DIR'."
+    echo "Directory contents:"
+    ls -l "$SHAPES_DIR"
+    exit 1
+fi
+
+echo "Found ${#files[@]} TTL files."
+
 # Loop over each TTL file
 for file in "${files[@]}"; do
-    ((total++))  # Increment total counter
-    echo "───────────────────────────────"
-    echo "Validating $file..."
+    ((total++))
+    echo "--------------------------------"
+    echo "Validating file: $file"
 
-    # Run pySHACL validation inside an embedded Python script
-    # Capture output (including errors) to show in the terminal
     if output=$(python3 - <<EOF 2>&1
 import sys
 from pyshacl import validate
 from rdflib.plugins.parsers.notation3 import BadSyntax
 
-ttl_file = "$file"  # File to validate
+ttl_file = "$file"
+
 try:
-    # Run validation
     conforms, v_graph, v_text = validate(
         ttl_file,
-        shacl_graph=None,  # No separate SHACL graph, uses SHACL included in TTL
-        inference='rdfs',  # Use RDFS inference
-        abort_on_error=True,  # Stop at first error
-        advanced=True,       # Enable advanced SHACL features
-        meta_shacl=True,     # Enable Meta-SHACL checks
+        shacl_graph=None,
+        inference='rdfs',
+        abort_on_first=True,
+        advanced=True,
+        meta_shacl=True,
         debug=False
     )
+
     if conforms:
-        # TTL file conforms to SHACL
-        print("✅ $ttl_file conforms to SHACL")
+        print("RESULT: CONFORMS")
+        print("File:", ttl_file)
         sys.exit(0)
+
     else:
-        # TTL file fails validation, print first 15 lines of errors
-        print("❌ $ttl_file does NOT conform:")
-        print(v_text.splitlines()[0:15])
+        print("RESULT: VALIDATION FAILED")
+        print("File:", ttl_file)
+        print("Validation report (first 15 lines):")
+        print("\\n".join(v_text.splitlines()[:15]))
         sys.exit(1)
+
 except BadSyntax as e:
-    # Handle syntax errors in TTL files
     msg = str(e)
+
+    print("RESULT: SYNTAX ERROR")
+    print("File:", ttl_file)
+
     if "Prefix" in msg:
-        prefix = msg.split('"')[1]
-        print(f"❌ {ttl_file} has syntax errors:")
-        print(f"  Missing prefix declaration: {prefix}")
-        print(f"  Suggestion: Add '@prefix {prefix}: <URI> .' at the top of the TTL file")
-    else:
-        print(f"❌ {ttl_file} has syntax errors:")
-        print(f"  {msg}")
+        try:
+            prefix = msg.split('"')[1]
+            print("Missing prefix declaration:", prefix)
+            print("Suggested fix: add '@prefix {}: <URI> .' near the top of the file.".format(prefix))
+        except:
+            pass
+
+    print("Parser message:", msg)
     sys.exit(1)
+
 except Exception as e:
-    # Catch-all for unexpected errors
-    print(f"❌ {ttl_file} validation failed due to unexpected error:")
-    print(f"  {str(e)}")
+    print("RESULT: UNEXPECTED ERROR")
+    print("File:", ttl_file)
+    print("Error message:", str(e))
     sys.exit(1)
+
 EOF
 ); then
-        ((valid++))  # If Python exits 0, increment valid counter
-    else
-        # If validation failed, print captured output
         echo "$output"
-        ((invalid++))  # Increment invalid counter
+        ((valid++))
+    else
+        echo "$output"
+        ((invalid++))
     fi
 done
 
-# Print summary of results
-echo "───────────────────────────────"
-echo "Validation Summary:"
-echo "Total files: $total"
-echo "✅ Conforms: $valid"
-echo "❌ Failed: $invalid"
+echo "--------------------------------"
+echo "Validation Summary"
+echo "Total files processed: $total"
+echo "Files conforming: $valid"
+echo "Files failed: $invalid"
 
-# Exit with non-zero if any files failed validation
 if [ $invalid -gt 0 ]; then
     exit 1
 else
