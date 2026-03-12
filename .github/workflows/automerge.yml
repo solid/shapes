@@ -2,6 +2,8 @@ name: Enable automerge on dependabot PRs
 
 on:
   pull_request_target:
+    branches:
+      - main
 
 jobs:
   automerge:
