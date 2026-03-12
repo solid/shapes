@@ -7,9 +7,6 @@ on:
     paths:
       - 'shapes/**/*.ttl'
 
-env: 
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # Ensures compatibility with Node.js 24 for JavaScript-based actions 
-
 jobs:
   main-pr-validation:
     runs-on: ubuntu-latest
@@ -17,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # needed to compare with origin/main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,29 +25,38 @@ jobs:
         run: |
           pip install pyshacl rdflib rich
 
-      - name: Validate only changed TTL files
+      - name: Determine changed TTL files
+        id: changes
         run: |
           git fetch origin main
-          changed_files=$(git diff --name-only origin/main...HEAD -- '*.ttl')
+          # Get list of changed TTL files in PR
+          changed_files=$(git diff --name-only origin/main...HEAD -- 'shapes/**/*.ttl' || true)
+          echo "Changed TTL files:"
+          echo "$changed_files"
+          # Output to GitHub Actions
+          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$changed_files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
-          if [ -z "$changed_files" ]; then
-            echo "No TTL files added or modified in this PR."
-          else
-            echo "Validating changed TTL files:"
-            echo "$changed_files"
-            ok=true
-            for file in $changed_files; do
-              echo "───────────────────────────────"
-              echo "Validating $file..."
-              python shapes/scripts/validate-shacl-shapes-file.py "$file" || ok=false
-            done
-            $ok || exit 1
-          fi
-
-      - name: Metadata & immutability checks
+      - name: Validate SHACL shapes for changed files
+        if: steps.changes.outputs.changed_files != ''
         run: |
-          python scripts/check-metadata-and-immutability.py
+          echo "Validating changed TTL files:"
+          echo "${{ steps.changes.outputs.changed_files }}"
+          ok=true
+          for file in ${{ steps.changes.outputs.changed_files }}; do
+            echo "───────────────────────────────"
+            echo "Validating $file..."
+            python shapes/scripts/validate-shacl-shapes-file.py "$file" || ok=false
+          done
+          $ok || exit 1
 
-      - name: Namespace & naming checks
+      - name: Metadata & immutability checks for changed files
+        if: steps.changes.outputs.changed_files != ''
         run: |
-          python scripts/check-namespaces-and-names.py
+          python scripts/check-metadata-and-immutability-file.py ${{ steps.changes.outputs.changed_files }}
+
+      - name: Namespace & naming checks for changed files
+        if: steps.changes.outputs.changed_files != ''
+        run: |
+          python scripts/check-namespaces-and-names-file.py ${{ steps.changes.outputs.changed_files }}

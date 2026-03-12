@@ -28,8 +28,8 @@ jobs:
 
       - name: Metadata & immutability checks
         run: |
-          python scripts/check-metadata-and-immutability.py
+          python scripts/check-metadata-and-immutability-dir.py
 
       - name: Namespace & naming checks
         run: |
-          python scripts/check-namespaces-and-names.py
+          python scripts/check-namespaces-and-names-dir.py
