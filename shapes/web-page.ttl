@@ -8,6 +8,11 @@
 
 web-page-shape:WebPageShape a sh:NodeShape;
   sh:targetObjectsOf vcard:url;
+  rdfs:label "Web Page Shape" ;
+  rdfs:comment "SHACL shape for validating web identifiers (URLs) associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;
+  dct:created "2026-03-12"^^xsd:date ;
+  vs:term_status "testing" ;
+  
   sh:property [
     sh:path vcard:value;    # @@ also need to contrail the type part
     sh:pattern "^https?:" ;    # starts with http: or https:

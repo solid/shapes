@@ -22,6 +22,8 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
     rdfs:label "Person Shape" ;
     rdfs:comment "SHACL shape representing a person" ;
     sh:targetClass vcard:Individual ;  
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
     
     sh:property [ 
         sh:path vcard:fn ;
@@ -102,6 +104,8 @@ person-shape:IssueTrackerPersonShape
     a sh:NodeShape ;
     rdfs:label "Person Shape" ;
     rdfs:comment "Defines constraints for an individual person in a group." ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
 
     sh:property [
         sh:path vcard:fn ;
@@ -127,6 +131,8 @@ person-shape:ContactPersonShape a sh:NodeShape ;
     rdfs:label "Person Shape" ;
     rdfs:comment "SHACL shape representing a person" ;
     sh:targetClass vcard:Individual ;  
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
     
     sh:property [
 	    sh:path rdf:type ;
@@ -230,87 +236,3 @@ person-shape:ContactPersonShape a sh:NodeShape ;
     
 
 
-email-shape:EmailShape a sh:NodeShape;
-    rdfs:label "Email Shape" ;
-    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
-    sh:targetObjectsOf vcard:hasEmail;
-    sh:property [
-    sh:path vcard:value;
-        sh:pattern "^mailto:" ;    # starts with mailto
-    sh:minCount 1;
-    sh:maxCount 1 ;
-    sh:datatype xsd:string ;
-    rdfs:label "Email Address" ;
-    rdfs:comment "The email address value (e.g., user@example.org)."
-  ] .
-
-email-shape:EmailWithTypeShape
-    a sh:NodeShape ;
-    sh:targetObjectsOf vcard:hasEmail ;
-    rdfs:label "Email Shape" ;
-    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
-    sh:property [
-        sh:path vcard:value ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org)."
-    ] ;
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 0 ;
-        rdfs:label "Email Type" ;
-        rdfs:comment "The classification of the email (e.g., home or work)."
-    ] .
-
-address-shape:AddressShape
-    rdfs:label "Address";
-    sh:targetClass vcard:Address;
-    a sh:NodeShape ;
-    sh:codeIdentifier "Address";
-
-    sh:property [
-        rdfs:label "Street Address";
-        sh:path vcard:street-address ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "streetAddress"
-    ] ;
-
-    sh:property [
-        rdfs:label "Locality";
-        sh:path vcard:locality ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "locality";
-    ] ;
-
-    sh:property [
-        rdfs:label "Postal Code";
-        sh:path vcard:postal-code ;
-        sh:datatype xsd:string ;
-        sh:maxLength 25 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "postalCode";
-    ] ;
-
-    sh:property [
-        rdfs:label "Region";
-        sh:path vcard:region ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "region";
-    ] ;
-
-    sh:property [
-        rdfs:label "Country Name";
-        sh:path vcard:country-name ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "countryName";
-    ] .

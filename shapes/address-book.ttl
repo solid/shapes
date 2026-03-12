@@ -18,7 +18,7 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:targetClass vcard:AddressBook ;
     rdfs:comment "Represents a collection of vCard people and/or vCard groups" ; 
     rdfs:comment "This class is not part of vCard as defined by the IETF" ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
 
     sh:property [

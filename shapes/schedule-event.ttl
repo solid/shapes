@@ -19,6 +19,8 @@ schedule-event-shape:ScheduleEventShape
     rdfs:label "Schedule Event Shape" ;
     rdfs:comment "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees." ;
     sh:targetClass cal:Vevent ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
 
     # Event title
     sh:property [

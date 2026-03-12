@@ -10,3 +10,5 @@
 software-agent-shape:ContactSoftwareAgentShape
     a sh:NodeShape ;
     sh:targetClass prov:SoftwareAgent .
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;

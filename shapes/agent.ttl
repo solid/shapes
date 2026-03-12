@@ -22,7 +22,7 @@
 agent-shape:AgentShape
     a sh:NodeShape ;
     sh:targetClass foaf:Agent ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     rdfs:label "Agent Shape" ;
     rdfs:comment "SHACL shape representing an agent, which can be a person, organization, or software agent." ;

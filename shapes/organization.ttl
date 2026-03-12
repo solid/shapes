@@ -21,6 +21,8 @@ organization-shape:ContactOrganizationShape
     sh:targetClass vcard:Organization ;
     rdfs:label "Organization Shape" ;
     rdfs:comment "SHACL shape for validating organization contact and classification details." ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
 
     # Organization Name
     sh:property [
@@ -69,6 +71,9 @@ organization-shape:ContactDetailsOrganizationShape
     sh:targetClass vcard:Organization ;
     rdfs:label "Organization contact details Shape" ;
     rdfs:comment "SHACL shape defining data constraints for an organization contact." ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
+
 
     sh:property [
         sh:path rdf:type ;
@@ -137,108 +142,6 @@ organization-shape:ContactDetailsOrganizationShape
         rdfs:comment "General notes about the organization." ;
     ] .
 
-################################################################
-# Telephone shape
-################################################################
 
-telephone-shape:TelephoneShape
-    a sh:NodeShape ;
-    sh:targetObjectsOf vcard:hasTelephone ;
 
-    # Phone Type (optional, restricted to vCard types)
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-        sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
-        rdfs:label "Phone Type" ;
-        rdfs:comment "The classification of the phone (cell, home, work)." 
-    ] ;
 
-    # Phone Number (required)
-    sh:property [
-        sh:path vcard:value ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        rdfs:label "Phone Number" ;
-        rdfs:comment "The telephone number of the contact." 
-    ] .
-
-################################################################
-# Email shape
-################################################################
-
-email-shape:EmailWithTypeShape
-    a sh:NodeShape ;
-    sh:targetObjectsOf vcard:hasEmail ;
-    rdfs:label "Email Shape" ;
-    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
-    sh:property [
-        sh:path vcard:value ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org)."
-    ] ;
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 0 ;
-        rdfs:label "Email Type" ;
-        rdfs:comment "The classification of the email (e.g., home or work)."
-    ] .
-
-################################################################
-# Address shape
-################################################################
-
-address-shape:AddressShape
-    a sh:NodeShape ;
-    sh:targetClass vcard:Address ;
-    sh:codeIdentifier "Address" ;
-    rdfs:label "Address" ;
-
-    sh:property [
-        sh:path vcard:street-address ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1 ;
-        rdfs:label "Street Address" ;
-        sh:codeIdentifier "streetAddress" ;
-    ] ;
-
-    sh:property [
-        sh:path vcard:locality ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1 ;
-        rdfs:label "Locality" ;
-        sh:codeIdentifier "locality" ;
-    ] ;
-
-    sh:property [
-        sh:path vcard:postal-code ;
-        sh:datatype xsd:string ;
-        sh:maxLength 25 ;
-        sh:maxCount 1 ;
-        rdfs:label "Postal Code" ;
-        sh:codeIdentifier "postalCode" ;
-    ] ;
-
-    sh:property [
-        sh:path vcard:region ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1 ;
-        rdfs:label "Region" ;
-        sh:codeIdentifier "region" ;
-    ] ;
-
-    sh:property [
-        sh:path vcard:country-name ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1 ;
-        rdfs:label "Country Name" ;
-        sh:codeIdentifier "countryName" ;
-    ] .

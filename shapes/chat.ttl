@@ -24,7 +24,7 @@ chat-shape:ChatChannelShape a sh:NodeShape ;
     rdfs:label "Chat Channel Shape" ;
     rdfs:comment "SHACL NodeShape describing the properties and constraints for a Solid Chat LongChat." ;
     sh:targetClass mee:LongChat ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
 
     sh:property
@@ -73,7 +73,7 @@ chat-shape:ChatMessageShape a sh:NodeShape ;
     rdfs:label "Chat Message Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for messages in Solid Chat." ;
     sh:targetObjectsOf flow:message ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     sh:property
         [ sh:path terms:created ; 
@@ -110,7 +110,7 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
     rdfs:label "Participation Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for a participant in a Solid Chat." ;
     sh:targetObjectsOf flow:participation ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     sh:property
         [ sh:path ical:dtstart ;
@@ -171,7 +171,7 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
     rdfs:label "Chat Shared Preferences Shape" ;
     rdfs:comment "NodeShape defining shared UI preferences for chat participants." ;
     sh:targetObjectsOf ui:sharedPreferences ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     sh:property
         [ sh:path solid:expandImagesInline ;
@@ -204,7 +204,7 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
 # Examples: Agreeing with a message, Liking a message, Reacting to a message, Acknowledging a message, These actions are based on Schema.org actions.
 
 chat-shape:ActionShape a sh:NodeShape ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     sh:property [
         sh:path rdf:type ;  # object Must be subclass of schema:Action 

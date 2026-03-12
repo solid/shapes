@@ -15,7 +15,7 @@ address-shape:AddressShape
     sh:targetClass vcard:Address;
     a sh:NodeShape ;
     sh:codeIdentifier "Address";
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
 
     sh:property [

@@ -23,7 +23,7 @@ issue-tracker-shape:IssueTrackerShape
     rdfs:label "Issue Tracker Configuration Shape" ;
     rdfs:comment "Defines data constraints for configuring an issue tracker including title, description, workflow states, classification systems, assignment rules, optional forms, and additional properties." ;
     sh:targetClass wf:Tracker ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
 
     sh:property
@@ -90,7 +90,7 @@ issue-tracker-shape:PropertyListShape
     a sh:NodeShape ;
     rdfs:label "Property List Item Shape" ;
     rdfs:comment "Defines constraints for each property included in the propertyList of an issue tracker." ;
-    dct:created "2026-11-03"^^xsd:date ;
+    dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     
     sh:property [

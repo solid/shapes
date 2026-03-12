@@ -13,6 +13,8 @@ personal-name:PersonalNameShape
     rdfs:label "Structured Personal Name Shape"@en ;
     rdfs:comment "Validates components of a person's structured name in VCARD data." ;
     sh:targetObjectOf vcard:hasName ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
     
     # Family name (surname)
     sh:property [

@@ -11,6 +11,9 @@
 
 telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
   sh:targetObjectsOf vcard:hasTelephone;
+  dct:created "2026-03-12"^^xsd:date ;
+  vs:term_status "testing" ;
+
   sh:property [
     sh:path vcard:value;
     sh:nodeKind sh:IRI;  
@@ -25,6 +28,8 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
 telephone-shape:TelephoneShape
     a sh:NodeShape ;
     sh:targetObjectsOf vcard:hasTelephone ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
 
     # Phone Type (optional, restricted to vCard types)
     sh:property [
