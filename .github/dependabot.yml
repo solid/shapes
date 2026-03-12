@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"                # checks all workflow files in .github/workflows
+    schedule:
+      interval: "weekly"          # checks once per week to reduce PR noise
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore"             # PRs will be like "chore: Bump actions/checkout"
+      include: "scope"            # includes the Action name in the commit message
