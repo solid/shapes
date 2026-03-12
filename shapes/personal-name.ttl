@@ -4,9 +4,12 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
 @prefix personal-name: <https://solidproject.org/shapes/personal-name#> .
 
-# Source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
+
 
 personal-name:PersonalNameShape
     a sh:NodeShape ;
@@ -15,6 +18,8 @@ personal-name:PersonalNameShape
     sh:targetObjectOf vcard:hasName ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     
     # Family name (surname)
     sh:property [

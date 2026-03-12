@@ -4,9 +4,10 @@
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix web-page-shape: <https://solidproject.org/shapes/web-page#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-# source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
+@prefix web-page-shape: <https://solidproject.org/shapes/web-page#> .
 
 web-page-shape:WebPageShape a sh:NodeShape;
   sh:targetObjectsOf vcard:url;
@@ -14,6 +15,8 @@ web-page-shape:WebPageShape a sh:NodeShape;
   rdfs:comment "SHACL shape for validating web identifiers (URLs) associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;
   dct:created "2026-03-12"^^xsd:date ;
   vs:term_status "testing" ;
+  dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+  prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
 
   sh:property [
     sh:path vcard:value;    # @@ also need to contrail the type part
