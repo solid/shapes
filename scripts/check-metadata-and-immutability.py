@@ -3,12 +3,14 @@
 check_metadata_and_immutability.py
 
 Validates SHACL shapes for:
-- Required metadata - rdfs:label, dct:created, vs:term_status
-- Immutability of stable/archaic shapes - no changes allowed without proper versioning and status update
-- Versioning link consistency - if a shape is modified, it should have a new version and appropriate status change
+- Required metadata (rdfs:label, dct:created, vs:term_status)
+- Correct metadata formats
+- Status validity
+- Immutability rules (placeholder for future logic)
 """
 
 import sys
+import glob
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDF, RDFS
 
@@ -17,71 +19,154 @@ SH = Namespace("http://www.w3.org/ns/shacl#")
 DCT = Namespace("http://purl.org/dc/terms/")
 VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
 
+# Allowed status values
+VALID_STATUS = {"unstable", "testing", "stable", "archaic"}
+
 # Paths
 SHAPES_DIR = "shapes/"
 
-# Exit code tracker
 exit_code = 0
 
-def check_shape_metadata(g, shape_uri):
+
+def report_error(file, shape, property_name, message, value=None, expected=None):
+    """Print a structured validation error."""
     global exit_code
-    errors = []
-    
+    exit_code = 1
+
+    print("\n[SHACL METADATA ERROR]")
+    print(f"File:        {file}")
+    print(f"Shape:       {shape}")
+    print(f"Property:    {property_name}")
+
+    if value is not None:
+        print(f"Found:       {value}")
+
+    if expected is not None:
+        print(f"Expected:    {expected}")
+
+    print(f"Problem:     {message}")
+
+
+def check_shape_metadata(g, file, shape_uri):
+
     label = g.value(shape_uri, RDFS.label)
     created = g.value(shape_uri, DCT.created)
     status = g.value(shape_uri, VS.term_status)
-    
+
+    # rdfs:label
     if not label:
-        errors.append(f"Missing rdfs:label for {shape_uri}")
+        report_error(
+            file,
+            shape_uri,
+            "rdfs:label",
+            "Missing required label for SHACL NodeShape.",
+            expected="Human readable label e.g. rdfs:label \"Person Shape\""
+        )
+
+    # dct:created
     if not created:
-        errors.append(f"Missing dct:created for {shape_uri}")
+        report_error(
+            file,
+            shape_uri,
+            "dct:created",
+            "Creation date missing.",
+            expected="ISO 8601 date literal e.g. \"2025-02-10\"^^xsd:date"
+        )
     else:
         try:
-            g.value(shape_uri, DCT.created).toPython()  # parse as date
+            created.toPython()
         except Exception:
-            errors.append(f"Invalid dct:created value for {shape_uri}")
-    if not status:
-        errors.append(f"Missing vs:term_status for {shape_uri}")
-    elif str(status) not in ["unstable", "testing", "stable", "archaic"]:
-        errors.append(f"Invalid vs:term_status '{status}' for {shape_uri}")
-    
-    for e in errors:
-        print(f"[METADATA ERROR] {e}")
-    if errors:
-        exit_code = 1
+            report_error(
+                file,
+                shape_uri,
+                "dct:created",
+                "Invalid date literal.",
+                value=created,
+                expected="ISO 8601 xsd:date (YYYY-MM-DD)"
+            )
 
-def check_immutability(g, shape_uri):
-    global exit_code
+    # vs:term_status
+    if not status:
+        report_error(
+            file,
+            shape_uri,
+            "vs:term_status",
+            "Status missing.",
+            expected=f"One of {sorted(VALID_STATUS)}"
+        )
+    else:
+        status_str = str(status)
+
+        if status_str not in VALID_STATUS:
+            report_error(
+                file,
+                shape_uri,
+                "vs:term_status",
+                "Invalid status value.",
+                value=status_str,
+                expected=f"One of {sorted(VALID_STATUS)}"
+            )
+
+
+def check_immutability(g, file, shape_uri):
+    """
+    Placeholder for immutability validation.
+
+    In production you would:
+    - Compare against previous committed version
+    - Detect structural changes
+    - Ensure version increment
+    """
+
     status = g.value(shape_uri, VS.term_status)
-    # For demo: assume previous committed shapes are loaded as immutable (simplified)
-    # In practice, compare with saved checksum or committed version
-    if status and str(status) in ["stable", "archaic"]:
-        # Check if any forbidden property modifications exist
-        # Here we assume detection logic is implemented; for now just a placeholder
+
+    if status and str(status) in {"stable", "archaic"}:
+        # Future logic example:
+        # compare shape hash with previous commit
         pass
+
 
 def main():
     global exit_code
-    import glob
-    
+
     ttl_files = glob.glob(f"{SHAPES_DIR}/*.ttl")
+
     if not ttl_files:
-        print(f"No .ttl files found in {SHAPES_DIR}")
+        print(f"[ERROR] No Turtle files found in '{SHAPES_DIR}'")
         sys.exit(1)
-    
-    for f in ttl_files:
+
+    for file in ttl_files:
+
         g = Graph()
-        g.parse(f, format="turtle")
+
+        try:
+            g.parse(file, format="turtle")
+        except Exception as e:
+            print("\n[PARSE ERROR]")
+            print(f"File: {file}")
+            print(f"Problem: Failed to parse Turtle file")
+            print(f"Details: {e}")
+            exit_code = 1
+            continue
+
+        shapes_found = False
+
         for shape_uri in g.subjects(RDF.type, SH.NodeShape):
-            check_shape_metadata(g, shape_uri)
-            check_immutability(g, shape_uri)
-    
+            shapes_found = True
+            check_shape_metadata(g, file, shape_uri)
+            check_immutability(g, file, shape_uri)
+
+        if not shapes_found:
+            print(f"\n[WARNING] No sh:NodeShape found in {file}")
+
     if exit_code:
-        print("\nValidation failed. Please fix the above errors.")
+        print("\n Validation FAILED")
+        print("Fix the above issues before committing shapes.")
     else:
-        print("Metadata and immutability validation passed.")
-    
+        print("\n Metadata and immutability validation passed.")
+
     sys.exit(exit_code)
+
 
 if __name__ == "__main__":
     main()

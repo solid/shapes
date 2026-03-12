@@ -204,6 +204,9 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
 # Examples: Agreeing with a message, Liking a message, Reacting to a message, Acknowledging a message, These actions are based on Schema.org actions.
 
 chat-shape:ActionShape a sh:NodeShape ;
+    rdfs:label "Action Shape" ;
+    rdfs:comment "NodeShape defining constraints for actions representing interactions or sentiments in the chat system." ;
+    sh:targetClass schema:Action ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     sh:property [
