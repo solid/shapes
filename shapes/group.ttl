@@ -41,7 +41,7 @@ group-shape:GroupShape
 # Group Member Local Identifier Shape
 # Source -  https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
 
-group-shape:GroupMemberLocalId
+group-shape:GroupMemberLocalIdShape
     a sh:NodeShape ;
     rdfs:label "Group Member Local Identifier Shape" ;
     rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs." ;
