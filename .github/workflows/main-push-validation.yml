@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'shapes/**/*.ttl'
   workflow_dispatch:  # allows manual triggering
 
 jobs:
@@ -13,23 +15,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Skip validation for Dependabot
+        if: github.actor == 'dependabot[bot]'
+        run: echo "Skipping SHACL validation for Dependabot PR"
+
       - name: Set up Python
+        if: github.actor != 'dependabot[bot]'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          pip install pyshacl rdflib rich
+        if: github.actor != 'dependabot[bot]'
+        run: pip install pyshacl rdflib rich
 
       - name: Validate all TTL files
-        run: |
-          bash scripts/validate-shacl-shapes-dir.sh
+        if: github.actor != 'dependabot[bot]'
+        run: bash scripts/validate-shacl-shapes-dir.sh
 
       - name: Metadata & immutability checks
-        run: |
-          python scripts/check-metadata-and-immutability-dir.py
+        if: github.actor != 'dependabot[bot]'
+        run: python scripts/check-metadata-and-immutability-dir.py
 
       - name: Namespace & naming checks
-        run: |
-          python scripts/check-namespaces-and-names-dir.py
+        if: github.actor != 'dependabot[bot]'
+        run: python scripts/check-namespaces-and-names-dir.py
