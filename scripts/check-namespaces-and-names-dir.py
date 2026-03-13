@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-check_namespaces_and_names.py
+check-namespaces-and-names-dir.py
 
 Validates SHACL shapes for:
 - Namespace correctness
@@ -22,15 +22,23 @@ SHAPES_DIR = "shapes/"
 # Exit code
 exit_code = 0
 
-def check_shape_names(g, shape_uri):
+
+
+def check_shape_names(shape_uri):
     global exit_code
+
+    # Skip blank nodes
+    from rdflib.term import BNode
+    if isinstance(shape_uri, BNode) or (hasattr(shape_uri, "n3") and shape_uri.n3().startswith("_:")):
+        return
+
     uri = str(shape_uri)
-    
+
     # Namespace check
     if not uri.startswith(EXPECTED_NS_PREFIX):
         print(f"[NAMESPACE ERROR] Shape {uri} does not start with {EXPECTED_NS_PREFIX}")
         exit_code = 1
-    
+
     # Local name check
     local_name = uri.split("#")[-1]
     if not local_name.endswith("Shape"):
@@ -65,7 +73,7 @@ def main():
         g.parse(f, format="turtle")
         check_prefix_labels(g)
         for shape_uri in g.subjects(RDF.type, SH.NodeShape):
-            check_shape_names(g, shape_uri)
+            check_shape_names(shape_uri)
     
     if exit_code:
         print("\nValidation failed. Please fix the above errors.")

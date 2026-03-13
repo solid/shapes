@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-check_namespaces_and_names_selected.py
+shapes/shapes/scripts/check-namespaces-and-names-file.py
 
 Validates SHACL shapes for:
 - Namespace correctness
@@ -14,6 +14,7 @@ Usage:
 import sys
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDF
+from rdflib.term import BNode
 
 # Namespaces
 SH = Namespace("http://www.w3.org/ns/shacl#")
@@ -26,6 +27,11 @@ exit_code = 0
 def check_shape_names(g, shape_uri):
     """Check namespace and local name conventions of a single shape."""
     global exit_code
+
+    # Skip blank nodes (BNodes or _:) 
+    if isinstance(shape_uri, BNode) or (hasattr(shape_uri, "n3") and shape_uri.n3().startswith("_:")):
+        return
+
     uri = str(shape_uri)
     
     # Namespace check
