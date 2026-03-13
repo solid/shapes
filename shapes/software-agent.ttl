@@ -14,7 +14,7 @@ software-agent-shape:ContactSoftwareAgentShape
     rdfs:label "Software Agent Shape" ;
     rdfs:comment "SHACL shape representing a software agent, which can be associated with a vCard contact as an agent that performs actions on behalf of the contact." ;
     dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" 
+    vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     .

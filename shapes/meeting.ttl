@@ -18,8 +18,7 @@ meeting-shape:MeetingShape
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
-    dct:references <http://www.w3.org/2002/12/cal/ical#Vevent> ; # references the cal:Vevent class, which is the expected type of nodes conforming to this shape, as well as the cal:summary, cal:location, cal:dtstart, cal:dtend, and cal:comment properties, which are used to specify the title, location, start and end times, and additional comments for a meeting, respectively. 
-    rdfs:comment
+    dct:references <http://www.w3.org/2002/12/cal/ical#Vevent> ; 
     sh:property [
         sh:path cal:summary ;
         sh:datatype xsd:string ;
