@@ -18,7 +18,8 @@ meeting-shape:MeetingShape
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
-    dct:references <http://www.w3.org/2002/12/cal/ical#Vevent> ; 
+    dct:references <http://www.w3.org/2002/12/cal/ical#Vevent> ;  
+
     sh:property [
         sh:path cal:summary ;
         sh:datatype xsd:string ;
@@ -59,8 +60,7 @@ meeting-shape:MeetingShape
         sh:minCount 0 ;
         rdfs:label "Comment" ;
         rdfs:comment "Additional notes or comments about the meeting."
-    ] ;
-
+    ]; 
      .
 
 
