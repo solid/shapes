@@ -10,8 +10,6 @@
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix person-shape:  <https://solidproject.org/shapes/person-shape#> .
-@prefix group-shape:  <https://solidproject.org/shapes/group#> .
 
 @prefix issue-tracker-shape:  <https://solidproject.org/shapes/issue-tracker#> .
 
@@ -69,7 +67,7 @@ issue-tracker-shape:IssueTrackerShape
         # Nested assignee group
         [ sh:path wf:assigneeGroup ;
           sh:minCount 0 ;
-          sh:node group-shape:IssueTrackerGroupShape ;
+          sh:node _:IssueTrackerGroupShape ;
           rdfs:label "Assignee Group" ;
           rdfs:comment "The contact group from which issues may be assigned to individuals."
         ],
@@ -105,3 +103,58 @@ issue-tracker-shape:PropertyListShape
         rdfs:comment "The human-readable name of the property."
     ] .
 
+
+
+_:IssueTrackerGroupShape
+    a sh:NodeShape ;
+    rdfs:label "Assignee Group Shape" ;
+    rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ; 
+    rdfs:comment "Group shape used in issue tracker" ;
+    sh:property [
+        sh:path vcard:fn ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Group Name" ;
+        rdfs:comment "The formatted name of the group."
+    ] ;
+    sh:property [
+        sh:path vcard:member ;
+        sh:minCount 0 ;
+        sh:node _:IssueTrackerPersonShape ;
+        rdfs:label "Group Member" ;
+        rdfs:comment "Each member of the group represented as a vCard Individual."  
+    ] .
+
+
+_:IssueTrackerPersonShape
+    a sh:NodeShape ;
+    rdfs:label "Person Shape" ;
+    rdfs:comment "Defines constraints for an individual person in a group." ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
+    rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
+
+
+    sh:property [
+        sh:path vcard:fn ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Person Name" ;
+        rdfs:comment "The human-readable name of the person."
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Solid ID" ;
+        rdfs:comment "The Solid WebID of the person, if available."
+    ] .

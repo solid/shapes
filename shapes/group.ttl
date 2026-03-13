@@ -82,10 +82,37 @@ group-shape:IssueTrackerGroupShape
     sh:property [
         sh:path vcard:member ;
         sh:minCount 0 ;
-        sh:node person-shape:IssueTrackerPersonShape ;
+        sh:node _:IssueTrackerPersonShape ;
         rdfs:label "Group Member" ;
-        rdfs:comment "Each member of the group represented as a vCard Individual."
+        rdfs:comment "Each member of the group represented as a vCard Individual."  
     ] .
 
 
+_:IssueTrackerPersonShape
+    a sh:NodeShape ;
+    rdfs:label "Person Shape" ;
+    rdfs:comment "Defines constraints for an individual person in a group." ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
+    rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
+
+
+    sh:property [
+        sh:path vcard:fn ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Person Name" ;
+        rdfs:comment "The human-readable name of the person."
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:class vcard:Individual ;
+        rdfs:label "Solid ID" ;
+        rdfs:comment "The Solid WebID of the person, if available."
+    ] .
 
