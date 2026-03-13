@@ -3,11 +3,12 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+@prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
 
 vcard-shape:VCardShape
     a sh:NodeShape ;
