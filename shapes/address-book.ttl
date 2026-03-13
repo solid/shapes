@@ -20,12 +20,14 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dct:references <https://raw.githack.com/solid/contacts/refs/heads/main/vcard-extension-addressbook.ttl> ; # uses non-standard vcard extensions:
+    sh:codeIdentifier "AddressBook";
 
     sh:property [
         rdfs:label "Formatted name";
         sh:path vcard:fn ;
         sh:datatype xsd:string;
         sh:minCount 1;
+        sh:codeIdentifier "formattedName";
   ];
   sh:property [
     rdfs:label "Name Email Index" ; 
@@ -34,6 +36,7 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:path vcard:nameEmailIndex ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
+    sh:codeIdentifier "nameEmailIndex";
   ];
 
   sh:property [
@@ -44,6 +47,7 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
     sh:maxCount 1;
+    sh:codeIdentifier "groupIndex";
   ] ;
 
   sh:property [
@@ -53,6 +57,8 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:path vcard:includesGroup ;
     sh:datatype xsd:anyURI; 
     sh:minCount 0;
+    sh:codeIdentifier "includesGroup";
+
   ] ;
 
   sh:property [
@@ -63,6 +69,7 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
     sh:maxCount 1;
+    sh:codeIdentifier "inAddressBook" ;
   ] .
 
 
