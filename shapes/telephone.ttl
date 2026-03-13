@@ -5,9 +5,11 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
 
-## Shape source: https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
+
 
 telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
   sh:targetObjectsOf vcard:hasTelephone;
@@ -15,6 +17,8 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
   rdfs:comment "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they are represented as IRIs with the appropriate 'tel:' scheme." ;
   dct:created "2026-03-12"^^xsd:date ;
   vs:term_status "testing" ;
+  dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+  prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
 
   sh:property [
     sh:path vcard:value;
@@ -25,7 +29,7 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
   ].
 
 
-# Shape source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+
 
 telephone-shape:TelephoneShape
     a sh:NodeShape ;
@@ -34,6 +38,8 @@ telephone-shape:TelephoneShape
     rdfs:comment "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;  
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
 
     # Phone Type (optional, restricted to vCard types)
     sh:property [

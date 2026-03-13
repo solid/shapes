@@ -1,4 +1,3 @@
-@prefix chat-shape: <https://solidproject.org/shapes/chat#> .
 @prefix dc:         <http://purl.org/dc/elements/1.1/> .
 @prefix flow:       <http://www.w3.org/2005/01/wf/flow#> .
 @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
@@ -15,10 +14,9 @@
 @prefix schema: <https://schema.org/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
-
-# Chat Shape
-# Source: https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex
+@prefix chat-shape: <https://solidproject.org/shapes/chat#> .
 
 chat-shape:ChatChannelShape a sh:NodeShape ;
     rdfs:label "Chat Channel Shape" ;
@@ -26,6 +24,8 @@ chat-shape:ChatChannelShape a sh:NodeShape ;
     sh:targetClass mee:LongChat ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
 
     sh:property
         [ sh:path rdf:type ;
@@ -67,14 +67,15 @@ chat-shape:ChatChannelShape a sh:NodeShape ;
         ] .
 
 
-######## CHAT MESSAGE 
-
 chat-shape:ChatMessageShape a sh:NodeShape ;
     rdfs:label "Chat Message Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for messages in Solid Chat." ;
     sh:targetObjectsOf flow:message ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+
     sh:property
         [ sh:path terms:created ; 
           sh:minCount 1 ; 
@@ -103,15 +104,15 @@ chat-shape:ChatMessageShape a sh:NodeShape ;
         ] .
 
 
-
-########### CHAT PARTICIPATION 
-
 chat-shape:ChatParticipationShape a sh:NodeShape ;
     rdfs:label "Participation Shape" ;
     rdfs:comment "SHACL NodeShape defining constraints for a participant in a Solid Chat." ;
     sh:targetObjectsOf flow:participation ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+
     sh:property
         [ sh:path ical:dtstart ;
           sh:datatype xsd:dateTime ;
@@ -164,15 +165,16 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
 
 
 
-#### Solid Chat Shared Preferences Shapes
-### SHACL validation rules for user shared preferences in Solid Chat.
-
 chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
     rdfs:label "Chat Shared Preferences Shape" ;
     rdfs:comment "NodeShape defining shared UI preferences for chat participants." ;
     sh:targetObjectsOf ui:sharedPreferences ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    rdfs:comment "This shape defines shared preferences that can be applied to the chat UI for all participants. For example, if a user sets a preference to expand images inline, this preference can be shared with other participants so that their UI also expands images inline for messages from that user." ;
+
     sh:property
         [ sh:path solid:expandImagesInline ;
           sh:datatype xsd:boolean ;
@@ -199,9 +201,6 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
 
 
 
-# ActionShape models sentiment or interaction events in the chat system.
-# Instead of modifying a message directly, Solid Chat represents reactions as separate action resources.
-# Examples: Agreeing with a message, Liking a message, Reacting to a message, Acknowledging a message, These actions are based on Schema.org actions.
 
 chat-shape:ActionShape a sh:NodeShape ;
     rdfs:label "Action Shape" ;
@@ -209,6 +208,10 @@ chat-shape:ActionShape a sh:NodeShape ;
     sh:targetClass schema:Action ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    rdfs:comment "In Solid Chat, actions are used to represent interactions such as reactions to messages. For example, a user can 'Like' a message, which would be represented as an instance of schema:LikeAction with the message as its object and the user as its agent. This allows for a flexible way to model various types of interactions without modifying the original message resource." ;
+
     sh:property [
         sh:path rdf:type ;  # object Must be subclass of schema:Action 
        # sh:class schema:Action ; commented out will only validate subclasses of schema:Action if SHACL engine is OWL-aware

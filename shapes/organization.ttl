@@ -6,15 +6,15 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
 @prefix email-shape: <https://solidproject.org/shapes/email#> .
 @prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
 @prefix address-shape: <https://solidproject.org/shapes/address#> .
+
 @prefix organization-shape: <https://solidproject.org/shapes/Organization#> .
 
-################################################################
-# Basic organization shape
-# Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl
-################################################################
 
 organization-shape:ContactOrganizationShape
     a sh:NodeShape ;
@@ -23,6 +23,9 @@ organization-shape:ContactOrganizationShape
     rdfs:comment "SHACL shape for validating organization contact and classification details." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl> ;
+    dct:references <http://www.w3.org/2006/vcard/ns#Organization> ; # references the vcard:Organization class, which is the expected type of nodes conforming to this shape, as well as the schema:name, schema:url, and rdf:type properties, which are used to specify the organization's name, homepage URL, and classification type, respectively.
 
     # Organization Name
     sh:property [
@@ -60,11 +63,6 @@ organization-shape:ContactOrganizationShape
         rdfs:comment "Classification of the organization as one of the predefined types."
     ] .
 
-################################################################
-# Detailed contact shape with nested shapes
-# Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl 
-# Forms documentation: https://github.com/SolidOS/solid-ui/blob/main/docs/FormsReadme.md
-################################################################
 
 organization-shape:ContactDetailsOrganizationShape
     a sh:NodeShape ;
@@ -73,7 +71,10 @@ organization-shape:ContactDetailsOrganizationShape
     rdfs:comment "SHACL shape defining data constraints for an organization contact." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    dct:references <http://www.w3.org/2006/vcard/ns#Organization> ; # references the vcard:Organization class, which is the expected type of nodes conforming to this shape, as well as the schema:name, schema:url, and rdf:type properties, which are used to specify the organization's name, homepage URL, and classification type, respectively.
+    dct:references <https://github.com/SolidOS/solid-ui/blob/main/docs/FormsReadme.md> ;
 
     sh:property [
         sh:path rdf:type ;

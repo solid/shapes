@@ -6,6 +6,10 @@
 @prefix schema: <http://schema.org/> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 @prefix email-shape: <https://solidproject.org/shapes/email#> .
 @prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
@@ -13,11 +17,8 @@
 @prefix person-shape: <https://solidproject.org/shapes/person#> .
 @prefix software-agent-shape: <https://solidproject.org/shapes/software-agent#> .
 @prefix organization-shape: <https://solidproject.org/shapes/organization#> .
-@prefix agent-shape: <https://solidproject.org/shapes/agent#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
-# source https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
+@prefix agent-shape: <https://solidproject.org/shapes/agent#> .
 
 agent-shape:AgentShape
     a sh:NodeShape ;
@@ -26,6 +27,8 @@ agent-shape:AgentShape
     vs:term_status "testing" ;
     rdfs:label "Agent Shape" ;
     rdfs:comment "SHACL shape representing an agent, which can be a person, organization, or software agent." ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
 
     sh:xone (
         [ sh:node person-shape:ContactDetailsPersonShape ]

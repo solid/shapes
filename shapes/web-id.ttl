@@ -3,11 +3,12 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix web-id-shape: <https://solidproject.org/shapes/web-id#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-# source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
+@prefix web-id-shape: <https://solidproject.org/shapes/web-id#> .
 
 web-id-shape:WebIdShape a sh:NodeShape;
   # A card may have any number of http[s] URLs, with property vcard:url and where the type must be given.
@@ -20,6 +21,8 @@ web-id-shape:WebIdShape a sh:NodeShape;
     rdfs:comment "SHACL shape for validating web identifiers (URLs) associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     
     sh:property [
         sh:path rdf:type ;

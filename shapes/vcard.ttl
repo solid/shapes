@@ -6,12 +6,8 @@
 @prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
-
-#################################################################
-# Main vCard Shape
-# The vCard shapes have been created with ref to the vCard format spec https://datatracker.ietf.org/doc/html/rfc6350
-# Shapes are not based on prior work in SolidOS GitHub repositories
-#################################################################
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 
 vcard-shape:VCardShape
     a sh:NodeShape ;
@@ -20,6 +16,8 @@ vcard-shape:VCardShape
     rdfs:comment "RFC 6350 based vCard validation." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dct:references <https://datatracker.ietf.org/doc/html/rfc6350> ;
+    rdfs:comment "This shape validates vCard data according to the structure and properties defined in RFC 6350, ensuring that vCard instances conform to the expected format and constraints." ;
 
     sh:property [
         sh:path vcard:fn ;
@@ -76,6 +74,9 @@ vcard-shape:NameShape
     rdfs:comment "SHACL shape representing the structured name of a vCard individual." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dct:references <https://datatracker.ietf.org/doc/html/rfc6350> ;
+    rdfs:comment "This shape validates vCard data according to the structure and properties defined in RFC 6350, ensuring that vCard instances conform to the expected format and constraints." ;
+
 
 
     sh:property [
@@ -131,6 +132,9 @@ vcard-shape:AddressShape
     rdfs:comment "SHACL shape representing the address details of a vCard individual." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dct:references <https://datatracker.ietf.org/doc/html/rfc6350> ;
+    rdfs:comment "This shape validates vCard data according to the structure and properties defined in RFC 6350, ensuring that vCard instances conform to the expected format and constraints." ;
+
 
     sh:property [
         sh:path vcard:street-address ;

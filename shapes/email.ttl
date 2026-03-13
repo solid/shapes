@@ -6,14 +6,13 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
 @prefix email-shape:  <https://solidproject.org/shapes/email#> .
 
 
-############################################################
-# Email SHACL Shapes
-############################################################
 
-#  Source https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl 
 
 email-shape:EmailShape a sh:NodeShape;
     rdfs:label "Email Shape" ;
@@ -21,6 +20,9 @@ email-shape:EmailShape a sh:NodeShape;
     sh:targetObjectsOf vcard:hasEmail;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those contact nodes, as well as the vcard:value property, which is used to specify the email address value of an email contact node, and the rdf:type property, which is used to specify the classification type of an email contact node (e.g., home or work)        
 
     sh:property [
     sh:path vcard:value;
@@ -33,8 +35,6 @@ email-shape:EmailShape a sh:NodeShape;
   ].
 
 
-#  Source: https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl
-
 email-shape:EmailWithTypeShape
     a sh:NodeShape ;
     sh:targetObjectsOf vcard:hasEmail ;
@@ -42,6 +42,9 @@ email-shape:EmailWithTypeShape
     rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those
     
     sh:property [
         sh:path vcard:value ;

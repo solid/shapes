@@ -5,14 +5,12 @@
 @prefix sched: <http://www.w3.org/ns/pim/schedule#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
 @prefix schedule-event-shape:   <https://solidproject.org/shapes/schedule-event#> .
 
 
-
-# source - https://github.com/SolidOS/solid-panes/blob/main/src/schedule/formsForSchedule.ttl
-
-
-# Reference: Schedule event forms (single form / multi-step)
 
 schedule-event-shape:ScheduleEventShape
     a sh:NodeShape ;
@@ -21,6 +19,9 @@ schedule-event-shape:ScheduleEventShape
     sh:targetClass cal:Vevent ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/solid-panes/blob/main/src/schedule/formsForSchedule.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/solid-panes/blob/main/src/schedule/formsForSchedule.ttl> ;
+    rdfs:comment "Schedule event forms (single form / multi-step)";
 
     # Event title
     sh:property [

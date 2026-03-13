@@ -7,12 +7,8 @@
 
 @prefix bookmark: <http://www.w3.org/2002/01/bookmark#> .
 @prefix bookmark-shape: <https://solidproject.org/shapes/bookmark#> .
-
-
-# Source for this SHACL shape: https://github.com/SolidOS/solid-web-components/blob/main/documentation/data/dashboard-forms.ttl
-# Source file references http://www.w3.org/2002/01/bookmark#Bookmark a class in the W3C Bookmark vocabulary (the Annotea Bookmark ontology)
-# Specification document describing the Annotea Bookmark schema - https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707
-# Note - there are bookmark properties that are not included in this shape - http://purl.org/dc/elements/1.1/#description, http://purl.org/dc/elements/1.1/#creator, http://www.w3.org/2000/10/annotation-ns#created, http://purl.org/dc/elements/1.1/#date
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 
 bookmark-shape:BookmarkShape
@@ -22,6 +18,12 @@ bookmark-shape:BookmarkShape
     rdfs:comment "A Bookmark node with label, URL, topic, and description" ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/solid-web-components/blob/main/documentation/data/dashboard-forms.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/solid-web-components/blob/main/documentation/data/dashboard-forms.ttl> ;
+    dct:references <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ; # references the Annotea Bookmark schema, which defines the bookmark:Bookmark class and its properties    
+    dct:references <http://www.w3.org/2002/01/bookmark#Bookmark> ; # references the bookmark:Bookmark class in the W3C Bookmark vocabulary (the Annotea Bookmark ontology)  
+    rdfs:comment "This shape does not include all properties defined for bookmark:Bookmark in the W3C Bookmark vocabulary (the Annotea Bookmark ontology), but only those relevant to the use case of representing bookmarks on a dashboard" ;
+
 
     # Label property
     sh:property [

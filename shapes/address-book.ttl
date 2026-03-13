@@ -3,15 +3,12 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix address-book-shape: <https://solidproject.org/shapes/address-book#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-
-# Shape source: https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl
-
-# uses non-standard vcard extensions:
-# https://raw.githack.com/solid/contacts/refs/heads/main/vcard-extension-addressbook.ttl
+@prefix address-book-shape: <https://solidproject.org/shapes/address-book#> .
 
 address-book-shape:AddressBookShape a sh:NodeShape ;
     rdfs:label "AddressBook";    
@@ -20,6 +17,9 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     rdfs:comment "This class is not part of vCard as defined by the IETF" ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    dct:references <https://raw.githack.com/solid/contacts/refs/heads/main/vcard-extension-addressbook.ttl> ; # uses non-standard vcard extensions:
 
     sh:property [
         rdfs:label "Formatted name";

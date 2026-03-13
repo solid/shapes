@@ -2,15 +2,12 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix cal:  <http://www.w3.org/2002/12/cal/ical#> .
-@prefix meeting-shape: <https://solidproject.org/shapes/meeting#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-################################################################
-# Meeting Shape
-# SHACL data shapes extracted from the SolidOS meeting pane UI form definition
-# Source: https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl
-################################################################
+@prefix meeting-shape: <https://solidproject.org/shapes/meeting#> .
 
 meeting-shape:MeetingShape
     a sh:NodeShape ;
@@ -19,7 +16,9 @@ meeting-shape:MeetingShape
     sh:targetClass cal:Vevent ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-
+    dc:source <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
+    dct:references <http://www.w3.org/2002/12/cal/ical#Vevent> ; 
     sh:property [
         sh:path cal:summary ;
         sh:datatype xsd:string ;

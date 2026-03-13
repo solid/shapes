@@ -2,21 +2,18 @@
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix dct:  <http://purl.org/dc/terms/> .
 @prefix wf:   <http://www.w3.org/2005/01/wf/flow#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix ui:   <http://www.w3.org/ns/ui#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
-@prefix issue-tracker-shape:  <https://solidproject.org/shapes/issue-tracker#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix person-shape:  <https://solidproject.org/shapes/person-shape#> .
 @prefix group-shape:  <https://solidproject.org/shapes/group#> .
 
-################################################################
-# Issue Tracker Configuration Shape 
-# source https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl
-################################################################
+@prefix issue-tracker-shape:  <https://solidproject.org/shapes/issue-tracker#> .
 
 issue-tracker-shape:IssueTrackerShape
     a sh:NodeShape ;
@@ -25,6 +22,9 @@ issue-tracker-shape:IssueTrackerShape
     sh:targetClass wf:Tracker ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    dct:references <https://www.w3.org/2005/01/wf/flow#> ; # references the wf:Tracker class, which is the expected type of an issue tracker configuration node, as well as the wf:description, wf:issueClass, wf:issueCategory, wf:allowSubIssues, wf:propertyList, wf:assigneeGroup, and wf:extrasEntryForm properties, which are used to specify various aspects of the issue tracker configuration such as its description, workflow states, classification systems, assignment rules, optional forms, and additional properties. It also references the vcard:Group class, which is the expected type of the assignee group linked from an issue tracker configuration via the wf:assigneeGroup property.
 
     sh:property
         [ sh:path dct:title ;
@@ -92,6 +92,9 @@ issue-tracker-shape:PropertyListShape
     rdfs:comment "Defines constraints for each property included in the propertyList of an issue tracker." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+   
     
     sh:property [
         sh:path rdfs:label ;
