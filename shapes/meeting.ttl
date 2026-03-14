@@ -19,6 +19,7 @@ meeting-shape:MeetingShape
     dc:source <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/meeting-pane/blob/main/src/meetingDetailsForm.ttl> ;
     dct:references <http://www.w3.org/2002/12/cal/ical#Vevent> ; 
+    sh:codeIdentifier "Meeting";
     
     sh:property [
         sh:path cal:summary ;
@@ -26,7 +27,8 @@ meeting-shape:MeetingShape
         sh:minCount 1 ;
         sh:maxLength 256 ;
         rdfs:label "Meeting Title" ;
-        rdfs:comment "The name or summary of the meeting."
+        rdfs:comment "The name or summary of the meeting.";
+        sh:codeIdentifier "title";
     ] ;
 
     sh:property [
@@ -34,8 +36,9 @@ meeting-shape:MeetingShape
         sh:datatype xsd:string ;
         sh:minCount 0 ;
         sh:maxLength 128 ;
-        rdfs:label "Location" ;
-        rdfs:comment "The location where the meeting takes place."
+        rdfs:label "Meeting Location" ;
+        rdfs:comment "The location where the meeting takes place.";
+        sh:codeIdentifier "location";
     ] ;
 
     sh:property [
@@ -43,7 +46,8 @@ meeting-shape:MeetingShape
         sh:datatype xsd:dateTime ;
         sh:minCount 0 ;
         rdfs:label "Start Time" ;
-        rdfs:comment "The start date and time of the meeting."
+        rdfs:comment "The start date and time of the meeting.";
+        sh:codeIdentifier "startTime";
     ] ;
 
     sh:property [
@@ -51,7 +55,8 @@ meeting-shape:MeetingShape
         sh:datatype xsd:dateTime ;
         sh:minCount 0 ;
         rdfs:label "End Time" ;
-        rdfs:comment "The end date and time of the meeting."
+        rdfs:comment "The end date and time of the meeting.";
+        sh:codeIdentifier "endTime";
     ] ;
 
     sh:property [
@@ -59,7 +64,8 @@ meeting-shape:MeetingShape
         sh:datatype xsd:string ;
         sh:minCount 0 ;
         rdfs:label "Comment" ;
-        rdfs:comment "Additional notes or comments about the meeting."
+        rdfs:comment "Additional notes or comments about the meeting.";
+        sh:codeIdentifier "comment";
     ]; 
      .
 

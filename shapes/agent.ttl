@@ -9,7 +9,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
 
 @prefix agent-shape: <https://solidproject.org/shapes/agent#> .
 
@@ -63,7 +62,7 @@ _:ContactPersonShape
         rdfs:label "Organization Name" ;
         rdfs:comment "The organization the person belongs to.";
         sh:datatype xsd:string; 
-        sh:codeIdentifier "organizationName";
+        sh:codeIdentifier "name";
     ];
 
     sh:property [ 
@@ -73,7 +72,7 @@ _:ContactPersonShape
         rdfs:label "Address" ;
         rdfs:comment "Address details" ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:codeIdentifier "hasAddress";
+        sh:codeIdentifier "address";
     ];
 
     sh:property [ 
@@ -83,7 +82,7 @@ _:ContactPersonShape
         rdfs:label "Emails" ;
         rdfs:comment "Email addresses of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:codeIdentifier "hasEmail";
+        sh:codeIdentifier "email";
     ];
 
     sh:property [ 
@@ -92,7 +91,7 @@ _:ContactPersonShape
         rdfs:label "Telephones" ;
         rdfs:comment "Telephone numbers of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:codeIdentifier "hasTelephone"; 
+        sh:codeIdentifier "telephone"; 
     ];
 
     sh:property [ 
@@ -166,7 +165,7 @@ _:ContactOrganizationShape
         ) ;
         rdfs:label "Organization Type / Category" ;
         rdfs:comment "Classification of the organization as one of the predefined types.";
-        sh:codeIdentifier "organizationTypeCategory";
+        sh:codeIdentifier "typeCategory";
     ] .
 
 

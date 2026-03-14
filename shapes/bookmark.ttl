@@ -23,7 +23,7 @@ bookmark-shape:BookmarkShape
     dct:references <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ; # references the Annotea Bookmark schema, which defines the bookmark:Bookmark class and its properties    
     dct:references <http://www.w3.org/2002/01/bookmark#Bookmark> ; # references the bookmark:Bookmark class in the W3C Bookmark vocabulary (the Annotea Bookmark ontology)  
     rdfs:comment "This shape does not include all properties defined for bookmark:Bookmark in the W3C Bookmark vocabulary (the Annotea Bookmark ontology), but only those relevant to the use case of representing bookmarks on a dashboard" ;
-
+    sh:codeIdentifier "Bookmark";
 
     # Label property
     sh:property [
@@ -33,6 +33,7 @@ bookmark-shape:BookmarkShape
         rdfs:label "Label" ;
         sh:name "Label" ;
         rdfs:comment "Human-readable name of the bookmark" ;
+        sh:codeIdentifier "label";
     ] ;
 
     # URL property
@@ -43,6 +44,7 @@ bookmark-shape:BookmarkShape
         rdfs:label "URL" ;
         sh:name "URL" ;
         rdfs:comment "The URL that the bookmark points to" ;
+        sh:codeIdentifier "url";
     ] ;
 
     # Topic property
@@ -53,6 +55,7 @@ bookmark-shape:BookmarkShape
         rdfs:label "Topic" ;
         sh:name "Topic" ;
         rdfs:comment "Topic or category of the bookmark" ;
+        sh:codeIdentifier "topic";
     ] ;
 
     # Description property
@@ -63,4 +66,5 @@ bookmark-shape:BookmarkShape
         rdfs:label "Description" ;
         sh:name "Description" ;
         rdfs:comment "Optional description of the bookmark" ;
+        sh:codeIdentifier "description";
     ] .

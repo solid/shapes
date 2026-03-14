@@ -1,16 +1,14 @@
-@prefix sh:   <http://www.w3.org/ns/shacl#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix schema: <http://schema.org/> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix organization-shape: <https://solidproject.org/shapes/Organization#> .
-
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 organization-shape:ContactOrganizationShape
     a sh:NodeShape ;
@@ -29,7 +27,8 @@ organization-shape:ContactOrganizationShape
         sh:datatype xsd:string ;
         sh:maxLength 200 ;
         rdfs:label "Organization Name" ;
-        rdfs:comment "The official name of the organization."
+        rdfs:comment "The official name of the organization.";
+        sh:codeIdentifier "name";
     ] ;
 
     # Homepage URL
@@ -37,7 +36,8 @@ organization-shape:ContactOrganizationShape
         sh:path schema:url ;
         sh:nodeKind sh:IRI ;
         rdfs:label "Homepage URL" ;
-        rdfs:comment "The homepage or primary web address of the organization."
+        rdfs:comment "The homepage or primary web address of the organization.";
+        sh:codeIdentifier "homepageURL";
     ] ;
 
     # Organization Type / Classification
@@ -56,7 +56,8 @@ organization-shape:ContactOrganizationShape
             schema:SportsOrganization
         ) ;
         rdfs:label "Organization Type / Category" ;
-        rdfs:comment "Classification of the organization as one of the predefined types."
+        rdfs:comment "Classification of the organization as one of the predefined types.";
+        sh:codeIdentifier "typeCategory";
     ] .
 
 
@@ -71,6 +72,7 @@ organization-shape:ContactDetailsOrganizationShape
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     dct:references <http://www.w3.org/2006/vcard/ns#Organization> ; # references the vcard:Organization class, which is the expected type of nodes conforming to this shape, as well as the schema:name, schema:url, and rdf:type properties, which are used to specify the organization's name, homepage URL, and classification type, respectively.
     dct:references <https://github.com/SolidOS/solid-ui/blob/main/docs/FormsReadme.md> ;
+    sh:codeIdentifier "OrganizationContactDetails";
 
     sh:property [
         sh:path rdf:type ;
@@ -88,7 +90,8 @@ organization-shape:ContactDetailsOrganizationShape
             schema:SportsOrganization
         ) ;
         rdfs:label "Organization Type" ;
-        rdfs:comment "The classification or type of organization."
+        rdfs:comment "The classification or type of organization.";
+        sh:codeIdentifier "organizationType";
     ] ;
 
     sh:property [
@@ -97,7 +100,8 @@ organization-shape:ContactDetailsOrganizationShape
         sh:datatype xsd:string ;
         sh:maxLength 200 ;
         rdfs:label "Organization Name" ;
-        rdfs:comment "The official name of the organization."
+        rdfs:comment "The official name of the organization.";
+        sh:codeIdentifier "name";
     ] ;
 
     sh:property [
@@ -105,7 +109,8 @@ organization-shape:ContactDetailsOrganizationShape
         sh:minCount 0 ;
         sh:nodeKind sh:IRI ;
         rdfs:label "Homepage URL" ;
-        rdfs:comment "The homepage or primary website of the organization."
+        rdfs:comment "The homepage or primary website of the organization.";
+        sh:codeIdentifier "homepageURL";
     ] ;
 
     sh:property [
@@ -114,6 +119,7 @@ organization-shape:ContactDetailsOrganizationShape
         rdfs:label "Address" ;
         rdfs:comment "Address details" ;
         sh:node _:AddressShape ;
+        sh:codeIdentifier "hasAddress";
     ] ;
 
     sh:property [
@@ -122,6 +128,7 @@ organization-shape:ContactDetailsOrganizationShape
         rdfs:label "Email Addresses" ;
         rdfs:comment "Email addresses." ;
         sh:node _:EmailWithTypeShape ;
+        sh:codeIdentifier "hasEmailAddress";
     ] ;
 
     sh:property [
@@ -130,6 +137,7 @@ organization-shape:ContactDetailsOrganizationShape
         rdfs:label "Telephone Numbers" ;
         rdfs:comment "Telephone numbers associated with the organization." ;
         sh:node _:TelephoneShape ;
+        sh:codeIdentifier "hasTelephoneNumber";
     ] ;
 
     sh:property [
@@ -137,6 +145,7 @@ organization-shape:ContactDetailsOrganizationShape
         sh:minCount 0 ;
         rdfs:label "Notes" ;
         rdfs:comment "General notes about the organization." ;
+        sh:codeIdentifier "notes";
     ] .
 
 
@@ -151,6 +160,7 @@ _:AddressShape
     vs:term_status "testing" ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    
     
 
     sh:property [
@@ -210,20 +220,23 @@ _:EmailWithTypeShape
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those
-    
+    sh:codeIdentifier "Email";
+
     sh:property [
         sh:path vcard:value ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
         rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org)."
+        rdfs:comment "The email address value (e.g., user@example.org).";
+        sh:codeIdentifier "emailAddress";
     ] ;
     sh:property [
         sh:path rdf:type ;
         sh:minCount 0 ;
         rdfs:label "Email Type" ;
-        rdfs:comment "The classification of the email (e.g., home or work)."
+        rdfs:comment "The classification of the email (e.g., home or work).";
+        sh:codeIdentifier "type";
     ] .
 
 
@@ -236,6 +249,7 @@ _:TelephoneShape
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    sh:codeIdentifier "Telephone";
 
     # Phone Type (optional, restricted to vCard types)
     sh:property [
@@ -244,7 +258,8 @@ _:TelephoneShape
         sh:maxCount 1 ;
         sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
         rdfs:label "Phone Type" ;
-        rdfs:comment "The classification of the phone (cell, home, work)." 
+        rdfs:comment "The classification of the phone (cell, home, work)." ;
+        sh:codeIdentifier "type";
     ] ;
 
     # Phone Number (required)
@@ -253,5 +268,6 @@ _:TelephoneShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         rdfs:label "Phone Number" ;
-        rdfs:comment "The telephone number of the contact." 
+        rdfs:comment "The telephone number of the contact." ;
+        sh:codeIdentifier "telephoneNumber";
     ] .
