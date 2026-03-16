@@ -226,8 +226,8 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
 
 
 
-chat-shape:ActionShape a sh:NodeShape ;
-    rdfs:label "Action Shape" ;
+chat-shape:ChatActionShape a sh:NodeShape ;
+    rdfs:label "Chat Action Shape" ;
     rdfs:comment "NodeShape defining constraints for actions representing interactions or sentiments in the chat system." ;
     sh:targetClass schema:Action ;
     dct:created "2026-03-12"^^xsd:date ;
@@ -235,7 +235,7 @@ chat-shape:ActionShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
     rdfs:comment "In Solid Chat, actions are used to represent interactions such as reactions to messages. For example, a user can 'Like' a message, which would be represented as an instance of schema:LikeAction with the message as its object and the user as its agent. This allows for a flexible way to model various types of interactions without modifying the original message resource." ;
-    sh:codeIdentifier "Action";
+    sh:codeIdentifier "ChatAction";
 
     sh:property [
         sh:path rdf:type ;  # object Must be subclass of schema:Action 
