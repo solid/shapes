@@ -19,12 +19,14 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    sh:codeIdentifier "Person";
     
     sh:property [ 
         sh:path vcard:fn ;
         sh:minCount 0 ;
         rdfs:label "Full Name" ;
         sh:datatype xsd:string; 
+        sh:codeIdentifier "fullName";
     ];
 
     sh:property [ 
@@ -33,6 +35,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:label "Role" ;
         rdfs:comment "The role or job title of the person." ;
         sh:datatype xsd:string;
+        sh:codeIdentifier "role";
     ];
 
     sh:property [ 
@@ -41,6 +44,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:label "Organization Name" ;
         rdfs:comment "The organization the person belongs to.";
         sh:datatype xsd:string; 
+        sh:codeIdentifier "organizationName";
     ];
 
     sh:property [ 
@@ -50,6 +54,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:label "Address" ;
         rdfs:comment "Address details" ;
         sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:codeIdentifier "address";
     ];
 
     sh:property [ 
@@ -59,6 +64,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:label "Emails" ;
         rdfs:comment "Email addresses of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:codeIdentifier "email";
     ];
 
     sh:property [ 
@@ -67,6 +73,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:label "Telephones" ;
         rdfs:comment "Telephone numbers of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:codeIdentifier "telephone";
     ];
 
     sh:property [ 
@@ -75,7 +82,8 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         sh:maxCount 1 ;
         sh:datatype xsd:date ;
         rdfs:label "Birthday" ;
-        rdfs:comment "Date of birth" 
+        rdfs:comment "Date of birth" ;
+        sh:codeIdentifier "dateOfBirth";
     ];
 
     sh:property [ 
@@ -85,6 +93,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:label "Notes" ;
         rdfs:comment "General notes about the contact." ;
         sh:datatype xsd:string;
+        sh:codeIdentifier "notes";
     ];
     .
 
@@ -98,6 +107,7 @@ person-shape:IssueTrackerPersonShape
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
     rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
+    sh:codeIdentifier "Person";
 
 
     sh:property [
@@ -105,7 +115,8 @@ person-shape:IssueTrackerPersonShape
         sh:minCount 1 ;
         sh:datatype xsd:string ;
         rdfs:label "Person Name" ;
-        rdfs:comment "The human-readable name of the person."
+        rdfs:comment "The human-readable name of the person.";
+        sh:codeIdentifier "fullName";
     ] ;
     sh:property [
         sh:path owl:sameAs ;
@@ -113,7 +124,8 @@ person-shape:IssueTrackerPersonShape
         sh:maxCount 1 ;
         sh:class vcard:Individual ;
         rdfs:label "Solid ID" ;
-        rdfs:comment "The Solid WebID of the person, if available."
+        rdfs:comment "The Solid WebID of the person, if available.";
+        sh:codeIdentifier "solidId";
     ] .
 
 
@@ -128,11 +140,14 @@ person-shape:ContactPersonShape a sh:NodeShape ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    sh:codeIdentifier "Person";
     
     sh:property [
 	    sh:path rdf:type ;
         sh:value vcard:Individual;
-        sh:count 1;
+        sh:mincount 1;
+        sh:maxCount 1;
+        sh:codeIdentifier "Individual";
 	];
 
     sh:property [ 
@@ -141,6 +156,7 @@ person-shape:ContactPersonShape a sh:NodeShape ;
         sh:pattern ".* .*" ;
         rdfs:label "Full Name" ;
         sh:datatype xsd:string; 
+        sh:codeIdentifier "fullName";
     ];
 
     sh:property [ 
@@ -148,49 +164,59 @@ person-shape:ContactPersonShape a sh:NodeShape ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:pattern "^urn:uuid:" ;
+        sh:codeIdentifier "identifier";
     ];
 
     sh:property [ 
         sh:path vcard:hasName ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
+        sh:codeIdentifier "name";
     ];
 
     sh:property [ 
         sh:path vcard:hasPhoto ;
+        sh:codeIdentifier "photo";
     ];
 
     sh:property [ 
         sh:path vcard:hasRelated ;
+        sh:codeIdentifier "related";
     ];
 
     sh:property [ 
         sh:path vcard:url ;
+        sh:codeIdentifier "url";
     ];
 
     sh:property [ 
         sh:path vcard:hasAddress ;
+        sh:codeIdentifier "address";
     ];
 
     sh:property [ 
         sh:path vcard:bday ;
         sh:datatype xsd:dateTime;
         sh:maxCount 1;
+        sh:codeIdentifier "dateOfBirth";
     ];
 
     sh:property [ 
         sh:path vcard:hasEmail ;
+        sh:codeIdentifier "email";
         # source file does not link this to an email shape
     ];
 
     sh:property [ 
         sh:path vcard:hasTelephone;
+        sh:codeIdentifier "telephone";
     ];
 
     sh:property [ 
         sh:path vcard:organization-name ;
         sh:datatype xsd:string;
         sh:maxCount 1;
+        sh:codeIdentifier "organizationName";
     ];
 
     sh:property [ 
@@ -200,24 +226,28 @@ person-shape:ContactPersonShape a sh:NodeShape ;
         sh:maxCount 1;
         rdfs:label "Role" ;
         rdfs:comment "The role or job title of the person." ;
+        sh:codeIdentifier "role";
     ];
 
     sh:property [ 
         sh:path vcard:title;
         sh:datatype xsd:string;
         sh:maxCount 1;
+        sh:codeIdentifier "title";
     ];
 
     sh:property [
 		sh:path vcard:note;
         sh:datatype xsd:string;
         sh:maxCount 1;
+        sh:codeIdentifier "notes";
 	];
 
     sh:property [
 		sh:path owl:sameAs; # Other IDs we have found for this person
         # But see also webids store as vcard:URI type vcard WebId
         sh:dataType vcard:Individual;
+        sh:codeIdentifier "sameAs";
 	];
 
     sh:property [
@@ -225,6 +255,7 @@ person-shape:ContactPersonShape a sh:NodeShape ;
         a sh:BackwardLink;  # Must be stored at least in the book
         sh:minCount 1;
         sh:maxCount 1;   
+        sh:codeIdentifier "inAddressBook";
 	] .
 
 
@@ -240,6 +271,7 @@ _:TelephoneShape
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    sh:codeIdentifier "Telephone";
 
     # Phone Type (optional, restricted to vCard types)
     sh:property [
@@ -248,7 +280,8 @@ _:TelephoneShape
         sh:maxCount 1 ;
         sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
         rdfs:label "Phone Type" ;
-        rdfs:comment "The classification of the phone (cell, home, work)." 
+        rdfs:comment "The classification of the phone (cell, home, work)." ;
+        sh:codeIdentifier "telephoneType";
     ] ;
 
     # Phone Number (required)
@@ -257,7 +290,8 @@ _:TelephoneShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         rdfs:label "Phone Number" ;
-        rdfs:comment "The telephone number of the contact." 
+        rdfs:comment "The telephone number of the contact." ;
+        sh:codeIdentifier "telephoneNumber";
     ] .
 
 _:AddressShape
@@ -277,7 +311,8 @@ _:AddressShape
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
         sh:maxCount 1;
-        sh:codeIdentifier "streetAddress"
+        sh:codeIdentifier "streetAddress";
+
     ] ;
 
     sh:property [
@@ -328,18 +363,21 @@ _:EmailWithTypeShape
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those
-    
+    sh:codeIdentifier "Email";
+
     sh:property [
         sh:path vcard:value ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
         rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org)."
+        rdfs:comment "The email address value (e.g., user@example.org).";
+        sh:codeIdentifier "emailAddress";
     ] ;
     sh:property [
         sh:path rdf:type ;
         sh:minCount 0 ;
         rdfs:label "Email Type" ;
-        rdfs:comment "The classification of the email (e.g., home or work)."
+        rdfs:comment "The classification of the email (e.g., home or work).";
+        sh:codeIdentifier "emailType";
     ] .

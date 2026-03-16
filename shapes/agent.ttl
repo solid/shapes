@@ -62,7 +62,7 @@ _:ContactPersonShape
         rdfs:label "Organization Name" ;
         rdfs:comment "The organization the person belongs to.";
         sh:datatype xsd:string; 
-        sh:codeIdentifier "name";
+        sh:codeIdentifier "organisationName";
     ];
 
     sh:property [ 

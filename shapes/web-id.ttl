@@ -23,6 +23,7 @@ web-id-shape:WebIdShape a sh:NodeShape;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+    sh:codeIdentifier "WebId";
     
     sh:property [
         sh:path rdf:type ;
@@ -30,6 +31,8 @@ web-id-shape:WebIdShape a sh:NodeShape;
         sh:minCount 1;
         sh:maxCount 1;
         sh:in (vcard:Home vcard:Work vcard:Homepage vcard:WebId vcard:PublicId);
+        rdfs:label "Web ID Type";
+        sh:codeIdentifier "webIdType";
     ];
     
     sh:property [
@@ -38,5 +41,7 @@ web-id-shape:WebIdShape a sh:NodeShape;
         sh:datatype xsd:string; 
         sh:minCount 1;
         sh:maxCount 1;
+        rdfs:label "Value";
+        sh:codeIdentifier "value";
     ].
 

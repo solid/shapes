@@ -19,6 +19,7 @@ vcard-shape:VCardShape
     vs:term_status "testing" ;
     dct:references <https://datatracker.ietf.org/doc/html/rfc6350> ;
     rdfs:comment "This shape validates vCard data according to the structure and properties defined in RFC 6350, ensuring that vCard instances conform to the expected format and constraints." ;
+    sh:codeIdentifier "VCard";
 
     sh:property [
         sh:path vcard:fn ;
@@ -28,6 +29,8 @@ vcard-shape:VCardShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "fullName";
+        sh:codeIdentifier "fullName";
     ] ;
 
     sh:property [
@@ -35,24 +38,33 @@ vcard-shape:VCardShape
         sh:maxCount 1 ;
         sh:node vcard-shape:NameShape ;
         sh:nodeKind sh:BlankNode ;
+        rdfs:label "name";
+        sh:codeIdentifier "name";
+        
     ] ;
 
     sh:property [
         sh:path vcard:hasEmail ;
         sh:nodeKind sh:IRI ;
         sh:maxCount 3 ;
+        rdfs:comment "label";
+        sh:codeIdentifier "email";
     ] ;
 
     sh:property [
         sh:path vcard:hasTelephone ;
         sh:nodeKind sh:IRI ;
         sh:maxCount 3 ;
+        rdfs:label "telephone";
+        sh:codeIdentifier "telephone";
     ] ;
 
     sh:property [
         sh:path vcard:hasAddress ;
         sh:node vcard-shape:AddressShape ;
         sh:nodeKind sh:BlankNode ;
+        rdfs:label "address";
+        sh:codeIdentifier "address";
     ] ;
 
     sh:property [
@@ -62,6 +74,8 @@ vcard-shape:VCardShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Organization Name";
+        sh:codeIdentifier "organizationName"
     ] ;
 .
 
@@ -77,7 +91,7 @@ vcard-shape:NameShape
     vs:term_status "testing" ;
     dct:references <https://datatracker.ietf.org/doc/html/rfc6350> ;
     rdfs:comment "This shape validates vCard data according to the structure and properties defined in RFC 6350, ensuring that vCard instances conform to the expected format and constraints." ;
-
+    sh:codeIdentifier "PersonalName";
 
 
     sh:property [
@@ -87,6 +101,8 @@ vcard-shape:NameShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Family Name";
+        sh:codeIdentifier "familyName";
     ] ;
 
     sh:property [
@@ -96,6 +112,8 @@ vcard-shape:NameShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Given Name";
+        sh:codeIdentifier "givenName"
     ] ;
 
     sh:property [
@@ -104,6 +122,8 @@ vcard-shape:NameShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Additional Name";
+        sh:codeIdentifier "additionalName";
     ] ;
 
     sh:property [
@@ -112,6 +132,8 @@ vcard-shape:NameShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "honorificPrefix";
+        sh:codeIdentifier "Honorific Prefix";
     ] ;
 
     sh:property [
@@ -120,6 +142,8 @@ vcard-shape:NameShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:comment "Honorific Suffix";
+        sh:codeIdentifier "honorificSuffix"
     ] ;
 .
 
@@ -135,7 +159,7 @@ vcard-shape:AddressShape
     vs:term_status "testing" ;
     dct:references <https://datatracker.ietf.org/doc/html/rfc6350> ;
     rdfs:comment "This shape validates vCard data according to the structure and properties defined in RFC 6350, ensuring that vCard instances conform to the expected format and constraints." ;
-
+    sh:codeIdentifier "Address";
 
     sh:property [
         sh:path vcard:street-address ;
@@ -144,6 +168,8 @@ vcard-shape:AddressShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Street Address";
+        sh:codeIdentifier "streetAddress";
     ] ;
 
     sh:property [
@@ -153,6 +179,8 @@ vcard-shape:AddressShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Extended Address";
+        sh:codeIdentifier "extendedAddress";
     ] ;
 
     sh:property [
@@ -162,6 +190,8 @@ vcard-shape:AddressShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Locality";
+        sh:codeIdentifier "locality";
     ] ;
 
     sh:property [
@@ -171,6 +201,8 @@ vcard-shape:AddressShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:label "Region";
+        sh:codeIdentifier "region";
     ] ;
 
     sh:property [
@@ -180,6 +212,8 @@ vcard-shape:AddressShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:comment "Postal Code";
+        sh:codeIdentifier "postalCode";
     ] ;
 
     sh:property [
@@ -189,5 +223,7 @@ vcard-shape:AddressShape
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
         ) ;
+        rdfs:comment "Country Name";
+        sh:codeIdentifier "countryName";
     ] ;
 .

@@ -20,6 +20,7 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
   vs:term_status "testing" ;
   dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
   prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+  sh:codeIdentifier "Telephone";
 
   sh:property [
     sh:path vcard:value;
@@ -27,6 +28,7 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
     sh:pattern "^tel:" ;    # starts with tel:
     sh:minCount 1;
     sh:maxCount 1;
+    sh:codeIdentifier "telephoneNumber";
   ].
 
 
@@ -41,6 +43,7 @@ telephone-shape:TelephoneShape
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
+    sh:codeIdentifier "Telephone";
 
     # Phone Type (optional, restricted to vCard types)
     sh:property [
@@ -49,7 +52,8 @@ telephone-shape:TelephoneShape
         sh:maxCount 1 ;
         sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
         rdfs:label "Phone Type" ;
-        rdfs:comment "The classification of the phone (cell, home, work)." 
+        rdfs:comment "The classification of the phone (cell, home, work)." ;
+        sh:codeIdentifier "telephoneType";
     ] ;
 
     # Phone Number (required)
@@ -58,7 +62,8 @@ telephone-shape:TelephoneShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         rdfs:label "Phone Number" ;
-        rdfs:comment "The telephone number of the contact." 
+        rdfs:comment "The telephone number of the contact." ;
+        sh:codeIdentifier "telephoneNumber";
     ] .
 
 
