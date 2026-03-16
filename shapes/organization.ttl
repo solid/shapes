@@ -20,7 +20,8 @@ organization-shape:ContactOrganizationShape
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl> ;
     dct:references <http://www.w3.org/2006/vcard/ns#Organization> ; # references the vcard:Organization class, which is the expected type of nodes conforming to this shape, as well as the schema:name, schema:url, and rdf:type properties, which are used to specify the organization's name, homepage URL, and classification type, respectively.
-
+    sh:codeIdentifier "Organization";
+    
     # Organization Name
     sh:property [
         sh:path schema:name ;
