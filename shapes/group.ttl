@@ -63,7 +63,7 @@ group-shape:GroupMemberLocalIdShape
         sh:codeIdentifier "sameAsIndividual";
     ] .
 
-group-shape:IssueTrackerGroupShape
+group-shape:IssueTrackerAssigneeGroupShape
     a sh:NodeShape ;
     rdfs:label "Assignee Group Shape" ;
     rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;

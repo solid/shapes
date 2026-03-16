@@ -72,7 +72,7 @@ issue-tracker-shape:IssueTrackerShape
         # Nested assignee group
         [ sh:path wf:assigneeGroup ;
           sh:minCount 0 ;
-          sh:node _:IssueTrackerGroupShape ;
+          sh:node _:IssueTrackerAssigneeGroupShape ;
           rdfs:label "Assignee Group" ;
           rdfs:comment "The contact group from which issues may be assigned to individuals.";
           sh:codeIdentifier "assigneeGroup";
@@ -107,7 +107,7 @@ issue-tracker-shape:PropertyListShape
 
 
 
-_:IssueTrackerGroupShape
+_:IssueTrackerAssigneeGroupShape
     a sh:NodeShape ;
     rdfs:label "Assignee Group Shape" ;
     rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;
@@ -117,7 +117,7 @@ _:IssueTrackerGroupShape
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ; 
     rdfs:comment "Group shape used in issue tracker" ;
-    sh:codeIdentifier "AssigneeGroup";
+    sh:codeIdentifier "IssueTrackerAssigneeGroup";
 
     sh:property [
         sh:path vcard:fn ;
