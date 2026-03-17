@@ -56,7 +56,6 @@ schedule-event-shape:ScheduleEventShape
     sh:property [
         sh:path sched:durationInDays ;
         sh:datatype xsd:integer ;
-        sh:minCount 0 ;
         rdfs:label "Duration in Days" ;
         rdfs:comment "Duration of the event in days for all-day events.";
         sh:codeIdentifier "durationDays";
@@ -66,7 +65,6 @@ schedule-event-shape:ScheduleEventShape
     sh:property [
         sh:path sched:durationInMinutes ;
         sh:datatype xsd:integer ;
-        sh:minCount 0 ;
         rdfs:label "Duration in Minutes" ;
         rdfs:comment "Duration of the event in minutes for single day events.";
         sh:codeIdentifier "durationMinutes";

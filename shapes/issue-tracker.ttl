@@ -27,14 +27,12 @@ issue-tracker-shape:IssueTrackerShape
 
     sh:property
         [ sh:path dct:title ;
-          sh:minCount 0 ;
           sh:datatype xsd:string ;
           rdfs:label "Tracker Title" ;
           rdfs:comment "The human-readable title of the issue tracker.";
           sh:codeIdentifier "title";
         ],
         [ sh:path wf:description ;
-          sh:minCount 0 ;
           sh:datatype xsd:string ;
           rdfs:label "Tracker Description" ;
           rdfs:comment "A description explaining the purpose or scope of the issue tracker.";
@@ -47,14 +45,12 @@ issue-tracker-shape:IssueTrackerShape
           sh:codeIdentifier "issueState";
         ],
         [ sh:path wf:issueCategory ;
-          sh:minCount 0 ;
           sh:class rdfs:Class ;
           rdfs:label "Issue Category" ;
           rdfs:comment "Issue category";
           sh:codeIdentifier "issueCategory";
         ],
         [ sh:path wf:allowSubIssues ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           sh:datatype xsd:boolean ;
           rdfs:label "Allow Sub-Issues?" ;
@@ -64,7 +60,6 @@ issue-tracker-shape:IssueTrackerShape
 
         # Nested propertyList
         [ sh:path wf:propertyList ;
-          sh:minCount 0 ;
           sh:node issue-tracker-shape:PropertyListShape ;
           rdfs:label "Additional Properties" ;
           rdfs:comment "An ordered list of additional properties to display in table views of issues.";
@@ -73,7 +68,6 @@ issue-tracker-shape:IssueTrackerShape
 
         # Nested assignee group
         [ sh:path wf:assigneeGroup ;
-          sh:minCount 0 ;
           sh:node group-shape:IssueTrackerAssigneeGroupShape ;
           rdfs:label "Assignee Group" ;
           rdfs:comment "The contact group from which issues may be assigned to individuals.";

@@ -48,7 +48,6 @@ telephone-shape:TelephoneShape
     # Phone Type (optional, restricted to vCard types)
     sh:property [
         sh:path rdf:type ;
-        sh:minCount 0 ;
         sh:maxCount 1 ;
         sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
         rdfs:label "Phone Type" ;

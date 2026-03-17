@@ -67,7 +67,6 @@ chat-shape:ChatChannelShape a sh:NodeShape ;
         ],
         [ sh:path flow:participation ;
           sh:node chat-shape:ChatParticipationShape ;
-          sh:minCount 0 ;
           rdfs:label "Participation" ;
           rdfs:comment "Indicates participants in the chat channel." ;
           sh:codeIdentifier "participation";
@@ -151,7 +150,6 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
         ],
         [ sh:path solid:expandImagesInline ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Expand Images Inline" ;
           rdfs:comment "Indicates if images should be displayed inline for this participant." ;
@@ -159,7 +157,6 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
         ],
         [ sh:path solid:inlineImageHeightEms ;
           sh:datatype xsd:integer ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Inline Image Height (ems)" ;
           rdfs:comment "Preferred height of inline images in em units for this participant." ;
@@ -167,7 +164,6 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
         ],
         [ sh:path solid:newestFirst ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Newest First" ;
           rdfs:comment "If true, messages are displayed newest first for this participant.";
@@ -175,7 +171,6 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
         ],
         [ sh:path ui:backgroundColor ;
           sh:datatype xsd:string ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           sh:pattern "#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]" ;
           rdfs:label "Background Color" ;
@@ -199,7 +194,6 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
     sh:property
         [ sh:path solid:expandImagesInline ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Expand Images Inline" ;
           rdfs:comment "Indicates whether images should be expanded inline in the chat UI." ;
@@ -207,7 +201,6 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
         ],
         [ sh:path solid:inlineImageHeightEms ;
           sh:datatype xsd:integer ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Inline Image Height (ems)" ;
           rdfs:comment "Preferred height for inline images in em units." ;
@@ -215,7 +208,6 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
         ],
         [ sh:path solid:newestFirst ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Newest First" ;
           rdfs:comment "If true, messages are displayed newest first in the chat UI." ;

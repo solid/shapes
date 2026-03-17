@@ -28,7 +28,6 @@ bookmark-shape:BookmarkShape
     sh:property [
         sh:path rdfs:label ;
         sh:datatype xsd:string ;
-        sh:minCount 0 ;
         rdfs:label "Label" ;
         sh:name "Label" ;
         rdfs:comment "Human-readable name of the bookmark" ;
@@ -39,7 +38,6 @@ bookmark-shape:BookmarkShape
     sh:property [
         sh:path bookmark:recalls ;
         sh:datatype xsd:anyURI ;
-        sh:minCount 0 ;
         rdfs:label "URL" ;
         sh:name "URL" ;
         rdfs:comment "The URL that the bookmark points to" ;
@@ -50,7 +48,6 @@ bookmark-shape:BookmarkShape
     sh:property [
         sh:path bookmark:hasTopic ;
         sh:datatype xsd:string ;
-        sh:minCount 0 ;
         rdfs:label "Topic" ;
         sh:name "Topic" ;
         rdfs:comment "Topic or category of the bookmark" ;
@@ -61,7 +58,6 @@ bookmark-shape:BookmarkShape
     sh:property [
         sh:path rdfs:comment ;
         sh:datatype xsd:string ;
-        sh:minCount 0 ;
         rdfs:label "Description" ;
         sh:name "Description" ;
         rdfs:comment "Optional description of the bookmark" ;

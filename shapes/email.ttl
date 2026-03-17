@@ -59,7 +59,6 @@ email-shape:EmailWithTypeShape
     ] ;
     sh:property [
         sh:path rdf:type ;
-        sh:minCount 0 ;
         rdfs:label "Email Type" ;
         rdfs:comment "The classification of the email (e.g., home or work).";
         sh:codeIdentifier "emailType";

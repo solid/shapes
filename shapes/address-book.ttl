@@ -55,7 +55,6 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     rdfs:comment "This property is not part of vCard as defined by the IETF" ;
     sh:path vcard:includesGroup ;
     sh:datatype xsd:anyURI; 
-    sh:minCount 0;
     sh:codeIdentifier "includesGroup";
 
   ] ;

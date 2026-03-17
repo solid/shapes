@@ -27,7 +27,6 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
     
     sh:property [ 
         sh:path vcard:fn ;
-        sh:minCount 0 ;
         rdfs:label "Full Name" ;
         sh:datatype xsd:string; 
         sh:codeIdentifier "fullName";
@@ -35,7 +34,6 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:role ;
-        sh:minCount 0 ;
         rdfs:label "Role" ;
         rdfs:comment "The role or job title of the person." ;
         sh:datatype xsd:string;
@@ -44,7 +42,6 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:organization-name ;
-        sh:minCount 0 ;
         rdfs:label "Organization Name" ;
         rdfs:comment "The organization the person belongs to.";
         sh:datatype xsd:string; 
@@ -53,7 +50,6 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:hasAddress ;
-        sh:minCount 0 ;
         sh:node address-shape:AddressShape;
         rdfs:label "Address" ;
         rdfs:comment "Address details" ;
@@ -63,7 +59,6 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:hasEmail ;
-        sh:minCount 0 ;
         sh:node email-shape:EmailWithTypeShape;
         rdfs:label "Emails" ;
         rdfs:comment "Email addresses of the contact." ;
@@ -82,7 +77,6 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:bday ;
-        sh:minCount 0 ;
         sh:maxCount 1 ;
         sh:datatype xsd:date ;
         rdfs:label "Birthday" ;
@@ -92,7 +86,6 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:note ;
-        sh:minCount 0 ;
         sh:maxCount 1 ;
         rdfs:label "Notes" ;
         rdfs:comment "General notes about the contact." ;
@@ -124,7 +117,6 @@ person-shape:IssueTrackerPersonShape
     ] ;
     sh:property [
         sh:path owl:sameAs ;
-        sh:minCount 0 ;
         sh:maxCount 1 ;
         sh:class vcard:Individual ;
         rdfs:label "Solid ID" ;
@@ -156,7 +148,6 @@ person-shape:ContactPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:fn ;
-        sh:minCount 0 ;
         sh:pattern ".* .*" ;
         rdfs:label "Full Name" ;
         sh:datatype xsd:string; 
@@ -173,7 +164,6 @@ person-shape:ContactPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:hasName ;
-        sh:minCount 0 ;
         sh:maxCount 1 ;
         sh:codeIdentifier "name";
     ];
@@ -225,7 +215,6 @@ person-shape:ContactPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:role ;
-        sh:minCount 0 ;
         sh:datatype xsd:string;
         sh:maxCount 1;
         rdfs:label "Role" ;
