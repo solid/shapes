@@ -31,12 +31,14 @@ issue-tracker-shape:IssueTrackerShape
           rdfs:label "Tracker Title" ;
           rdfs:comment "The human-readable title of the issue tracker.";
           sh:codeIdentifier "title";
+          sh:maxCount 1;
         ],
         [ sh:path wf:description ;
           sh:datatype xsd:string ;
           rdfs:label "Tracker Description" ;
           rdfs:comment "A description explaining the purpose or scope of the issue tracker.";
           sh:codeIdentifier "description";
+          sh:maxCount 1;
         ],
         [ sh:path wf:issueClass ;
           sh:class rdfs:Class ;
