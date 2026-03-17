@@ -20,8 +20,6 @@ vcard-shape:VCardShape
 
     sh:property [
         sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -32,7 +30,6 @@ vcard-shape:VCardShape
 
     sh:property [
         sh:path vcard:n ;
-        sh:maxCount 1 ;
         sh:node vcard-shape:NameShape ;
         sh:nodeKind sh:BlankNode ;
         rdfs:label "name";
@@ -43,7 +40,6 @@ vcard-shape:VCardShape
     sh:property [
         sh:path vcard:hasEmail ;
         sh:nodeKind sh:IRI ;
-        sh:maxCount 3 ;
         rdfs:comment "label";
         sh:codeIdentifier "email";
     ] ;
@@ -51,7 +47,6 @@ vcard-shape:VCardShape
     sh:property [
         sh:path vcard:hasTelephone ;
         sh:nodeKind sh:IRI ;
-        sh:maxCount 3 ;
         rdfs:label "telephone";
         sh:codeIdentifier "telephone";
     ] ;
@@ -66,7 +61,6 @@ vcard-shape:VCardShape
 
     sh:property [
         sh:path vcard:organization-name ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -93,7 +87,6 @@ vcard-shape:NameShape
 
     sh:property [
         sh:path vcard:family-name ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -104,7 +97,6 @@ vcard-shape:NameShape
 
     sh:property [
         sh:path vcard:given-name ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -160,7 +152,6 @@ vcard-shape:AddressShape
 
     sh:property [
         sh:path vcard:street-address ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -171,7 +162,6 @@ vcard-shape:AddressShape
 
     sh:property [
         sh:path vcard:extended-address ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -182,7 +172,6 @@ vcard-shape:AddressShape
 
     sh:property [
         sh:path vcard:locality ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -193,7 +182,6 @@ vcard-shape:AddressShape
 
     sh:property [
         sh:path vcard:region ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -204,7 +192,6 @@ vcard-shape:AddressShape
 
     sh:property [
         sh:path vcard:postal-code ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]
@@ -215,7 +202,6 @@ vcard-shape:AddressShape
 
     sh:property [
         sh:path vcard:country-name ;
-        sh:maxCount 1 ;
         sh:or (
             [ sh:datatype xsd:string ]
             [ sh:datatype xsd:string ]

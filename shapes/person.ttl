@@ -30,6 +30,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:label "Full Name" ;
         sh:datatype xsd:string; 
         sh:codeIdentifier "fullName";
+        sh:maxCount 1;
     ];
 
     sh:property [ 
@@ -38,6 +39,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:comment "The role or job title of the person." ;
         sh:datatype xsd:string;
         sh:codeIdentifier "role";
+        sh:maxCount 1;
     ];
 
     sh:property [ 
@@ -46,6 +48,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         rdfs:comment "The organization the person belongs to.";
         sh:datatype xsd:string; 
         sh:codeIdentifier "organizationName";
+        sh:maxCount 1;
     ];
 
     sh:property [ 
@@ -114,7 +117,9 @@ person-shape:IssueTrackerPersonShape
         rdfs:label "Person Name" ;
         rdfs:comment "The human-readable name of the person.";
         sh:codeIdentifier "fullName";
+        sh:maxCount 1;
     ] ;
+
     sh:property [
         sh:path owl:sameAs ;
         sh:maxCount 1 ;
@@ -122,7 +127,25 @@ person-shape:IssueTrackerPersonShape
         rdfs:label "Solid ID" ;
         rdfs:comment "The Solid WebID of the person, if available.";
         sh:codeIdentifier "solidId";
-    ] .
+    ] ;
+
+    sh:property [
+        sh:path vcard:phone ;
+        sh:maxCount 1 ;
+        rdfs:label "Phone" ;
+        rdfs:comment "Telephone number";
+        sh:codeIdentifier "phone";
+    ] ;
+
+    sh:property [
+        sh:path vcard:email ;
+        sh:maxCount 1 ;
+        rdfs:label "Email" ;
+        rdfs:comment "Email address";
+        sh:codeIdentifier "emailAddress";
+    ] ;
+    
+    .
 
 
 
@@ -152,6 +175,7 @@ person-shape:ContactPersonShape a sh:NodeShape ;
         rdfs:label "Full Name" ;
         sh:datatype xsd:string; 
         sh:codeIdentifier "fullName";
+        sh:minCount 1;
     ];
 
     sh:property [ 
