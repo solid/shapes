@@ -1,6 +1,5 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix organization-shape: <https://solidproject.org/shapes/Organization#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -9,6 +8,12 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix address-shape: <https://solidproject.org/shapes/address#> .
+@prefix email-shape: <https://solidproject.org/shapes/email#> .
+@prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
+
+@prefix organization-shape: <https://solidproject.org/shapes/organization#> .
 
 organization-shape:ContactOrganizationShape
     a sh:NodeShape ;
@@ -119,7 +124,7 @@ organization-shape:ContactDetailsOrganizationShape
         sh:minCount 0 ;
         rdfs:label "Address" ;
         rdfs:comment "Address details" ;
-        sh:node _:AddressShape ;
+        sh:node address-shape:AddressShape ;
         sh:codeIdentifier "hasAddress";
     ] ;
 
@@ -137,7 +142,7 @@ organization-shape:ContactDetailsOrganizationShape
         sh:minCount 0 ;
         rdfs:label "Telephone Numbers" ;
         rdfs:comment "Telephone numbers associated with the organization." ;
-        sh:node _:TelephoneShape ;
+        sh:node telephone-shape:TelephoneShape ;
         sh:codeIdentifier "hasTelephoneNumber";
     ] ;
 
@@ -150,125 +155,3 @@ organization-shape:ContactDetailsOrganizationShape
     ] .
 
 
-
-
-_:AddressShape
-    rdfs:label "Address";
-    sh:targetClass vcard:Address;
-    a sh:NodeShape ;
-    sh:codeIdentifier "Address";
-    dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" ;
-    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    
-    
-
-    sh:property [
-        rdfs:label "Street Address";
-        sh:path vcard:street-address ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "streetAddress"
-    ] ;
-
-    sh:property [
-        rdfs:label "Locality";
-        sh:path vcard:locality ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "locality";
-    ] ;
-
-    sh:property [
-        rdfs:label "Postal Code";
-        sh:path vcard:postal-code ;
-        sh:datatype xsd:string ;
-        sh:maxLength 25 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "postalCode";
-    ] ;
-
-    sh:property [
-        rdfs:label "Region";
-        sh:path vcard:region ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "region";
-    ] ;
-
-    sh:property [
-        rdfs:label "Country Name";
-        sh:path vcard:country-name ;
-        sh:datatype xsd:string ;
-        sh:maxLength 128 ;
-        sh:maxCount 1;
-        sh:codeIdentifier "countryName";
-    ] .
-
-
-
-_:EmailWithTypeShape
-    a sh:NodeShape ;
-    sh:targetObjectsOf vcard:hasEmail ;
-    rdfs:label "Email Shape" ;
-    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
-    dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those
-    sh:codeIdentifier "Email";
-
-    sh:property [
-        sh:path vcard:value ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org).";
-        sh:codeIdentifier "emailAddress";
-    ] ;
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 0 ;
-        rdfs:label "Email Type" ;
-        rdfs:comment "The classification of the email (e.g., home or work).";
-        sh:codeIdentifier "type";
-    ] .
-
-
-_:TelephoneShape
-    a sh:NodeShape ;
-    sh:targetObjectsOf vcard:hasTelephone ;
-    rdfs:label "Telephone Shape" ;
-    rdfs:comment "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;  
-    dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    sh:codeIdentifier "Telephone";
-
-    # Phone Type (optional, restricted to vCard types)
-    sh:property [
-        sh:path rdf:type ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-        sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
-        rdfs:label "Phone Type" ;
-        rdfs:comment "The classification of the phone (cell, home, work)." ;
-        sh:codeIdentifier "type";
-    ] ;
-
-    # Phone Number (required)
-    sh:property [
-        sh:path vcard:value ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        rdfs:label "Phone Number" ;
-        rdfs:comment "The telephone number of the contact." ;
-        sh:codeIdentifier "telephoneNumber";
-    ] .

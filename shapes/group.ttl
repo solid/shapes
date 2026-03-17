@@ -8,8 +8,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix group-shape:  <https://solidproject.org/shapes/group#> .
+@prefix person-shape: <https://solidproject.org/shapes/person#> . 
 
+@prefix group-shape:  <https://solidproject.org/shapes/group#> .
 
 group-shape:GroupShape
     a sh:NodeShape ;
@@ -39,7 +40,8 @@ group-shape:GroupShape
         rdfs:label "Group Member" ;
         rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs.";
         sh:codeIdentifier "member";
-    ] .
+    ] 
+    .
 
 group-shape:GroupMemberLocalIdShape
     a sh:NodeShape ;
@@ -61,7 +63,8 @@ group-shape:GroupMemberLocalIdShape
         rdfs:label "Same As Individual" ;
         rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource.";
         sh:codeIdentifier "sameAsIndividual";
-    ] .
+    ] 
+    .
 
 group-shape:IssueTrackerAssigneeGroupShape
     a sh:NodeShape ;
@@ -86,41 +89,10 @@ group-shape:IssueTrackerAssigneeGroupShape
     sh:property [
         sh:path vcard:member ;
         sh:minCount 0 ;
-        sh:node _:IssueTrackerPersonShape ;
+        sh:node person-shape:IssueTrackerPersonShape ;
         rdfs:label "Group Member" ;
         rdfs:comment "Each member of the group represented as a vCard Individual.";
         sh:codeIdentifier "member"; 
-    ] .
-
-
-_:IssueTrackerPersonShape
-    a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "Defines constraints for an individual person in a group." ;
-    dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
-    rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
-    sh:codeIdentifier "Person";
-
-
-    sh:property [
-        sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Person Name" ;
-        rdfs:comment "The human-readable name of the person.";
-        sh:codeIdentifier "name";
-    ] ;
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-        sh:class vcard:Individual ;
-        rdfs:label "Solid ID" ;
-        rdfs:comment "The Solid WebID of the person, if available.";
-        sh:codeIdentifier "solidId";
-    ] .
+    ] 
+    .
 
