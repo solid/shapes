@@ -53,6 +53,7 @@ group-shape:GroupMemberLocalIdShape
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:member property, which is used to link a group to its members, and the vcard:Individual class, which is the expected type of those members, as well as the owl:sameAs property, which is used to link the local group member identifier to
     sh:codeIdentifier "GroupMemberLocalId";
+    
 
     sh:property [
         sh:path owl:sameAs ;
@@ -79,7 +80,7 @@ group-shape:IssueTrackerAssigneeGroupShape
 
     sh:property [
         sh:path vcard:fn ;
-        sh:minCount 1 ;
+        sh:maxCount 1 ;
         sh:datatype xsd:string ;
         rdfs:label "Group Name" ;
         rdfs:comment "The formatted name of the group.";

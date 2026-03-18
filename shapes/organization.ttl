@@ -32,6 +32,7 @@ organization-shape:ContactOrganizationShape
         sh:path schema:name ;
         sh:datatype xsd:string ;
         sh:maxLength 200 ;
+        sh:maxCount 1;
         rdfs:label "Organization Name" ;
         rdfs:comment "The official name of the organization.";
         sh:codeIdentifier "name";

@@ -66,5 +66,7 @@ address-shape:AddressShape
         sh:maxLength 128 ;
         sh:maxCount 1;
         sh:codeIdentifier "countryName";
-    ] .
+    ]
+    
+     .
 
