@@ -1,0 +1,24 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix acp: <http://www.w3.org/ns/solid/acp#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix acp-matcher-shape: <https://solidproject.org/shapes/acp-matcher#> .
+
+acp-matcher-shape:AcpMatcherShape a sh:NodeShape ;
+    dc:source <https://github.com/solid/object/blob/main/src/acp/Matcher.ts> ; 
+    prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/Matcher.ts> ; 
+    sh:codeIdentifier "AcpMatcher";
+    rdfs:label "ACP Matcher Shape";
+
+      sh:property [
+        sh:path acp:agent ;
+        sh:nodeKind sh:IRI ;
+        rdfs:label "agent";
+        sh:codeIdentifier "agent";
+    ] ;
+
+     .

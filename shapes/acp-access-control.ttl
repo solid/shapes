@@ -1,0 +1,24 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix acp: <http://www.w3.org/ns/solid/acp#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix acp-policy-shape: <https://solidproject.org/shapes/acp-policy#> .
+
+@prefix acp-access-control-shape: <https://solidproject.org/shapes/acp-access-control#> .
+
+acp-access-control-shape:AcpAccessControlShape a sh:NodeShape ;
+    dc:source <https://github.com/solid/object/blob/main/src/acp/AccessControl.ts> ; 
+    prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/AccessControl.ts> ; 
+    sh:codeIdentifier "AcpAccessControl";
+    rdfs:label "ACP Access Control Shape";
+
+    sh:property [
+        sh:path acp:apply ;
+        sh:node acp-policy-shape:AcpPolicyShape ;
+        rdfs:label "apply";
+        sh:codeIdentifier "apply";
+    ] . 

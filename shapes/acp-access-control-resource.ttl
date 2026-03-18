@@ -1,0 +1,33 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix acp: <http://www.w3.org/ns/solid/acp#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix acp-access-control-shape:  <https://solidproject.org/shapes/acp-access-control#> .
+@prefix acp-access-control-resource-shape: <https://solidproject.org/shapes/acp-access-control-resource#> .
+
+# Shape for AccessControlResource
+acp-access-control-resource-shape:AcpAccessControlResourceShape a sh:NodeShape ;
+    dc:source <https://github.com/solid/object/blob/main/src/acp/AccessControlResource.ts> ;
+    prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/AccessControlResource.ts> ; 
+    sh:codeIdentifier "AccessControlResource";
+    rdfs:label "Access Control Resource Shape";
+
+    # accessControl: multiple AccessControl objects
+    sh:property [
+        sh:path acp:accessControl ;
+        sh:node acp-access-control-shape:AcpAccessControlShape ;
+        sh:codeIdentifier "accessControl";
+    ] ;
+
+    # resource: IRI as string
+    sh:property [
+        sh:path acp:resource ;
+        sh:datatype xsd:anyURI ;
+        sh:maxCount 1;
+        sh:codeIdentifier "resource"
+    ] .
+

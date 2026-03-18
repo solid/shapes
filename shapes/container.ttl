@@ -1,0 +1,21 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix resource-shape: <https://solidproject.org/shapes/resource#> .
+
+@prefix container-shape: <https://solidproject.org/shapes/container#> .
+
+
+container-shape:ContainerShape a sh:NodeShape ;
+    dc:source <https://github.com/solid/object/blob/main/src/solid/Container.ts> ; 
+    prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/solid/Container.ts> ; 
+    rdfs:label "Container";
+    sh:codeIdentifier "Container";
+
+    sh:property [
+        sh:path ldp:contains ;
+        sh:node resource-shape:ResourceShape ;
+        sh:codeIdentifier "contains" ;
+    ] .
