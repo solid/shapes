@@ -15,7 +15,8 @@ acp-typed-shape:AcpTypedShape a sh:NodeShape ;
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/AccessControl.ts> ;
     sh:codeIdentifier "AccessControlPolicy";
     rdfs:label "ACP Policy Shape";
-    dct:created "2026-03-18";
+    dct:created "2026-03-18"^^xsd:date ;
+    vs:term_status "testing";
 
     sh:property [
         sh:path rdf:type ;
