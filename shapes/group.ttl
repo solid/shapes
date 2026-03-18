@@ -1,4 +1,3 @@
-@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
@@ -9,9 +8,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix group-shape:  <https://solidproject.org/shapes/group#> .
-@prefix person-shape:  <https://solidproject.org/shapes/person#> .
+@prefix person-shape: <https://solidproject.org/shapes/person#> . 
 
+@prefix group-shape:  <https://solidproject.org/shapes/group#> .
 
 group-shape:GroupShape
     a sh:NodeShape ;
@@ -23,22 +22,25 @@ group-shape:GroupShape
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:Group class, which is the expected type of nodes conforming to this shape, as well as the vcard:fn property, which is used to specify the formatted name of the group, and the vcard:member property, which is used to link the group to its members, which are expected to be vCard Individuals    
+    sh:codeIdentifier "Group";
 
     sh:property [
         sh:path vcard:fn ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         rdfs:label "Group Name" ;
-        rdfs:comment "The formatted name of the group."
+        rdfs:comment "The formatted name of the group.";
+        sh:codeIdentifier "name";
     ] ;
 
     sh:property [
         sh:path vcard:member ;
-        sh:minCount 0 ;
         sh:class vcard:Individual ;
         rdfs:label "Group Member" ;
-        rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs."
-    ] .
+        rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs.";
+        sh:codeIdentifier "member";
+    ] 
+    .
 
 group-shape:GroupMemberLocalIdShape
     a sh:NodeShape ;
@@ -50,6 +52,8 @@ group-shape:GroupMemberLocalIdShape
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:member property, which is used to link a group to its members, and the vcard:Individual class, which is the expected type of those members, as well as the owl:sameAs property, which is used to link the local group member identifier to
+    sh:codeIdentifier "GroupMemberLocalId";
+    
 
     sh:property [
         sh:path owl:sameAs ;
@@ -57,12 +61,12 @@ group-shape:GroupMemberLocalIdShape
         sh:maxCount 1 ;
         sh:class vcard:Individual ;
         rdfs:label "Same As Individual" ;
-        rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource."
-    ] .
+        rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource.";
+        sh:codeIdentifier "sameAsIndividual";
+    ] 
+    .
 
-
-
-group-shape:IssueTrackerGroupShape
+group-shape:IssueTrackerAssigneeGroupShape
     a sh:NodeShape ;
     rdfs:label "Assignee Group Shape" ;
     rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;
@@ -72,47 +76,22 @@ group-shape:IssueTrackerGroupShape
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ; 
     rdfs:comment "Group shape used in issue tracker" ;
+    sh:codeIdentifier "IssueTrackerAssigneeGroup";
+
     sh:property [
         sh:path vcard:fn ;
-        sh:minCount 1 ;
+        sh:maxCount 1 ;
         sh:datatype xsd:string ;
         rdfs:label "Group Name" ;
-        rdfs:comment "The formatted name of the group."
+        rdfs:comment "The formatted name of the group.";
+        sh:codeIdentifier "name";
     ] ;
     sh:property [
         sh:path vcard:member ;
-        sh:minCount 0 ;
-        sh:node _:IssueTrackerPersonShape ;
+        sh:node person-shape:IssueTrackerPersonShape ;
         rdfs:label "Group Member" ;
-        rdfs:comment "Each member of the group represented as a vCard Individual."  
-    ] .
-
-
-_:IssueTrackerPersonShape
-    a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "Defines constraints for an individual person in a group." ;
-    dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
-    rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
-
-
-    sh:property [
-        sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Person Name" ;
-        rdfs:comment "The human-readable name of the person."
-    ] ;
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-        sh:class vcard:Individual ;
-        rdfs:label "Solid ID" ;
-        rdfs:comment "The Solid WebID of the person, if available."
-    ] .
+        rdfs:comment "Each member of the group represented as a vCard Individual.";
+        sh:codeIdentifier "member"; 
+    ] 
+    .
 

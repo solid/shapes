@@ -1,6 +1,5 @@
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
@@ -23,15 +22,17 @@ email-shape:EmailShape a sh:NodeShape;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those contact nodes, as well as the vcard:value property, which is used to specify the email address value of an email contact node, and the rdf:type property, which is used to specify the classification type of an email contact node (e.g., home or work)        
+    sh:codeIdentifier "Email";
 
     sh:property [
-    sh:path vcard:value;
+        sh:path vcard:value;
         sh:pattern "^mailto:" ;    # starts with mailto
-    sh:minCount 1;
-    sh:maxCount 1 ;
-    sh:datatype xsd:string ;
-    rdfs:label "Email Address" ;
-    rdfs:comment "The email address value (e.g., user@example.org)."
+        sh:minCount 1;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        rdfs:label "Email Address" ;
+        rdfs:comment "The email address value (e.g., user@example.org).";
+        sh:codeIdentifier "emailAddress";
   ].
 
 
@@ -45,18 +46,20 @@ email-shape:EmailWithTypeShape
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those
-    
+    sh:codeIdentifier "EmailWithType";
+
     sh:property [
         sh:path vcard:value ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
         rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org)."
+        rdfs:comment "The email address value (e.g., user@example.org).";
+        sh:codeIdentifier "emailAddress";
     ] ;
     sh:property [
         sh:path rdf:type ;
-        sh:minCount 0 ;
         rdfs:label "Email Type" ;
-        rdfs:comment "The classification of the email (e.g., home or work)."
+        rdfs:comment "The classification of the email (e.g., home or work).";
+        sh:codeIdentifier "emailType";
     ] .

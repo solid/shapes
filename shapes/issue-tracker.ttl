@@ -1,15 +1,14 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
-@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix wf:   <http://www.w3.org/2005/01/wf/flow#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
-@prefix ui:   <http://www.w3.org/ns/ui#> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+@prefix group-shape: <https://solidproject.org/shapes/group#> .
 
 @prefix issue-tracker-shape:  <https://solidproject.org/shapes/issue-tracker#> .
 
@@ -23,62 +22,60 @@ issue-tracker-shape:IssueTrackerShape
     dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     dct:references <https://www.w3.org/2005/01/wf/flow#> ; # references the wf:Tracker class, which is the expected type of an issue tracker configuration node, as well as the wf:description, wf:issueClass, wf:issueCategory, wf:allowSubIssues, wf:propertyList, wf:assigneeGroup, and wf:extrasEntryForm properties, which are used to specify various aspects of the issue tracker configuration such as its description, workflow states, classification systems, assignment rules, optional forms, and additional properties. It also references the vcard:Group class, which is the expected type of the assignee group linked from an issue tracker configuration via the wf:assigneeGroup property.
+    sh:codeIdentifier "IssueTracker";
 
     sh:property
         [ sh:path dct:title ;
-          sh:minCount 0 ;
           sh:datatype xsd:string ;
           rdfs:label "Tracker Title" ;
-          rdfs:comment "The human-readable title of the issue tracker."
+          rdfs:comment "The human-readable title of the issue tracker.";
+          sh:codeIdentifier "title";
+          sh:maxCount 1;
         ],
         [ sh:path wf:description ;
-          sh:minCount 0 ;
           sh:datatype xsd:string ;
           rdfs:label "Tracker Description" ;
-          rdfs:comment "A description explaining the purpose or scope of the issue tracker."
+          rdfs:comment "A description explaining the purpose or scope of the issue tracker.";
+          sh:codeIdentifier "description";
+          sh:maxCount 1;
         ],
         [ sh:path wf:issueClass ;
           sh:class rdfs:Class ;
           rdfs:label "Issue State Class" ;
-          rdfs:comment "The states an issue may be in (e.g., Task)."
+          rdfs:comment "The states an issue may be in (e.g., Task).";
+          sh:codeIdentifier "issueState";
         ],
         [ sh:path wf:issueCategory ;
-          sh:minCount 0 ;
           sh:class rdfs:Class ;
           rdfs:label "Issue Category" ;
-          rdfs:comment "Issue category"
+          rdfs:comment "Issue category";
+          sh:codeIdentifier "issueCategory";
         ],
         [ sh:path wf:allowSubIssues ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           sh:datatype xsd:boolean ;
           rdfs:label "Allow Sub-Issues?" ;
-          rdfs:comment "Indicates whether issues may contain sub-issues."
+          rdfs:comment "Indicates whether issues may contain sub-issues.";
+          sh:codeIdentifier "allowSubIssues";
         ],
 
         # Nested propertyList
         [ sh:path wf:propertyList ;
-          sh:minCount 0 ;
           sh:node issue-tracker-shape:PropertyListShape ;
           rdfs:label "Additional Properties" ;
-          rdfs:comment "An ordered list of additional properties to display in table views of issues."
+          rdfs:comment "An ordered list of additional properties to display in table views of issues.";
+          sh:codeIdentifier "additionalProperties";
         ],
 
         # Nested assignee group
         [ sh:path wf:assigneeGroup ;
-          sh:minCount 0 ;
-          sh:node _:IssueTrackerGroupShape ;
+          sh:node group-shape:IssueTrackerAssigneeGroupShape ;
           rdfs:label "Assignee Group" ;
-          rdfs:comment "The contact group from which issues may be assigned to individuals."
-        ],
-
-        [ sh:path wf:extrasEntryForm ;
-          sh:minCount 0 ;
-          sh:maxCount 1 ;
-          sh:class ui:Form ;
-          rdfs:label "Other things to save about each issue" ;
-          rdfs:comment "An optional form defining additional structured data captured for each issue."
-        ] .
+          rdfs:comment "The contact group from which issues may be assigned to individuals.";
+          sh:codeIdentifier "assigneeGroup";
+        ] 
+        
+        .
 
 ################################################################
 # Shape for each property in wf:propertyList
@@ -92,6 +89,7 @@ issue-tracker-shape:PropertyListShape
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
+    sh:codeIdentifier "PropertyListItem";
    
     
     sh:property [
@@ -100,61 +98,7 @@ issue-tracker-shape:PropertyListShape
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
         rdfs:label "Property Name" ;
-        rdfs:comment "The human-readable name of the property."
+        rdfs:comment "The human-readable name of the property.";
+        sh:codeIdentifier "propertyName";
     ] .
 
-
-
-_:IssueTrackerGroupShape
-    a sh:NodeShape ;
-    rdfs:label "Assignee Group Shape" ;
-    rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;
-    dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ; 
-    rdfs:comment "Group shape used in issue tracker" ;
-    sh:property [
-        sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Group Name" ;
-        rdfs:comment "The formatted name of the group."
-    ] ;
-    sh:property [
-        sh:path vcard:member ;
-        sh:minCount 0 ;
-        sh:node _:IssueTrackerPersonShape ;
-        rdfs:label "Group Member" ;
-        rdfs:comment "Each member of the group represented as a vCard Individual."  
-    ] .
-
-
-_:IssueTrackerPersonShape
-    a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "Defines constraints for an individual person in a group." ;
-    dct:created "2026-03-12"^^xsd:date ;
-    vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
-    dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
-    rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
-
-
-    sh:property [
-        sh:path vcard:fn ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        rdfs:label "Person Name" ;
-        rdfs:comment "The human-readable name of the person."
-    ] ;
-    sh:property [
-        sh:path owl:sameAs ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-        sh:class vcard:Individual ;
-        rdfs:label "Solid ID" ;
-        rdfs:comment "The Solid WebID of the person, if available."
-    ] .

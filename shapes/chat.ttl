@@ -26,44 +26,50 @@ chat-shape:ChatChannelShape a sh:NodeShape ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    sh:codeIdentifier "ChatChannel";
 
     sh:property
         [ sh:path rdf:type ;
           sh:value mee:LongChat ;
           sh:minCount 1 ;
           rdfs:label "Type" ;
-          rdfs:comment "Specifies that the node must be of type LongChat." 
+          rdfs:comment "Specifies that the node must be of type LongChat." ;
+          sh:codeIdentifier "type";
         ],
         [ sh:path dc:author ;
           sh:minCount 1 ;  
           rdfs:label "Author" ;
-          rdfs:comment "The author of the chat channel." 
+          rdfs:comment "The author of the chat channel." ;
+          sh:codeIdentifier "author";
         ],
         [ sh:path dc:title ;
           sh:datatype xsd:string ;
           sh:minCount 1 ;
           sh:maxCount 1 ;
           rdfs:label "Title" ;
-          rdfs:comment "The title of the chat channel." 
+          rdfs:comment "The title of the chat channel." ;
+          sh:codeIdentifier "title";
         ],
         [ sh:path dc:created ;
           sh:datatype xsd:dateTime ;
           sh:minCount 1 ;
           sh:maxCount 1 ;
           rdfs:label "Created Date" ;
-          rdfs:comment "The creation date of the chat channel." 
+          rdfs:comment "The creation date of the chat channel." ;
+          sh:codeIdentifier "createdDate";
         ],
         [ sh:path ui:sharedPreferences ;
-            sh:node chat-shape:ChatSharedPreferencesShape ;
+          sh:node chat-shape:ChatSharedPreferencesShape ;
           sh:minCount 0 ; 
           rdfs:label "Shared Preferences" ;
-          rdfs:comment "References user interface preferences shared in the chat." 
+          rdfs:comment "References user interface preferences shared in the chat." ;
+          sh:codeIdentifier "sharedPreferences";
         ],
         [ sh:path flow:participation ;
-        sh:node chat-shape:ChatParticipationShape ;
-          sh:minCount 0 ;
+          sh:node chat-shape:ChatParticipationShape ;
           rdfs:label "Participation" ;
-          rdfs:comment "Indicates participants in the chat channel." 
+          rdfs:comment "Indicates participants in the chat channel." ;
+          sh:codeIdentifier "participation";
         ] .
 
 
@@ -75,6 +81,7 @@ chat-shape:ChatMessageShape a sh:NodeShape ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    sh:codeIdentifier "ChatMessage";
 
     sh:property
         [ sh:path terms:created ; 
@@ -82,25 +89,29 @@ chat-shape:ChatMessageShape a sh:NodeShape ;
           sh:maxCount 1 ;
           sh:datatype xsd:dateTime ;
           rdfs:label "Created Date" ;
-          rdfs:comment "The date and time when the message was created." 
+          rdfs:comment "The date and time when the message was created." ;
+          sh:codeIdentifier "createdDate";
         ],
         [ sh:path foaf:maker ;    
           sh:minCount 1 ; 
           sh:maxCount 1 ;
           rdfs:label "Message Author" ;
-          rdfs:comment "The agent or person who authored the message." 
+          rdfs:comment "The agent or person who authored the message." ;
+          sh:codeIdentifier "author";
         ],
         [ sh:path sioc:content ;  
           sh:datatype xsd:string ; 
           sh:minCount 1 ;
           sh:maxCount 1 ;
           rdfs:label "Message Content" ;
-          rdfs:comment "The textual content of the message." 
+          rdfs:comment "The textual content of the message." ;
+          sh:codeIdentifier "content";
         ],
         [ sh:path [ sh:inversePath flow:message ] ;
           sh:minCount 1 ; 
           rdfs:label "Related Chat" ;
-          rdfs:comment "The chat channel or conversation to which this message belongs." 
+          rdfs:comment "The chat channel or conversation to which this message belongs." ;
+          sh:codeIdentifier "relatedChatChannel";
         ] .
 
 
@@ -112,6 +123,7 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    sh:codeIdentifier "Participation";
 
     sh:property
         [ sh:path ical:dtstart ;
@@ -119,48 +131,51 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
           sh:minCount 1 ;
           sh:maxCount 1 ;
           rdfs:label "Start Date" ;
-          rdfs:comment "The date and time when the participation started." 
+          rdfs:comment "The date and time when the participation started." ;
+          sh:codeIdentifier "startDate";
         ],
         [ sh:path flow:participant ;
           sh:minCount 1 ;
           sh:maxCount 1 ;
           rdfs:label "Participant" ;
-          rdfs:comment "The agent or person participating in the chat." 
+          rdfs:comment "The agent or person participating in the chat." ;
+          sh:codeIdentifier "participant";
         ],
         [ sh:path solid:colorizeByAuthor ;
           sh:datatype xsd:boolean ;
           sh:maxCount 1 ;
           rdfs:label "Colorize By Author" ;
-          rdfs:comment "Indicates if messages from this participant should be colorized by author." 
+          rdfs:comment "Indicates if messages from this participant should be colorized by author." ;
+          sh:codeIdentifier "colorizeByAuthor";
         ],
         [ sh:path solid:expandImagesInline ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Expand Images Inline" ;
-          rdfs:comment "Indicates if images should be displayed inline for this participant." 
+          rdfs:comment "Indicates if images should be displayed inline for this participant." ;
+          sh:codeIdentifier "expandImagesInline";
         ],
         [ sh:path solid:inlineImageHeightEms ;
           sh:datatype xsd:integer ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Inline Image Height (ems)" ;
-          rdfs:comment "Preferred height of inline images in em units for this participant." 
+          rdfs:comment "Preferred height of inline images in em units for this participant." ;
+          sh:codeIdentifier "inlineImageHeight";
         ],
         [ sh:path solid:newestFirst ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Newest First" ;
-          rdfs:comment "If true, messages are displayed newest first for this participant." 
+          rdfs:comment "If true, messages are displayed newest first for this participant.";
+          sh:codeIdentifier "newestFirst"; 
         ],
         [ sh:path ui:backgroundColor ;
           sh:datatype xsd:string ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           sh:pattern "#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]" ;
           rdfs:label "Background Color" ;
-          rdfs:comment "Preferred background color for the participant in hexadecimal format." 
+          rdfs:comment "Preferred background color for the participant in hexadecimal format." ;
+          sh:codeIdentifier "backgroundColor";
         ] .
 
 
@@ -174,36 +189,37 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
     rdfs:comment "This shape defines shared preferences that can be applied to the chat UI for all participants. For example, if a user sets a preference to expand images inline, this preference can be shared with other participants so that their UI also expands images inline for messages from that user." ;
+    sh:codeIdentifier "ChatSharedPreferences";
 
     sh:property
         [ sh:path solid:expandImagesInline ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Expand Images Inline" ;
-          rdfs:comment "Indicates whether images should be expanded inline in the chat UI." 
+          rdfs:comment "Indicates whether images should be expanded inline in the chat UI." ;
+          sh:codeIdentifier "expandImagesInline";
         ],
         [ sh:path solid:inlineImageHeightEms ;
           sh:datatype xsd:integer ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Inline Image Height (ems)" ;
-          rdfs:comment "Preferred height for inline images in em units." 
+          rdfs:comment "Preferred height for inline images in em units." ;
+          sh:codeIdentifier "inlineImageHeight";
         ],
         [ sh:path solid:newestFirst ;
           sh:datatype xsd:boolean ;
-          sh:minCount 0 ;
           sh:maxCount 1 ;
           rdfs:label "Newest First" ;
-          rdfs:comment "If true, messages are displayed newest first in the chat UI." 
+          rdfs:comment "If true, messages are displayed newest first in the chat UI." ;
+          sh:codeIdentifier "newestFirst";
         ] .
 
 
 
 
 
-chat-shape:ActionShape a sh:NodeShape ;
-    rdfs:label "Action Shape" ;
+chat-shape:ChatActionShape a sh:NodeShape ;
+    rdfs:label "Chat Action Shape" ;
     rdfs:comment "NodeShape defining constraints for actions representing interactions or sentiments in the chat system." ;
     sh:targetClass schema:Action ;
     dct:created "2026-03-12"^^xsd:date ;
@@ -211,15 +227,20 @@ chat-shape:ActionShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
     rdfs:comment "In Solid Chat, actions are used to represent interactions such as reactions to messages. For example, a user can 'Like' a message, which would be represented as an instance of schema:LikeAction with the message as its object and the user as its agent. This allows for a flexible way to model various types of interactions without modifying the original message resource." ;
+    sh:codeIdentifier "ChatAction";
 
     sh:property [
         sh:path rdf:type ;  # object Must be subclass of schema:Action 
        # sh:class schema:Action ; commented out will only validate subclasses of schema:Action if SHACL engine is OWL-aware
         sh:minCount 1 ;
+        sh:codeIdentifier "type";
+        rdfs:label "Type";
     ] ;
     sh:property [
         sh:path schema:agent ;
         sh:maxCount 1 ;
+        rdfs:label "Agent";
+        sh:codeIdentifier "agent";
     ] .
 
 

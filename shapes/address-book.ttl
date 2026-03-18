@@ -1,4 +1,3 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -20,12 +19,14 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     dct:references <https://raw.githack.com/solid/contacts/refs/heads/main/vcard-extension-addressbook.ttl> ; # uses non-standard vcard extensions:
+    sh:codeIdentifier "AddressBook";
 
     sh:property [
         rdfs:label "Formatted name";
         sh:path vcard:fn ;
         sh:datatype xsd:string;
         sh:minCount 1;
+        sh:codeIdentifier "formattedName";
   ];
   sh:property [
     rdfs:label "Name Email Index" ; 
@@ -34,6 +35,7 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:path vcard:nameEmailIndex ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
+    sh:codeIdentifier "nameEmailIndex";
   ];
 
   sh:property [
@@ -44,6 +46,7 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
     sh:maxCount 1;
+    sh:codeIdentifier "groupIndex";
   ] ;
 
   sh:property [
@@ -52,7 +55,8 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     rdfs:comment "This property is not part of vCard as defined by the IETF" ;
     sh:path vcard:includesGroup ;
     sh:datatype xsd:anyURI; 
-    sh:minCount 0;
+    sh:codeIdentifier "includesGroup";
+
   ] ;
 
   sh:property [
@@ -63,6 +67,7 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
     sh:maxCount 1;
+    sh:codeIdentifier "inAddressBook" ;
   ] .
 
 

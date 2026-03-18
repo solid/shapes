@@ -17,12 +17,15 @@ web-page-shape:WebPageShape a sh:NodeShape;
   vs:term_status "testing" ;
   dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
   prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
+  sh:codeIdentifier "WebPage";
 
   sh:property [
     sh:path vcard:value;    # @@ also need to contrail the type part
     sh:pattern "^https?:" ;    # starts with http: or https:
     sh:minCount 1;
     sh:maxCount 1;
+    rdfs:label "URL";
+    sh:codeIdentifier "url";
   ] .
 
 

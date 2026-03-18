@@ -2,7 +2,6 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -67,5 +66,7 @@ address-shape:AddressShape
         sh:maxLength 128 ;
         sh:maxCount 1;
         sh:codeIdentifier "countryName";
-    ] .
+    ]
+    
+     .
 
