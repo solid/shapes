@@ -1,0 +1,42 @@
+name: Generate TypeScript from SHACL
+
+on:
+  push:
+    paths:
+      - "shapes/**"   # only trigger when SHACL files change
+  pull_request:
+    paths:
+      - "shapes/**"
+  workflow_dispatch:     # allows manual trigger from GitHub UI
+
+jobs:
+  generate-ts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install SHACL converter CLI
+        run: |
+          npm install github:theodi/shacl-shape-converter-typescript
+          npm install -g ts-node typescript
+
+      - name: Ensure output folder exists
+        run: mkdir -p objects
+
+      - name: Generate TypeScript classes
+        run: npx shacl-converter shapes objects
+
+      - name: Commit generated TypeScript classes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add generated-ts
+          git diff --cached --quiet || git commit -m "Auto-generate TypeScript classes from SHACL shapes"
+          git push || echo "Nothing to commit"
