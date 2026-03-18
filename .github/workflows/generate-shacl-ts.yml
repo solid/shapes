@@ -24,7 +24,7 @@ jobs:
 
       - name: Install SHACL converter CLI
         run: |
-          npm install github:theodi/shacl-shape-converter-typescript
+          npm install github:theodi/shacl-shape-converter-typescript#main:shacl-ts-generator
           npm install -g ts-node typescript
 
       - name: Ensure output folder exists
