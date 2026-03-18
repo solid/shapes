@@ -43,7 +43,7 @@ agent-shape:WebIdAgentShape
     rdfs:comment "Represents an agent, which can be a person, organization, or software agent." ;
     dct:created "2026-03-18"^^xsd:date ;
     dc:source <https://github.com/solid/object/blob/main/src/webid/Agent.ts>;
-    prov.prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/webid/Agent.ts> ;
+    prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/webid/Agent.ts> ;
     vs:term_status "testing" ;
     sh:codeIdentifier "WebIdAgent" ;
 
