@@ -5,6 +5,8 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
 @prefix acp-policy-shape: <https://solidproject.org/shapes/acp-policy#> .
 @prefix acp-matcher-shape: <https://solidproject.org/shapes/acp-matcher#> .
