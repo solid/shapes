@@ -148,7 +148,7 @@ vcard-shape:AddressShape
     vs:term_status "testing" ;
     dct:references <https://datatracker.ietf.org/doc/html/rfc6350> ;
     rdfs:comment "This shape validates vCard data according to the structure and properties defined in RFC 6350, ensuring that vCard instances conform to the expected format and constraints." ;
-    sh:codeIdentifier "Address";
+    sh:codeIdentifier "VCardAddress";
 
     sh:property [
         sh:path vcard:street-address ;

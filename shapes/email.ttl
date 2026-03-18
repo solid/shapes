@@ -46,7 +46,7 @@ email-shape:EmailWithTypeShape
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     dct:references <https://www.w3.org/2006/vcard/ns#> ; # references the vcard:hasEmail property, which is used to link an Individual to their email contact nodes, and the vcard:Email class, which is the expected type of those
-    sh:codeIdentifier "Email";
+    sh:codeIdentifier "EmailWithType";
 
     sh:property [
         sh:path vcard:value ;
