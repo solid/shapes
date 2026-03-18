@@ -13,6 +13,8 @@ acp-matcher-shape:AcpMatcherShape a sh:NodeShape ;
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/Matcher.ts> ; 
     sh:codeIdentifier "AcpMatcher";
     rdfs:label "ACP Matcher Shape";
+    dct:created "2026-03-18"^^xsd:date ;
+    vs:term_status "testing";
 
       sh:property [
         sh:path acp:agent ;

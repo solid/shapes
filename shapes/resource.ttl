@@ -13,6 +13,8 @@ resource-shape:ResourceShape a sh:NodeShape ;
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/solid/Resource.ts> ; 
     rdfs:label "Resource";
     sh:codeIdentifier "Resource";
+    dct:created "2026-03-18"^^xsd:date ;
+    vs:term_status "testing";
 
     sh:property [
         sh:path dc:title ;
