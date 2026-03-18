@@ -22,10 +22,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install SHACL converter CLI
+      - name: Clone CLI repo
+        run: git clone https://github.com/theodi/shacl-shape-converter-typescript.git
+
+      - name: Install and build CLI
         run: |
-          npm install github:theodi/shacl-shape-converter-typescript#main:shacl-ts-generator
-          npm install -g ts-node typescript
+          cd shacl-shape-converter-typescript/shacl-ts-generator
+          npm install
+          npm run build
+          npm link
 
       - name: Ensure output folder exists
         run: mkdir -p objects
