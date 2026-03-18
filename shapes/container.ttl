@@ -3,6 +3,9 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+
 @prefix resource-shape: <https://solidproject.org/shapes/resource#> .
 
 @prefix container-shape: <https://solidproject.org/shapes/container#> .
