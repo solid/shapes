@@ -40,8 +40,23 @@ jobs:
 
       - name: Commit generated TypeScript classes
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+          # Create a branch for the auto-generated code
+          BRANCH="auto/shacl-ts-${GITHUB_RUN_ID}"
+          git checkout -B $BRANCH
+
+          # Stage the objects folder
           git add objects
-          git diff --cached --quiet || git commit -m "Auto-generate TypeScript classes from SHACL shapes"
-          git push || echo "Nothing to commit"
+
+          # Only commit if changes exist
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Auto-generate TypeScript classes from SHACL shapes"
+
+          # Push the branch back to the repo
+          git push origin $BRANCH
