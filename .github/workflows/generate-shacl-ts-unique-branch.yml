@@ -44,7 +44,7 @@ jobs:
           git config user.name "GitHub Actions"
 
           # Create a branch for the auto-generated code
-          BRANCH="auto/shacl-ts-objects"
+          BRANCH="auto/shacl-ts-${GITHUB_RUN_ID}"
           git checkout -B $BRANCH
 
           # Stage the objects folder
