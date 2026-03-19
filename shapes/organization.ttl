@@ -130,7 +130,7 @@ organization-shape:ContactDetailsOrganizationShape
         sh:path vcard:hasEmail ;
         rdfs:label "Email Addresses" ;
         rdfs:comment "Email addresses." ;
-        sh:node _:EmailWithTypeShape ;
+        sh:node email-shape:EmailWithTypeShape ;
         sh:codeIdentifier "hasEmailAddress";
     ] ;
 
