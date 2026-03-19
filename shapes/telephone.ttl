@@ -20,7 +20,7 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
   vs:term_status "testing" ;
   dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
   prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
-  sh:codeIdentifier "Telephone";
+  sh:codeIdentifier "TelephoneAsIRI";
 
   sh:property [
     sh:path vcard:value;

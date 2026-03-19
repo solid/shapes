@@ -23,7 +23,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    sh:codeIdentifier "Person";
+    sh:codeIdentifier "ContactDetailsPerson";
     
     sh:property [ 
         sh:path vcard:fn ;
@@ -107,7 +107,7 @@ person-shape:IssueTrackerPersonShape
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
     rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
-    sh:codeIdentifier "Person";
+    sh:codeIdentifier "IssueTrackerPerson";
 
 
     sh:property [
@@ -159,7 +159,7 @@ person-shape:ContactPersonShape a sh:NodeShape ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
-    sh:codeIdentifier "Person";
+    sh:codeIdentifier "ContactPerson";
     
     sh:property [
 	    sh:path rdf:type ;

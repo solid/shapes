@@ -17,5 +17,6 @@ software-agent-shape:ContactSoftwareAgentShape
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
-    sh:codeIdentifier "SoftwareAgent";
+    sh:codeIdentifier "ScheduleEventSoftwareAgent";
     .
+

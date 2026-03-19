@@ -8,11 +8,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix schedule-event-shape:   <https://solidproject.org/shapes/schedule-event#> .
+@prefix event-shape:   <https://solidproject.org/shapes/event#> .
 
-
-
-schedule-event-shape:ScheduleEventShape
+event-shape:ScheduleEventShape
     a sh:NodeShape ;
     rdfs:label "Schedule Event Shape" ;
     rdfs:comment "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees." ;

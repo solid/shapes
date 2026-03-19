@@ -36,6 +36,7 @@ agent-shape:AgentShape
     ) .
 
 
+
 agent-shape:WebIdAgentShape
     a sh:NodeShape ;
     sh:targetClass foaf:Agent ;
