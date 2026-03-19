@@ -1,12 +1,12 @@
 name: Generate TypeScript from SHACL - new branch
 
 on:
-  push:
-    paths:
-      - "shapes/**"   # only trigger when SHACL files change
-  pull_request:
-    paths:
-      - "shapes/**"
+ # push:
+ #   paths:
+ #     - "shapes/**"   # only trigger when SHACL files change
+ # pull_request:
+ #   paths:
+ #     - "shapes/**"
   workflow_dispatch:     # allows manual trigger from GitHub UI
 
 jobs:
