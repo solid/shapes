@@ -1,4 +1,4 @@
-name: Generate TypeScript from SHACL
+name: Generate TypeScript from SHACL - new branch
 
 on:
   push:
