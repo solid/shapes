@@ -35,7 +35,7 @@ group-shape:GroupShape
 
     sh:property [
         sh:path vcard:member ;
-        sh:class vcard:Individual ;
+        sh:node person-shape:ContactDetailsPersonShape ;
         rdfs:label "Group Member" ;
         rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs.";
         sh:codeIdentifier "member";
