@@ -42,6 +42,6 @@ web-id-shape:WebIdShape a sh:NodeShape;
         sh:minCount 1;
         sh:maxCount 1;
         rdfs:label "Value";
-        sh:codeIdentifier "value";
+        sh:codeIdentifier "webIdValue"; // cannot use "value" with TermWrapper
     ].
 

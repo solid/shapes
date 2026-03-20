@@ -24,17 +24,18 @@ meeting-shape:MeetingShape
     sh:property [
         sh:path cal:summary ;
         sh:datatype xsd:string ;
-        sh:minCount 1 ;
+        sh:maxCount 1 ;
         sh:maxLength 256 ;
         rdfs:label "Meeting Title" ;
         rdfs:comment "The name or summary of the meeting.";
-        sh:codeIdentifier "title";
+        sh:codeIdentifier "summary";
     ] ;
 
     sh:property [
         sh:path cal:location ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
+        sh:maxCount 1 ;
         rdfs:label "Meeting Location" ;
         rdfs:comment "The location where the meeting takes place.";
         sh:codeIdentifier "location";
@@ -43,17 +44,19 @@ meeting-shape:MeetingShape
     sh:property [
         sh:path cal:dtstart ;
         sh:datatype xsd:dateTime ;
-        rdfs:label "Start Time" ;
+        rdfs:label "Start Date/Time" ;
         rdfs:comment "The start date and time of the meeting.";
-        sh:codeIdentifier "startTime";
+        sh:codeIdentifier "startDate";
+        sh:maxCount 1 ;
     ] ;
 
     sh:property [
         sh:path cal:dtend ;
         sh:datatype xsd:dateTime ;
-        rdfs:label "End Time" ;
+        rdfs:label "End Date/Time" ;
         rdfs:comment "The end date and time of the meeting.";
-        sh:codeIdentifier "endTime";
+        sh:codeIdentifier "endDate";
+        sh:maxCount 1 ;
     ] ;
 
     sh:property [
@@ -62,6 +65,7 @@ meeting-shape:MeetingShape
         rdfs:label "Comment" ;
         rdfs:comment "Additional notes or comments about the meeting.";
         sh:codeIdentifier "comment";
+        sh:maxCount 1 ;
     ]; 
      .
 

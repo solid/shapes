@@ -122,7 +122,7 @@ vcard-shape:NameShape
             [ sh:datatype xsd:string ]
         ) ;
         rdfs:label "honorificPrefix";
-        sh:codeIdentifier "Honorific Prefix";
+        sh:codeIdentifier "honorificPrefix";
     ] ;
 
     sh:property [
