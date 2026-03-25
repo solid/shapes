@@ -274,7 +274,7 @@ volunteer-shape:Location sh:type sh:NodeShape;
     rdfs:label "Location";
     sh:codeIdentifier "VolunteerLocation";
     a sh:NodeShape, rdfs:Class;
-    sh:property volunteer-shape:locationHasGeometry, volunteer-shape:locationHasAddress, volunteer-shape:sessionHasLocation, volunteer-shape:locationHasLongitude, volunteer-shape:locationHasLatitude, volunteer-shape:locationHasName
+    sh:property volunteer-shape:locationHasGeometry, volunteer-shape:locationHasAddress, volunteer-shape:locationHasSession, volunteer-shape:locationHasLongitude, volunteer-shape:locationHasLatitude, volunteer-shape:locationHasName
 .
 volunteer-shape:Organisation sh:type sh:NodeShape;
     rdfs:label "Organisation";
