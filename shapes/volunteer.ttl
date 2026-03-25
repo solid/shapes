@@ -1,6 +1,7 @@
 @prefix : <https://ns.volunteeringdata.io/>.
 @prefix dash: <http://datashapes.org/dash#>.
 @prefix dc: <http://purl.org/dc/terms/>.
+@prefix dct: <http://purl.org/dc/terms/>.
 @prefix fn: <http://www.w3.org/2005/xpath-functions#>.
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#>.
@@ -22,7 +23,7 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix volunteer-shape: <https://solidproject.org/shapes/volunteer#>.
-@prefix vs: <http://www.w3.org/2006/VS/terms/>.
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#>.
 @prefix prov: <http://www.w3.org/ns/prov#>.
 
 volunteer-shape:roleHasRequirement sh:type sh:PropertyShape;
@@ -258,39 +259,51 @@ volunteer-shape:timeHasSession sh:type sh:PropertyShape;
     sh:class :Session;
     sh:path :timeSession
 .
-volunteer-shape:Activity sh:type sh:NodeShape;
+volunteer-shape:ActivityShape sh:type sh:NodeShape;
     rdfs:label "Activity";
     sh:codeIdentifier "VolunteerActivity";
-    a sh:NodeShape, rdfs:Class;
+    a sh:NodeShape;
+    dct:created "2026-03-25"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property volunteer-shape:activityHasDescription, volunteer-shape:activityHasRole, volunteer-shape:activityRequiresEmergencyParticipation, volunteer-shape:activityHasTitle, volunteer-shape:activityHasImage, volunteer-shape:activityHasOrganisation, volunteer-shape:activityHasSession
 .
-volunteer-shape:Time sh:type sh:NodeShape;
+volunteer-shape:TimeShape sh:type sh:NodeShape;
     rdfs:label "Time";
     sh:codeIdentifier "VolunteerTime";
     a rdfs:Class, sh:NodeShape;
+    dct:created "2026-03-25"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property volunteer-shape:timeHasSession
 .
-volunteer-shape:Location sh:type sh:NodeShape;
+volunteer-shape:LocationShape sh:type sh:NodeShape;
     rdfs:label "Location";
     sh:codeIdentifier "VolunteerLocation";
     a sh:NodeShape, rdfs:Class;
+    dct:created "2026-03-25"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property volunteer-shape:locationHasGeometry, volunteer-shape:locationHasAddress, volunteer-shape:locationHasSession, volunteer-shape:locationHasLongitude, volunteer-shape:locationHasLatitude, volunteer-shape:locationHasName
 .
-volunteer-shape:Organisation sh:type sh:NodeShape;
+volunteer-shape:OrganisationShape sh:type sh:NodeShape;
     rdfs:label "Organisation";
     sh:codeIdentifier "VolunteerOrganisation";
     a rdfs:Class, sh:NodeShape;
+    dct:created "2026-03-25"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property volunteer-shape:organisationHasCharityNumber, volunteer-shape:organisationHasImage, volunteer-shape:organisationHasWebsite, volunteer-shape:organisationHasCharitableCause, volunteer-shape:organisationHasName, volunteer-shape:organisationHasActivity, volunteer-shape:organisationHasDescription
 .
-volunteer-shape:Role sh:type sh:NodeShape;
+volunteer-shape:RoleShape sh:type sh:NodeShape;
     rdfs:label "Role";
     sh:codeIdentifier "VolunteerRole";
     a rdfs:Class, sh:NodeShape;
+    dct:created "2026-03-25"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property volunteer-shape:roleHasTitle, volunteer-shape:roleHasDescription, volunteer-shape:roleHasAccessibility, volunteer-shape:roleHasApplyLink, volunteer-shape:roleHasSkill, volunteer-shape:roleHasReward, volunteer-shape:roleHasActivity, volunteer-shape:roleHasRequirement, volunteer-shape:roleHasMinimumAge, volunteer-shape:roleHasCommitment, volunteer-shape:roleAllowsRemoteParticipation, volunteer-shape:roleHasMaximumAge
 .
-volunteer-shape:Session sh:type sh:NodeShape;
+volunteer-shape:SessionShape sh:type sh:NodeShape;
     rdfs:label "Session";
     sh:codeIdentifier "VolunteerSession";
     a sh:NodeShape, rdfs:Class;
+    dct:created "2026-03-25"^^xsd:date ;
+    vs:term_status "testing" ;
     sh:property volunteer-shape:sessionHasTime, volunteer-shape:sessionHasActivity, volunteer-shape:sessionHasLocation
 .
