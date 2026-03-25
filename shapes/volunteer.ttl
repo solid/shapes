@@ -141,9 +141,9 @@ volunteer-shape:locationHasLatitude sh:type sh:PropertyShape;
     a sh:PropertyShape;
     sh:path :locationLatitude
 .
-volunteer-shape:sessionHasLocation sh:type sh:PropertyShape;
+volunteer-shape:locationHasSession sh:type sh:PropertyShape;
     rdfs:label "locationSession";
-    sh:codeIdentifier "sessionHasLocation";
+    sh:codeIdentifier "locationHasSession";
     a sh:PropertyShape;
     sh:class :Session;
     sh:path :locationSession
