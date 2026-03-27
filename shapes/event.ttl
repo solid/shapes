@@ -28,7 +28,7 @@ event-shape:ScheduleEventShape
         sh:datatype xsd:string ;
         rdfs:label "Event Title" ;
         rdfs:comment "The title or summary of the event.";
-        sh:codeIdentifier "Title";
+        sh:codeIdentifier "title";
     ] ;
 
     # Event location

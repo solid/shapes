@@ -166,7 +166,7 @@ person-shape:ContactPersonShape a sh:NodeShape ;
         sh:value vcard:Individual;
         sh:mincount 1;
         sh:maxCount 1;
-        sh:codeIdentifier "Individual";
+        sh:codeIdentifier "individual";
 	];
 
     sh:property [ 
