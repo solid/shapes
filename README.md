@@ -4,6 +4,8 @@ The *Solid SHACL Shapes Catalogue* is a collection of domain-specific **SHACL** 
 
 **Application developers are invited to find, modify, and submit their own SHACL shapes to this repository for existing and new domains through a guided GitHub peer review (PR) process.**
 
+If you have feedback on this process, please raise it in the **[GitHub discussion](https://github.com/solid/shapes/discussions/20)**.
+
 ## Background
 
 Solid ([https://solidproject.org](https://solidproject.org)) is a project aiming to give individuals control over their own data. Solid aims to decouple applications from user data. SHACL shapes act as contracts between applications, allowing apps to validate, discover, and reuse common data models when interacting with user data stored in Solid Pods.
@@ -27,7 +29,7 @@ The repository contains shapes that we know are already used within the Solid ec
 
 ## Contributing Shapes 
 
-See the [guidelines for contributing](./CONTRIBUTING.md).
+See the **[guidelines for contributing](./CONTRIBUTING.md)**. 
 
 ## Design Principles
 

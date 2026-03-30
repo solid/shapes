@@ -2,7 +2,9 @@
 
 Thank you for your interest in contributing. 
 
-This repository accepts contributions of SHACL shapes, improvements to existing shapes, and documentation updates. All contributions are reviewed through a GitHub pull request (PR) process.
+This repository accepts contributions of SHACL shapes, improvements to existing shapes, and documentation updates. All contributions are reviewed through a GitHub pull request (PR) process. 
+
+If you have feedback on this process, please raise it in the **[GitHub discussion](https://github.com/solid/shapes/discussions/20)**.
 
 
 ## Guidelines for Contributing
@@ -210,6 +212,8 @@ If a PR introduces a shape that overlaps conceptually with an existing one, we w
 If alignment is reached, contributors should work together to evolve the existing shape. If not, both shapes can continue to be maintained independently.
 ```
 
+
+If you have feedback on this process, please raise it in the **[GitHub discussion](https://github.com/solid/shapes/discussions/20)**.
 
 
 
