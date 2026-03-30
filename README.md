@@ -10,26 +10,24 @@ Solid ([https://solidproject.org](https://solidproject.org)) is a project aiming
 
 ## Purpose
 
-The *Solid SHACL Shapes Catalogue* supports interoperability by:
+The *Solid SHACL Shapes Catalogue* supports interoperability and is designed to:
 
-* Allowing applications to validate user data before reading or writing to Pods
-* Enabling discovery of common semantic models
-* Supporting mapping between different data schemas
-* Encouraging reuse of domain vocabularies across Solid applications
+* Provide a space for the community to converge on the data models used across applications – declared using SHACL shapes
+* Build up a collection of well-understood, reusable shape patterns
+* Enable a collaborative review process where shapes can be compared and discussed transparently
+* Support artefact generation from shapes, including object abstractions in Javascript, data validators (using SHACL engines), and forms.
+* Offer visibility into existing shapes to encourage reuse, reduce duplication, contributor recognition, and help new participants get started more easily
 
-The catalogue acts as a coordination layer for decentralized data exchange without sacrificing semantic consistency.
 
 ## Repository Structure
 
 SHACL shapes are organised in a single flat directory structure, in the [/shapes](/shapes/) folder. Each file corresponds to a semantic domain or vocabulary. There are no sub-folders.
 
-### Domain Shapes
+The repository contains shapes that we know are already used within the Solid ecosystem – including shapes based on the data models used by SolidOS, organised by semantic domain e.g. [/shapes/address.ttl](/shapes/address.ttl) and vocabulary e.g. [/shapes/vcard.ttl](/shapes/vcard.ttl). [Contributions from the community](./CONTRIBUTING.md) of shapes in use in the Solid ecosystem, as well as feedback are very much welcomed.
 
-Domain shapes define the semantic model of data — they describe what the data represents. Example domains include: address, person, organisation, contact, e.g. [/shapes/address.ttl](/shapes/address.ttl)
+## Contributing Shapes 
 
-### Vocabulary Mapping Shapes
-
-Vocabulary shapes map external ontologies to SHACL validation shapes, e.g. [/shapes/vcard.ttl](/shapes/vcard.ttl)
+See the [guidelines for contributing](./CONTRIBUTING.md).
 
 ## Design Principles
 
