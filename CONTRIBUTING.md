@@ -1,217 +1,123 @@
 # Contributing to the Solid SHACL Shapes Catalogue
 
-Thank you for your interest in contributing. 
-
 This repository accepts contributions of SHACL shapes, improvements to existing shapes, and documentation updates. All contributions are reviewed through a GitHub pull request (PR) process. 
 
 If you have feedback on this process, please raise it in the **[GitHub discussion](https://github.com/solid/shapes/discussions/20)**.
 
 
-## Guidelines for Contributing
+## Guidelines
 
-When contributing, you MUST:
+When contributing:
 
+- Create a new branch
 - Check whether a domain file already exists
 - Follow the naming conventions defined in this document
 - Include documentation using the GitHub PR template
 - Ensure shapes validate before submitting
 
-### Branching Requirements
 
-All contributions MUST be made from a separate branch.
 
-- Do NOT commit directly to the `main` branch
-- Create a new branch for each contribution or feature
-- Use a clear and descriptive branch name
+## Pull Request Process
 
-## Adding Shapes
+* Create branch 
+* Ensure the shape validates before opening a PR
+    * [validation scripts](./scripts) are available 
+* Open a PR and complete the questions in the PR template provided
+* Respond to review feedback and iterate as needed
 
-### Existing Domains
+All contributions are subject to peer review before merging.
 
-Each domain MUST have a single `{domain}.ttl` file.
+## Branch Requirements
 
-- If a domain file exists, add your shape to that file where appropriate
-- Do NOT create duplicate domain files
+All contributions must be made from a separate branch. 
 
-### New Domains
+## Domain Files
 
-If a domain file does not exist, create a new file:
+Each domain has a {domain}.ttl file. If a domain file exists, add your shape to that file otherwise create a new file in the shapes directory /shapes/{domain}.ttl. Domain file names are lowercase and should be a minimal representation of the semantic concept.
 
+### Namespace and Prefix Conventions
+
+Use the following pattern for namespace:
 ```
-/shapes/{domain}.ttl
-```
-
-### Rules
-
-- Domain names MUST be lowercase
-- Domain names SHOULD be a minimal representation of the semantic concept
-
-If using vocabularies, follow community ontology naming conventions.  
-If unsure, check: https://prefix.cc
-
-
-
-## Naming Conventions
-
-### Namespace Structure
-
-Use the following pattern:
-
-```
-[https://solidproject.org/shapes/{domain}#](https://solidproject.org/shapes/{domain}#)
+https://solidproject.org/shapes/{domain}#
 ```
 
-Examples:
-```
-[https://solidproject.org/shapes/address#](https://solidproject.org/shapes/address#)
-[https://solidproject.org/shapes/vcard#](https://solidproject.org/shapes/vcard#)
-````
-
-
-
-### Prefix Naming
-
-- Prefix labels MUST begin with a letter
-- Prefix labels MAY use lowercase letters, hyphens, or underscores
-
-Example:
+Prefix labels must begin with a letter and use lowercase letters, hyphens, or underscores, e.g.:
 
 ```turtle
 @prefix address-shape: <https://solidproject.org/shapes/address#> .
-@prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-````
-
-
-
-### Shape Naming
-
-* Shape names MUST use PascalCase
-* Shape names MUST end with `Shape`
-
-Examples:
-```
-address-shape:AddressShape
-vcard-shape:VCardAddressShape
 ```
 
 
-## Multiple Shapes per Domain
+### Multiple Shapes per Domain
 
-Multiple shapes MAY exist within a single domain.
+A goal of the solid/shapes repository is to work towards consensus on a single shape for a given domain where possible. Where this is not possible, multiple shapes may exist for a given domain. If a new shape needs to be added for an existing domain, naming conventions recommend the use of a semantic variation for the shape name, e.g.:
 
-* Use semantic variation rather than creating new namespaces
-
-Example:
 ```
 address-shape:AddressShape
 address-shape:AddressMinimalShape
 ```
 
+## Shape Name
+
+
+
+Shape names should use PascalCase abd end with `Shape`, e.g.:
+
+```
+address-shape:AddressShape
+```
+
+
+
 
 ## Validation Rules
+A goal of solid/shapes is to support interoperability in the Solid ecosystem, and with this in mind, it is recommended that shapes should have constraints that maximise their potential reuse. 
 
-Shapes SHOULD follow these guidelines:
-
-* Prefer optional validation to maximise Pod interoperability
-* Keep constraints focused on structural validation
 
 ## Shape Immutability Policy
 
-Shapes published to this catalogue are **immutable**.
-
-Once a shape is merged and published:
+Shapes published to this catalogue are **immutable** to ensure predictable behaviour for applications/agents that might use them. Once a shape is merged and published:
 
 * Shapes MUST NOT be modified in place
 * Validation rules MUST NOT be changed retrospectively
 * Structural or semantic changes MUST be introduced via new shapes
 
-This ensures predictable behaviour for applications using Solid Pods.
-
-
-
-### Why Shapes Are Immutable
-
-Shapes function as contracts between applications and user data. Modifying a published shape can cause:
-
-* Validation inconsistencies across applications
-* Silent breaking changes in decentralized clients
-* Data interoperability failures
-
-Immutability ensures that applications can safely cache and reuse shapes.
-
-
 
 ## Evolving Shapes
 
-If validation rules need to change, you MUST create a new shape.
+The Solid/shapes repository supports the evolution of shapes, where a change to the shape is not a breaking change.
 
-### Recommended Approach
+A non-breaking change for a domain file would be:
+* Addition of a new optional property
+* Addition of metadata/documentation
+* Addition of a new shapes
 
-#### Create a New Shape Variant
+A breaking change for an existing shape would be:
+* Addition of a new mandatory field 
+* Change of cardinality rules of existing properties
+* Change of target class mappings
 
-Example:
-
-```
-address-shape:AddressShape
-address-shape:AddressStrictShape
-```
-
-
-
-### When Adding New Constraints
-
-You MUST NOT:
-
-* Add new mandatory fields to existing shapes
-* Change cardinality rules of existing properties
-* Change target class mappings
-
-Instead:
-
-* Introduce a new shape variant or version
-
-You MAY:
-
-* Add new optional properties
-* Add documentation
-* Add new shapes
-
-
-
-
-
-## Pull Request Process
-
-* Submit a PR with a clear description of the shape and its purpose
-* Indicate whether you are modifying an existing domain or creating a new one
-* Ensure the shape validates before submission
-* Include documentation using the PR template
-* Respond to review feedback and iterate as needed
-
-All contributions are subject to peer review before merging.
+If validation rules need to change for a published shape that would constitute a breaking change, a new shape should be created.
 
 ## Contributor Checklist
 
 Before submitting your PR, ensure:
 
-* [ ] The shape validates successfully
-* [ ] Naming conventions are followed
 * [ ] The correct domain file is used or created
-* [ ] Documentation is included
 * [ ] No existing shapes are modified in a breaking way
+* [ ] Naming conventions are followed
+* [ ] The shape validates successfully
+* [ ] Descriptive metadata is included
 
 
 ## Human Consensus Process
 
-In addition to the contribution process described above, there is an important **human consensus** step that we are still refining. For example:
+In addition to the contribution process described above, there is an important **human consensus** step that we are still refining. 
 
-```
 If a PR introduces a shape that overlaps conceptually with an existing one, we will ask contributors to collaborate with the current maintainer(s) of that shape, aiming to align on a shared model where possible.
 
 If alignment is reached, contributors should work together to evolve the existing shape. If not, both shapes can continue to be maintained independently.
-```
-
 
 If you have feedback on this process, please raise it in the **[GitHub discussion](https://github.com/solid/shapes/discussions/20)**.
 
