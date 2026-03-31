@@ -21,12 +21,12 @@
 
 chat-shape:ChatChannelShape a sh:NodeShape ;
     rdfs:label "Chat Channel Shape" ;
-    rdfs:comment "SHACL NodeShape describing the properties and constraints for a Solid Chat LongChat." ;
+    rdfs:comment "SHACL NodeShape describing the properties and constraints for a Solid Chat" ;
     sh:targetClass mee:LongChat ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
-    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatChannel" ;
     sh:property chat-shape:ChatChannelShape_type,
                 chat-shape:ChatChannelShape_author,
@@ -91,8 +91,8 @@ chat-shape:ChatMessageShape a sh:NodeShape ;
     sh:targetObjectsOf flow:message ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
-    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatMessage" ;
     sh:property chat-shape:ChatMessageShape_createdDate,
                 chat-shape:ChatMessageShape_author,
@@ -141,8 +141,8 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
     sh:targetObjectsOf flow:participation ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
-    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "Participation" ;
     sh:property chat-shape:ChatParticipationShape_startDate,
                 chat-shape:ChatParticipationShape_participant,
@@ -218,8 +218,8 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
     sh:targetObjectsOf ui:sharedPreferences ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
-    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatSharedPreferences" ;
     sh:property chat-shape:ChatSharedPreferencesShape_expandImagesInline,
                 chat-shape:ChatSharedPreferencesShape_inlineImageHeight,
@@ -257,11 +257,13 @@ chat-shape:ChatActionShape a sh:NodeShape ;
     sh:targetClass schema:Action ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;  
-    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.shex> ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatAction" ;
     sh:property chat-shape:ChatActionShape_type,
-                chat-shape:ChatActionShape_agent .
+                chat-shape:ChatActionShape_agent,
+                chat-shape:ChatActionShape_target 
+                .
 
 chat-shape:ChatActionShape_type a sh:PropertyShape ;
     sh:path rdf:type ;
@@ -274,3 +276,10 @@ chat-shape:ChatActionShape_agent a sh:PropertyShape ;
     sh:maxCount 1 ;
     rdfs:label "Agent" ;
     sh:codeIdentifier "agent" .
+
+chat-shape:ChatActionShape_target a sh:PropertyShape ;
+    sh:path schema:target ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:label "Target" ;
+    sh:codeIdentifier "target" .
