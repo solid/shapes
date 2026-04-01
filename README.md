@@ -61,7 +61,10 @@ Shapes function act as contracts between applications and user data. Once publis
 
 ## License
 
-All content in this repository, including contributions, is subject to the repository's MIT license.
+This work is dual-licensed under MIT and Apache 2.0.
+You can choose between one of them if you use this work.
+
+`SPDX-License-Identifier: MIT OR Apache-2.0`
 
 ## Governance
 
