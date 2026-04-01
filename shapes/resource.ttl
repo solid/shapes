@@ -13,7 +13,7 @@
 resource-shape:ResourceShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/solid/Resource.ts> ; 
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/solid/Resource.ts> ; 
-    rdfs:label "Resource";
+    sh:name "Resource";
     sh:codeIdentifier "Resource";
     dct:created "2026-03-18"^^xsd:date ;
     vs:term_status "testing";
@@ -26,7 +26,7 @@ resource-shape:ResourceShape a sh:NodeShape ;
     ] ;
 
     sh:property [
-        sh:path rdfs:label ;
+        sh:path sh:name ;
         sh:codeIdentifier "label" ;
         sh:datatype xsd:string ;
         sh:maxCount 1

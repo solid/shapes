@@ -14,8 +14,8 @@
 
 
 email-shape:EmailShape a sh:NodeShape;
-    rdfs:label "Email Shape" ;
-    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
+    sh:name "Email Shape" ;
+    sh:description "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
     sh:targetObjectsOf vcard:hasEmail;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
@@ -30,8 +30,8 @@ email-shape:EmailShape a sh:NodeShape;
         sh:minCount 1;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
-        rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org).";
+        sh:name "Email Address" ;
+        sh:description "The email address value (e.g., user@example.org).";
         sh:codeIdentifier "emailAddress";
   ].
 
@@ -39,8 +39,8 @@ email-shape:EmailShape a sh:NodeShape;
 email-shape:EmailWithTypeShape
     a sh:NodeShape ;
     sh:targetObjectsOf vcard:hasEmail ;
-    rdfs:label "Email Shape" ;
-    rdfs:comment "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
+    sh:name "Email Shape" ;
+    sh:description "SHACL shape describing the structure of an email contact node including its value and optional classification type." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
@@ -53,13 +53,13 @@ email-shape:EmailWithTypeShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
-        rdfs:label "Email Address" ;
-        rdfs:comment "The email address value (e.g., user@example.org).";
+        sh:name "Email Address" ;
+        sh:description "The email address value (e.g., user@example.org).";
         sh:codeIdentifier "emailAddress";
     ] ;
     sh:property [
         sh:path rdf:type ;
-        rdfs:label "Email Type" ;
-        rdfs:comment "The classification of the email (e.g., home or work).";
+        sh:name "Email Type" ;
+        sh:description "The classification of the email (e.g., home or work).";
         sh:codeIdentifier "emailType";
     ] .

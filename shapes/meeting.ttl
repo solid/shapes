@@ -11,8 +11,8 @@
 
 meeting-shape:MeetingShape
     a sh:NodeShape ;
-    rdfs:label "Meeting Shape" ;
-    rdfs:comment "Defines constraints for meeting instances including title, location, time, comments, and display color." ;
+    sh:name "Meeting Shape" ;
+    sh:description "Defines constraints for meeting instances including title, location, time, comments, and display color." ;
     sh:targetClass cal:Vevent ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
@@ -26,8 +26,8 @@ meeting-shape:MeetingShape
         sh:datatype xsd:string ;
         sh:maxCount 1 ;
         sh:maxLength 256 ;
-        rdfs:label "Meeting Title" ;
-        rdfs:comment "The name or summary of the meeting.";
+        sh:name "Meeting Title" ;
+        sh:description "The name or summary of the meeting.";
         sh:codeIdentifier "summary";
     ] ;
 
@@ -36,16 +36,16 @@ meeting-shape:MeetingShape
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
         sh:maxCount 1 ;
-        rdfs:label "Meeting Location" ;
-        rdfs:comment "The location where the meeting takes place.";
+        sh:name "Meeting Location" ;
+        sh:description "The location where the meeting takes place.";
         sh:codeIdentifier "location";
     ] ;
 
     sh:property [
         sh:path cal:dtstart ;
         sh:datatype xsd:dateTime ;
-        rdfs:label "Start Date/Time" ;
-        rdfs:comment "The start date and time of the meeting.";
+        sh:name "Start Date/Time" ;
+        sh:description "The start date and time of the meeting.";
         sh:codeIdentifier "startDate";
         sh:maxCount 1 ;
     ] ;
@@ -53,8 +53,8 @@ meeting-shape:MeetingShape
     sh:property [
         sh:path cal:dtend ;
         sh:datatype xsd:dateTime ;
-        rdfs:label "End Date/Time" ;
-        rdfs:comment "The end date and time of the meeting.";
+        sh:name "End Date/Time" ;
+        sh:description "The end date and time of the meeting.";
         sh:codeIdentifier "endDate";
         sh:maxCount 1 ;
     ] ;
@@ -62,8 +62,8 @@ meeting-shape:MeetingShape
     sh:property [
         sh:path cal:comment ;
         sh:datatype xsd:string ;
-        rdfs:label "Comment" ;
-        rdfs:comment "Additional notes or comments about the meeting.";
+        sh:name "Comment" ;
+        sh:description "Additional notes or comments about the meeting.";
         sh:codeIdentifier "comment";
         sh:maxCount 1 ;
     ]; 

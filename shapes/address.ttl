@@ -13,7 +13,7 @@
 
 
 address-shape:AddressShape
-    rdfs:label "Address";
+    sh:name "Address";
     sh:targetClass vcard:Address;
     a sh:NodeShape ;
     sh:codeIdentifier "Address";
@@ -24,7 +24,7 @@ address-shape:AddressShape
     
 
     sh:property [
-        rdfs:label "Street Address";
+        sh:name "Street Address";
         sh:path vcard:street-address ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
@@ -33,7 +33,7 @@ address-shape:AddressShape
     ] ;
 
     sh:property [
-        rdfs:label "Locality";
+        sh:name "Locality";
         sh:path vcard:locality ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
@@ -42,7 +42,7 @@ address-shape:AddressShape
     ] ;
 
     sh:property [
-        rdfs:label "Postal Code";
+        sh:name "Postal Code";
         sh:path vcard:postal-code ;
         sh:datatype xsd:string ;
         sh:maxLength 25 ;
@@ -51,7 +51,7 @@ address-shape:AddressShape
     ] ;
 
     sh:property [
-        rdfs:label "Region";
+        sh:name "Region";
         sh:path vcard:region ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;
@@ -60,7 +60,7 @@ address-shape:AddressShape
     ] ;
 
     sh:property [
-        rdfs:label "Country Name";
+        sh:name "Country Name";
         sh:path vcard:country-name ;
         sh:datatype xsd:string ;
         sh:maxLength 128 ;

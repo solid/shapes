@@ -9,7 +9,7 @@ Validates metadata and immutability of selected SHACL shapes.
 
 import sys
 from rdflib import Graph, Namespace
-from rdflib.namespace import RDF, RDFS
+from rdflib.namespace import RDF
 
 # Namespaces
 SH = Namespace("http://www.w3.org/ns/shacl#")
@@ -36,14 +36,14 @@ def report_error(file, shape, property_name, message, value=None, expected=None)
 
 
 def check_shape_metadata(g, file, shape_uri):
-    label = g.value(shape_uri, RDFS.label)
+    label = g.value(shape_uri, SH.name)
     created = g.value(shape_uri, DCT.created)
     status = g.value(shape_uri, VS.term_status)
 
     if not label:
-        report_error(file, shape_uri, "rdfs:label",
-                     "Missing required label.",
-                     expected="Human readable label")
+        report_error(file, shape_uri, "sh:name",
+                     "Missing required name.",
+                     expected="Human readable name")
     if not created:
         report_error(file, shape_uri, "dct:created",
                      "Creation date missing.",

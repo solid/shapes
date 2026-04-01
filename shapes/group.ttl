@@ -14,8 +14,8 @@
 
 group-shape:GroupShape
     a sh:NodeShape ;
-    rdfs:label "Group Shape" ;
-    rdfs:comment "Defines constraints for a vCard Group including its name and members." ;
+    sh:name "Group Shape" ;
+    sh:description "Defines constraints for a vCard Group including its name and members." ;
     sh:targetClass vcard:Group ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
@@ -28,24 +28,24 @@ group-shape:GroupShape
         sh:path vcard:fn ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-        rdfs:label "Group Name" ;
-        rdfs:comment "The formatted name of the group.";
+        sh:name "Group Name" ;
+        sh:description "The formatted name of the group.";
         sh:codeIdentifier "name";
     ] ;
 
     sh:property [
         sh:path vcard:member ;
         sh:node person-shape:ContactDetailsPersonShape ;
-        rdfs:label "Group Member" ;
-        rdfs:comment "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs.";
+        sh:name "Group Member" ;
+        sh:description "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs.";
         sh:codeIdentifier "member";
     ] 
     .
 
 group-shape:GroupMemberLocalIdShape
     a sh:NodeShape ;
-    rdfs:label "Group Member Local Identifier Shape" ;
-    rdfs:comment "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs." ;
+    sh:name "Group Member Local Identifier Shape" ;
+    sh:description "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs." ;
     sh:targetObjectsOf vcard:member ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
@@ -60,37 +60,37 @@ group-shape:GroupMemberLocalIdShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:class vcard:Individual ;
-        rdfs:label "Same As Individual" ;
-        rdfs:comment "Links the local group member identifier to exactly one vCard Individual resource.";
+        sh:name "Same As Individual" ;
+        sh:description "Links the local group member identifier to exactly one vCard Individual resource.";
         sh:codeIdentifier "sameAsIndividual";
     ] 
     .
 
 group-shape:IssueTrackerAssigneeGroupShape
     a sh:NodeShape ;
-    rdfs:label "Assignee Group Shape" ;
-    rdfs:comment "Defines constraints for the vCard Group used as an assignee group for issues." ;
+    sh:name "Assignee Group Shape" ;
+    sh:description "Defines constraints for the vCard Group used as an assignee group for issues." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ; 
-    rdfs:comment "Group shape used in issue tracker" ;
+    sh:description "Group shape used in issue tracker" ;
     sh:codeIdentifier "IssueTrackerAssigneeGroup";
 
     sh:property [
         sh:path vcard:fn ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
-        rdfs:label "Group Name" ;
-        rdfs:comment "The formatted name of the group.";
+        sh:name "Group Name" ;
+        sh:description "The formatted name of the group.";
         sh:codeIdentifier "name";
     ] ;
     sh:property [
         sh:path vcard:member ;
         sh:node person-shape:IssueTrackerPersonShape ;
-        rdfs:label "Group Member" ;
-        rdfs:comment "Each member of the group represented as a vCard Individual.";
+        sh:name "Group Member" ;
+        sh:description "Each member of the group represented as a vCard Individual.";
         sh:codeIdentifier "member"; 
     ] 
     .

@@ -10,10 +10,10 @@
 @prefix address-book-shape: <https://solidproject.org/shapes/address-book#> .
 
 address-book-shape:AddressBookShape a sh:NodeShape ;
-    rdfs:label "AddressBook";    
+    sh:name "AddressBook";    
     sh:targetClass vcard:AddressBook ;
-    rdfs:comment "Represents a collection of vCard people and/or vCard groups" ; 
-    rdfs:comment "This class is not part of vCard as defined by the IETF" ;
+    sh:description "Represents a collection of vCard people and/or vCard groups" ; 
+    sh:description "This class is not part of vCard as defined by the IETF" ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
@@ -22,16 +22,16 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
     sh:codeIdentifier "AddressBook";
 
     sh:property [
-        rdfs:label "Formatted name";
+        sh:name "Formatted name";
         sh:path vcard:fn ;
         sh:datatype xsd:string;
         sh:minCount 1;
         sh:codeIdentifier "formattedName";
   ];
   sh:property [
-    rdfs:label "Name Email Index" ; 
-    rdfs:comment "Links an AddressBook to a document containing Individuals that appear in it" ;
-    rdfs:comment "This property is not part of vCard as defined by the IETF" ;
+    sh:name "Name Email Index" ; 
+    sh:description "Links an AddressBook to a document containing Individuals that appear in it" ;
+    sh:description "This property is not part of vCard as defined by the IETF" ;
     sh:path vcard:nameEmailIndex ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
@@ -39,9 +39,9 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
   ];
 
   sh:property [
-    rdfs:label "Group Index" ;
-    rdfs:comment "Links an AddressBook to a document containing all its includesGroup properties" ;
-    rdfs:comment "This property is not part of vCard as defined by the IETF" ;
+    sh:name "Group Index" ;
+    sh:description "Links an AddressBook to a document containing all its includesGroup properties" ;
+    sh:description "This property is not part of vCard as defined by the IETF" ;
     sh:path vcard:groupIndex ;
     sh:datatype xsd:anyURI; 
     sh:minCount 1;
@@ -50,9 +50,9 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
   ] ;
 
   sh:property [
-    rdfs:label "Includes Group" ;
-    rdfs:comment "When included in the group index document of an AddressBook, adds the group to the AddressBook" ;
-    rdfs:comment "This property is not part of vCard as defined by the IETF" ;
+    sh:name "Includes Group" ;
+    sh:description "When included in the group index document of an AddressBook, adds the group to the AddressBook" ;
+    sh:description "This property is not part of vCard as defined by the IETF" ;
     sh:path vcard:includesGroup ;
     sh:datatype xsd:anyURI; 
     sh:codeIdentifier "includesGroup";
@@ -60,9 +60,9 @@ address-book-shape:AddressBookShape a sh:NodeShape ;
   ] ;
 
   sh:property [
-    rdfs:label "in AddressBook" ;
-    rdfs:comment "Indicates that an Individual appears in an AddressBook" ;
-    rdfs:comment "This property is not part of vCard as defined by the IETF" ;
+    sh:name "in AddressBook" ;
+    sh:description "Indicates that an Individual appears in an AddressBook" ;
+    sh:description "This property is not part of vCard as defined by the IETF" ;
     sh:path vcard:inAddressBook ; ## Inverse
     sh:datatype xsd:anyURI; 
     sh:minCount 1;

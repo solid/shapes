@@ -23,8 +23,8 @@ agent-shape:AgentShape
     sh:targetClass foaf:Agent ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
-    rdfs:label "Agent Shape" ;
-    rdfs:comment "SHACL shape representing an agent, which can be a person, organization, or software agent." ;
+    sh:name "Agent Shape" ;
+    sh:description "SHACL shape representing an agent, which can be a person, organization, or software agent." ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
     sh:codeIdentifier "Agent" ;
@@ -40,8 +40,8 @@ agent-shape:AgentShape
 agent-shape:WebIdAgentShape
     a sh:NodeShape ;
     sh:targetClass foaf:Agent ;
-    rdfs:label "Agent Shape" ;
-    rdfs:comment "Represents an agent, which can be a person, organization, or software agent." ;
+    sh:name "Agent Shape" ;
+    sh:description "Represents an agent, which can be a person, organization, or software agent." ;
     dct:created "2026-03-18"^^xsd:date ;
     dc:source <https://github.com/solid/object/blob/main/src/webid/Agent.ts>;
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/webid/Agent.ts> ;

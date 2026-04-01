@@ -16,7 +16,7 @@ acp-access-control-resource-shape:AcpAccessControlResourceShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/acp/AccessControlResource.ts> ;
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/AccessControlResource.ts> ; 
     sh:codeIdentifier "AccessControlResource";
-    rdfs:label "Access Control Resource Shape";
+    sh:name "Access Control Resource Shape";
     dct:created "2026-03-18"^^xsd:date ;
     vs:term_status "testing";
 

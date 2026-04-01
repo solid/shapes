@@ -14,8 +14,8 @@
 
 issue-tracker-shape:IssueTrackerShape
     a sh:NodeShape ;
-    rdfs:label "Issue Tracker Configuration Shape" ;
-    rdfs:comment "Defines data constraints for configuring an issue tracker including title, description, workflow states, classification systems, assignment rules, optional forms, and additional properties." ;
+    sh:name "Issue Tracker Configuration Shape" ;
+    sh:description "Defines data constraints for configuring an issue tracker including title, description, workflow states, classification systems, assignment rules, optional forms, and additional properties." ;
     sh:targetClass wf:Tracker ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
@@ -27,51 +27,51 @@ issue-tracker-shape:IssueTrackerShape
     sh:property
         [ sh:path dct:title ;
           sh:datatype xsd:string ;
-          rdfs:label "Tracker Title" ;
-          rdfs:comment "The human-readable title of the issue tracker.";
+          sh:name "Tracker Title" ;
+          sh:description "The human-readable title of the issue tracker.";
           sh:codeIdentifier "title";
           sh:maxCount 1;
         ],
         [ sh:path wf:description ;
           sh:datatype xsd:string ;
-          rdfs:label "Tracker Description" ;
-          rdfs:comment "A description explaining the purpose or scope of the issue tracker.";
+          sh:name "Tracker Description" ;
+          sh:description "A description explaining the purpose or scope of the issue tracker.";
           sh:codeIdentifier "description";
           sh:maxCount 1;
         ],
         [ sh:path wf:issueClass ;
           sh:class rdfs:Class ;
-          rdfs:label "Issue State Class" ;
-          rdfs:comment "The states an issue may be in (e.g., Task).";
+          sh:name "Issue State Class" ;
+          sh:description "The states an issue may be in (e.g., Task).";
           sh:codeIdentifier "issueState";
         ],
         [ sh:path wf:issueCategory ;
           sh:class rdfs:Class ;
-          rdfs:label "Issue Category" ;
-          rdfs:comment "Issue category";
+          sh:name "Issue Category" ;
+          sh:description "Issue category";
           sh:codeIdentifier "issueCategory";
         ],
         [ sh:path wf:allowSubIssues ;
           sh:maxCount 1 ;
           sh:datatype xsd:boolean ;
-          rdfs:label "Allow Sub-Issues?" ;
-          rdfs:comment "Indicates whether issues may contain sub-issues.";
+          sh:name "Allow Sub-Issues?" ;
+          sh:description "Indicates whether issues may contain sub-issues.";
           sh:codeIdentifier "allowSubIssues";
         ],
 
         # Nested propertyList
         [ sh:path wf:propertyList ;
           sh:node issue-tracker-shape:PropertyListShape ;
-          rdfs:label "Additional Properties" ;
-          rdfs:comment "An ordered list of additional properties to display in table views of issues.";
+          sh:name "Additional Properties" ;
+          sh:description "An ordered list of additional properties to display in table views of issues.";
           sh:codeIdentifier "additionalProperties";
         ],
 
         # Nested assignee group
         [ sh:path wf:assigneeGroup ;
           sh:node group-shape:IssueTrackerAssigneeGroupShape ;
-          rdfs:label "Assignee Group" ;
-          rdfs:comment "The contact group from which issues may be assigned to individuals.";
+          sh:name "Assignee Group" ;
+          sh:description "The contact group from which issues may be assigned to individuals.";
           sh:codeIdentifier "assigneeGroup";
         ] 
         
@@ -83,8 +83,8 @@ issue-tracker-shape:IssueTrackerShape
 
 issue-tracker-shape:PropertyListShape
     a sh:NodeShape ;
-    rdfs:label "Property List Item Shape" ;
-    rdfs:comment "Defines constraints for each property included in the propertyList of an issue tracker." ;
+    sh:name "Property List Item Shape" ;
+    sh:description "Defines constraints for each property included in the propertyList of an issue tracker." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
@@ -93,12 +93,12 @@ issue-tracker-shape:PropertyListShape
    
     
     sh:property [
-        sh:path rdfs:label ;
+        sh:path sh:name ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
-        rdfs:label "Property Name" ;
-        rdfs:comment "The human-readable name of the property.";
+        sh:name "Property Name" ;
+        sh:description "The human-readable name of the property.";
         sh:codeIdentifier "propertyName";
     ] .
 

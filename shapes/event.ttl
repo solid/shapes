@@ -12,22 +12,22 @@
 
 event-shape:ScheduleEventShape
     a sh:NodeShape ;
-    rdfs:label "Schedule Event Shape" ;
-    rdfs:comment "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees." ;
+    sh:name "Schedule Event Shape" ;
+    sh:description "SHACL shape representing a scheduled event, including title, location, type, duration, authors, time proposals, and invitees." ;
     sh:targetClass cal:Vevent ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/solid-panes/blob/main/src/schedule/formsForSchedule.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/solid-panes/blob/main/src/schedule/formsForSchedule.ttl> ;
-    rdfs:comment "Schedule event forms (single form / multi-step)";
+    sh:description "Schedule event forms (single form / multi-step)";
     sh:codeIdentifier "ScheduleEvent";
 
     # Event title
     sh:property [
         sh:path cal:summary ;
         sh:datatype xsd:string ;
-        rdfs:label "Event Title" ;
-        rdfs:comment "The title or summary of the event.";
+        sh:name "Event Title" ;
+        sh:description "The title or summary of the event.";
         sh:codeIdentifier "title";
     ] ;
 
@@ -35,8 +35,8 @@ event-shape:ScheduleEventShape
     sh:property [
         sh:path cal:location ;
         sh:datatype xsd:string ;
-        rdfs:label "Event Location" ;
-        rdfs:comment "The location where the event takes place.";
+        sh:name "Event Location" ;
+        sh:description "The location where the event takes place.";
         sh:codeIdentifier "location";
     ] ;
 
@@ -45,8 +45,8 @@ event-shape:ScheduleEventShape
         sh:path sched:allDay ;
         sh:datatype xsd:boolean ;
         sh:maxCount 1 ;
-        rdfs:label "All-day Event" ;
-        rdfs:comment "Indicates whether the event lasts all day or has a specific time.";
+        sh:name "All-day Event" ;
+        sh:description "Indicates whether the event lasts all day or has a specific time.";
         sh:codeIdentifier "isAllDayEvent";
     ] ;
 
@@ -54,8 +54,8 @@ event-shape:ScheduleEventShape
     sh:property [
         sh:path sched:durationInDays ;
         sh:datatype xsd:integer ;
-        rdfs:label "Duration in Days" ;
-        rdfs:comment "Duration of the event in days for all-day events.";
+        sh:name "Duration in Days" ;
+        sh:description "Duration of the event in days for all-day events.";
         sh:codeIdentifier "durationDays";
 
     ];
@@ -63,8 +63,8 @@ event-shape:ScheduleEventShape
     sh:property [
         sh:path sched:durationInMinutes ;
         sh:datatype xsd:integer ;
-        rdfs:label "Duration in Minutes" ;
-        rdfs:comment "Duration of the event in minutes for single day events.";
+        sh:name "Duration in Minutes" ;
+        sh:description "Duration of the event in minutes for single day events.";
         sh:codeIdentifier "durationMinutes";
 
     ];
@@ -72,8 +72,8 @@ event-shape:ScheduleEventShape
     sh:property [
         sh:path cal:comment ;
         sh:datatype xsd:string ;
-        rdfs:label "Event Comment" ;
-        rdfs:comment "Comment about the the event.";
+        sh:name "Event Comment" ;
+        sh:description "Comment about the the event.";
         sh:codeIdentifier "comment";
     ] ;
     

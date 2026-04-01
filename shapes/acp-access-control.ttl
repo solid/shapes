@@ -16,13 +16,13 @@ acp-access-control-shape:AcpAccessControlShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/acp/AccessControl.ts> ; 
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/AccessControl.ts> ; 
     sh:codeIdentifier "AcpAccessControl";
-    rdfs:label "ACP Access Control Shape";
+    sh:name "ACP Access Control Shape";
     dct:created "2026-03-18"^^xsd:date ;
     vs:term_status "testing";
 
     sh:property [
         sh:path acp:apply ;
         sh:node acp-policy-shape:AcpPolicyShape ;
-        rdfs:label "apply";
+        sh:name "apply";
         sh:codeIdentifier "apply";
     ] . 

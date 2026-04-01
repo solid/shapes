@@ -15,7 +15,7 @@
 container-shape:ContainerShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/solid/Container.ts> ; 
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/solid/Container.ts> ; 
-    rdfs:label "Container";
+    sh:name "Container";
     sh:codeIdentifier "Container";
     dct:created "2026-03-18"^^xsd:date ;
     vs:term_status "testing";
