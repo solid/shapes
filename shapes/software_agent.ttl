@@ -6,13 +6,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
  
-@prefix software-agent-shape: <https://solidproject.org/shapes/software-agent#> .
+@prefix software_agent_shape: <https://solidproject.org/shapes/software_agent#> .
 
-software-agent-shape:ContactSoftwareAgentShape
+software_agent_shape:ContactSoftwareAgentShape
     a sh:NodeShape ;
     sh:targetClass prov:SoftwareAgent ;
-    rdfs:label "Software Agent Shape" ;
-    rdfs:comment "SHACL shape representing a software agent, which can be associated with a vCard contact as an agent that performs actions on behalf of the contact." ;
+    sh:name "Software Agent Shape" ;
+    sh:description "SHACL shape representing a software agent, which can be associated with a vCard contact as an agent that performs actions on behalf of the contact." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;

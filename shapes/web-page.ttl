@@ -7,12 +7,12 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix web-page-shape: <https://solidproject.org/shapes/web-page#> .
+@prefix web_page_shape: <https://solidproject.org/shapes/web_page#> .
 
-web-page-shape:WebPageShape a sh:NodeShape;
+web_page_shape:WebPageShape a sh:NodeShape;
   sh:targetObjectsOf vcard:url;
-  rdfs:label "Web Page Shape" ;
-  rdfs:comment "SHACL shape for validating web identifiers (URLs) associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;
+  sh:name "Web Page Shape" ;
+  sh:description "SHACL shape for validating web identifiers (URLs) associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;
   dct:created "2026-03-12"^^xsd:date ;
   vs:term_status "testing" ;
   dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
@@ -24,7 +24,7 @@ web-page-shape:WebPageShape a sh:NodeShape;
     sh:pattern "^https?:" ;    # starts with http: or https:
     sh:minCount 1;
     sh:maxCount 1;
-    rdfs:label "URL";
+    sh:name "URL";
     sh:codeIdentifier "url";
   ] .
 

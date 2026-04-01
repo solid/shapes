@@ -9,17 +9,17 @@
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-@prefix address-shape: <https://solidproject.org/shapes/address#> .
-@prefix email-shape: <https://solidproject.org/shapes/email#> .
-@prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
+@prefix address_shape: <https://solidproject.org/shapes/address#> .
+@prefix email_shape: <https://solidproject.org/shapes/email#> .
+@prefix telephone_shape: <https://solidproject.org/shapes/telephone#> .
 
-@prefix organization-shape: <https://solidproject.org/shapes/organization#> .
+@prefix organization_shape: <https://solidproject.org/shapes/organization#> .
 
-organization-shape:ContactOrganizationShape
+organization_shape:ContactOrganizationShape
     a sh:NodeShape ;
     sh:targetClass vcard:Organization ;
-    rdfs:label "Organization Shape" ;
-    rdfs:comment "SHACL shape for validating organization contact and classification details." ;
+    sh:name "Organization Shape" ;
+    sh:description "SHACL shape for validating organization contact and classification details." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/organizationForm.ttl> ;
@@ -33,8 +33,8 @@ organization-shape:ContactOrganizationShape
         sh:datatype xsd:string ;
         sh:maxLength 200 ;
         sh:maxCount 1;
-        rdfs:label "Organization Name" ;
-        rdfs:comment "The official name of the organization.";
+        sh:name "Organization Name" ;
+        sh:description "The official name of the organization.";
         sh:codeIdentifier "name";
     ] ;
 
@@ -42,8 +42,8 @@ organization-shape:ContactOrganizationShape
     sh:property [
         sh:path schema:url ;
         sh:nodeKind sh:IRI ;
-        rdfs:label "Homepage URL" ;
-        rdfs:comment "The homepage or primary web address of the organization.";
+        sh:name "Homepage URL" ;
+        sh:description "The homepage or primary web address of the organization.";
         sh:codeIdentifier "homepageURL";
     ] ;
 
@@ -62,17 +62,17 @@ organization-shape:ContactOrganizationShape
             schema:Project
             schema:SportsOrganization
         ) ;
-        rdfs:label "Organization Type / Category" ;
-        rdfs:comment "Classification of the organization as one of the predefined types.";
+        sh:name "Organization Type / Category" ;
+        sh:description "Classification of the organization as one of the predefined types.";
         sh:codeIdentifier "typeCategory";
     ] .
 
 
-organization-shape:ContactDetailsOrganizationShape
+organization_shape:ContactDetailsOrganizationShape
     a sh:NodeShape ;
     sh:targetClass vcard:Organization ;
-    rdfs:label "Organization contact details Shape" ;
-    rdfs:comment "SHACL shape defining data constraints for an organization contact." ;
+    sh:name "Organization contact details Shape" ;
+    sh:description "SHACL shape defining data constraints for an organization contact." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
@@ -96,8 +96,8 @@ organization-shape:ContactDetailsOrganizationShape
             schema:Project
             schema:SportsOrganization
         ) ;
-        rdfs:label "Organization Type" ;
-        rdfs:comment "The classification or type of organization.";
+        sh:name "Organization Type" ;
+        sh:description "The classification or type of organization.";
         sh:codeIdentifier "organizationType";
     ] ;
 
@@ -105,47 +105,47 @@ organization-shape:ContactDetailsOrganizationShape
         sh:path schema:name ;
         sh:datatype xsd:string ;
         sh:maxLength 200 ;
-        rdfs:label "Organization Name" ;
-        rdfs:comment "The official name of the organization.";
+        sh:name "Organization Name" ;
+        sh:description "The official name of the organization.";
         sh:codeIdentifier "name";
     ] ;
 
     sh:property [
         sh:path schema:url ;
         sh:nodeKind sh:IRI ;
-        rdfs:label "Homepage URL" ;
-        rdfs:comment "The homepage or primary website of the organization.";
+        sh:name "Homepage URL" ;
+        sh:description "The homepage or primary website of the organization.";
         sh:codeIdentifier "homepageURL";
     ] ;
 
     sh:property [
         sh:path vcard:hasAddress ;
-        rdfs:label "Address" ;
-        rdfs:comment "Address details" ;
-        sh:node address-shape:AddressShape ;
+        sh:name "Address" ;
+        sh:description "Address details" ;
+        sh:node address_shape:AddressShape ;
         sh:codeIdentifier "hasAddress";
     ] ;
 
     sh:property [
         sh:path vcard:hasEmail ;
-        rdfs:label "Email Addresses" ;
-        rdfs:comment "Email addresses." ;
-        sh:node email-shape:EmailWithTypeShape ;
+        sh:name "Email Addresses" ;
+        sh:description "Email addresses." ;
+        sh:node email_shape:EmailWithTypeShape ;
         sh:codeIdentifier "hasEmailAddress";
     ] ;
 
     sh:property [
         sh:path vcard:hasTelephone ;
-        rdfs:label "Telephone Numbers" ;
-        rdfs:comment "Telephone numbers associated with the organization." ;
-        sh:node telephone-shape:TelephoneShape ;
+        sh:name "Telephone Numbers" ;
+        sh:description "Telephone numbers associated with the organization." ;
+        sh:node telephone_shape:TelephoneShape ;
         sh:codeIdentifier "hasTelephoneNumber";
     ] ;
 
     sh:property [
         sh:path vcard:note ;
-        rdfs:label "Notes" ;
-        rdfs:comment "General notes about the organization." ;
+        sh:name "Notes" ;
+        sh:description "General notes about the organization." ;
         sh:codeIdentifier "notes";
     ] .
 
