@@ -12,13 +12,13 @@
 @prefix pim: <http://www.w3.org/ns/pim/space#> .
 @prefix solid: <https://www.w3.org/ns/solid/terms#> .
 
-@prefix person-shape: <https://solidproject.org/shapes/person#> .
-@prefix organization-shape: <https://solidproject.org/shapes/organization#> .
-@prefix software-agent-shape: <https://solidproject.org/shapes/software-agent#> .
+@prefix person_shape: <https://solidproject.org/shapes/person#> .
+@prefix organization_shape: <https://solidproject.org/shapes/organization#> .
+@prefix software_agent_shape: <https://solidproject.org/shapes/software_agent#> .
 
-@prefix agent-shape: <https://solidproject.org/shapes/agent#> .
+@prefix agent_shape: <https://solidproject.org/shapes/agent#> .
 
-agent-shape:AgentShape
+agent_shape:AgentShape
     a sh:NodeShape ;
     sh:targetClass foaf:Agent ;
     dct:created "2026-03-12"^^xsd:date ;
@@ -30,14 +30,14 @@ agent-shape:AgentShape
     sh:codeIdentifier "Agent" ;
 
     sh:xone (
-        [ sh:node person-shape:ContactPersonShape  ]
-        [ sh:node organization-shape:ContactOrganizationShape ]
-        [ sh:node software-agent-shape::ContactSoftwareAgentShape ]
+        [ sh:node person_shape:ContactPersonShape  ]
+        [ sh:node organization_shape:ContactOrganizationShape ]
+        [ sh:node software_agent_shape::ContactSoftwareAgentShape ]
     ) .
 
 
 
-agent-shape:WebIdAgentShape
+agent_shape:WebIdAgentShape
     a sh:NodeShape ;
     sh:targetClass foaf:Agent ;
     sh:name "Agent Shape" ;

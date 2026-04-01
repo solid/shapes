@@ -8,11 +8,11 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
-@prefix acp-policy-shape: <https://solidproject.org/shapes/acp-policy#> .
+@prefix acp_policy_shape: <https://solidproject.org/shapes/acp_policy#> .
 
-@prefix acp-access-control-shape: <https://solidproject.org/shapes/acp-access-control#> .
+@prefix acp_access_control_shape: <https://solidproject.org/shapes/acp_access_control#> .
 
-acp-access-control-shape:AcpAccessControlShape a sh:NodeShape ;
+acp_access_control_shape:AcpAccessControlShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/acp/AccessControl.ts> ; 
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/AccessControl.ts> ; 
     sh:codeIdentifier "AcpAccessControl";
@@ -22,7 +22,7 @@ acp-access-control-shape:AcpAccessControlShape a sh:NodeShape ;
 
     sh:property [
         sh:path acp:apply ;
-        sh:node acp-policy-shape:AcpPolicyShape ;
+        sh:node acp_policy_shape:AcpPolicyShape ;
         sh:name "apply";
         sh:codeIdentifier "apply";
     ] . 

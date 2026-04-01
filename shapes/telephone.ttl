@@ -8,11 +8,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
+@prefix telephone_shape: <https://solidproject.org/shapes/telephone#> .
 
-
-
-telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
+telephone_shape:TelephoneAsIRIShape a sh:NodeShape;
   sh:targetObjectsOf vcard:hasTelephone;
   sh:name "Telephone Shape (as IRI)" ;
   sh:description "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they are represented as IRIs with the appropriate 'tel:' scheme." ;
@@ -34,7 +32,7 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
 
 
 
-telephone-shape:TelephoneShape
+telephone_shape:TelephoneShape
     a sh:NodeShape ;
     sh:targetObjectsOf vcard:hasTelephone ;
     sh:name "Telephone Shape" ;

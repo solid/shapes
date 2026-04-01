@@ -15,11 +15,11 @@
 @prefix dct:        <http://purl.org/dc/terms/> .
 @prefix vs:         <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix prov:       <http://www.w3.org/ns/prov#> .
-@prefix chat-shape: <https://solidproject.org/shapes/chat#> .
+@prefix chat_shape: <https://solidproject.org/shapes/chat#> .
 
 ##################### Chat Channel Shape
 
-chat-shape:ChatChannelShape a sh:NodeShape ;
+chat_shape:ChatChannelShape a sh:NodeShape ;
     sh:name "Chat Channel Shape" ;
     sh:description "SHACL NodeShape describing the properties and constraints for a Solid Chat" ;
     sh:targetClass mee:LongChat ;
@@ -28,14 +28,14 @@ chat-shape:ChatChannelShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatChannel" ;
-    sh:property chat-shape:ChatChannelShape_type,
-                chat-shape:ChatChannelShape_author,
-                chat-shape:ChatChannelShape_title,
-                chat-shape:ChatChannelShape_createdDate,
-                chat-shape:ChatChannelShape_sharedPreferences,
-                chat-shape:ChatChannelShape_participation .
+    sh:property chat_shape:ChatChannelShape_type,
+                chat_shape:ChatChannelShape_author,
+                chat_shape:ChatChannelShape_title,
+                chat_shape:ChatChannelShape_createdDate,
+                chat_shape:ChatChannelShape_sharedPreferences,
+                chat_shape:ChatChannelShape_participation .
 
-chat-shape:ChatChannelShape_type a sh:PropertyShape ;
+chat_shape:ChatChannelShape_type a sh:PropertyShape ;
     sh:path rdf:type ;
     sh:value mee:LongChat ;
     sh:minCount 1 ;
@@ -43,14 +43,14 @@ chat-shape:ChatChannelShape_type a sh:PropertyShape ;
     sh:description "Specifies that the node must be of type LongChat." ;
     sh:codeIdentifier "type" .
 
-chat-shape:ChatChannelShape_author a sh:PropertyShape ;
+chat_shape:ChatChannelShape_author a sh:PropertyShape ;
     sh:path dc:author ;
     sh:minCount 1 ;
     sh:name "Author" ;
     sh:description "The author of the chat channel." ;
     sh:codeIdentifier "author" .
 
-chat-shape:ChatChannelShape_title a sh:PropertyShape ;
+chat_shape:ChatChannelShape_title a sh:PropertyShape ;
     sh:path dc:title ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;
@@ -59,7 +59,7 @@ chat-shape:ChatChannelShape_title a sh:PropertyShape ;
     sh:description "The title of the chat channel." ;
     sh:codeIdentifier "title" .
 
-chat-shape:ChatChannelShape_createdDate a sh:PropertyShape ;
+chat_shape:ChatChannelShape_createdDate a sh:PropertyShape ;
     sh:path dc:created ;
     sh:datatype xsd:dateTime ;
     sh:minCount 1 ;
@@ -68,24 +68,24 @@ chat-shape:ChatChannelShape_createdDate a sh:PropertyShape ;
     sh:description "The creation date of the chat channel." ;
     sh:codeIdentifier "createdDate" .
 
-chat-shape:ChatChannelShape_sharedPreferences a sh:PropertyShape ;
+chat_shape:ChatChannelShape_sharedPreferences a sh:PropertyShape ;
     sh:path ui:sharedPreferences ;
-    sh:node chat-shape:ChatSharedPreferencesShape ;
+    sh:node chat_shape:ChatSharedPreferencesShape ;
     sh:minCount 0 ;
     sh:name "Shared Preferences" ;
     sh:description "References user interface preferences shared in the chat." ;
     sh:codeIdentifier "sharedPreferences" .
 
-chat-shape:ChatChannelShape_participation a sh:PropertyShape ;
+chat_shape:ChatChannelShape_participation a sh:PropertyShape ;
     sh:path flow:participation ;
-    sh:node chat-shape:ChatParticipationShape ;
+    sh:node chat_shape:ChatParticipationShape ;
     sh:name "Participation" ;
     sh:description "Indicates participants in the chat channel." ;
     sh:codeIdentifier "participation" .
 
 ##################### Chat Message Shape
 
-chat-shape:ChatMessageShape a sh:NodeShape ;
+chat_shape:ChatMessageShape a sh:NodeShape ;
     sh:name "Chat Message Shape" ;
     sh:description "SHACL NodeShape defining constraints for messages in Solid Chat." ;
     sh:targetObjectsOf flow:message ;
@@ -94,13 +94,13 @@ chat-shape:ChatMessageShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatMessage" ;
-    sh:property chat-shape:ChatMessageShape_createdDate,
-                chat-shape:ChatMessageShape_author,
-                chat-shape:ChatMessageShape_content
+    sh:property chat_shape:ChatMessageShape_createdDate,
+                chat_shape:ChatMessageShape_author,
+                chat_shape:ChatMessageShape_content
                  .
-    # chat-shape:ChatMessageShape_relatedChatChannel  unsupported at this time
+    # chat_shape:ChatMessageShape_relatedChatChannel  unsupported at this time
 
-chat-shape:ChatMessageShape_createdDate a sh:PropertyShape ;
+chat_shape:ChatMessageShape_createdDate a sh:PropertyShape ;
     sh:path terms:created ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -109,7 +109,7 @@ chat-shape:ChatMessageShape_createdDate a sh:PropertyShape ;
     sh:description "The date and time when the message was created." ;
     sh:codeIdentifier "createdDate" .
 
-chat-shape:ChatMessageShape_author a sh:PropertyShape ;
+chat_shape:ChatMessageShape_author a sh:PropertyShape ;
     sh:path foaf:maker ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -117,7 +117,7 @@ chat-shape:ChatMessageShape_author a sh:PropertyShape ;
     sh:description "The agent or person who authored the message." ;
     sh:codeIdentifier "author" .
 
-chat-shape:ChatMessageShape_content a sh:PropertyShape ;
+chat_shape:ChatMessageShape_content a sh:PropertyShape ;
     sh:path sioc:content ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;
@@ -126,7 +126,7 @@ chat-shape:ChatMessageShape_content a sh:PropertyShape ;
     sh:description "The textual content of the message." ;
     sh:codeIdentifier "content" .
 
-chat-shape:ChatMessageShape_relatedChatChannel a sh:PropertyShape ;
+chat_shape:ChatMessageShape_relatedChatChannel a sh:PropertyShape ;
     sh:path [ sh:inversePath flow:message ] ;
     sh:minCount 1 ;
     sh:name "Related Chat" ;
@@ -135,7 +135,7 @@ chat-shape:ChatMessageShape_relatedChatChannel a sh:PropertyShape ;
 
 ##################### Chat Participation Shape
 
-chat-shape:ChatParticipationShape a sh:NodeShape ;
+chat_shape:ChatParticipationShape a sh:NodeShape ;
     sh:name "Participation Shape" ;
     sh:description "SHACL NodeShape defining constraints for a participant in a Solid Chat." ;
     sh:targetObjectsOf flow:participation ;
@@ -144,15 +144,15 @@ chat-shape:ChatParticipationShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "Participation" ;
-    sh:property chat-shape:ChatParticipationShape_startDate,
-                chat-shape:ChatParticipationShape_participant,
-                chat-shape:ChatParticipationShape_colorizeByAuthor,
-                chat-shape:ChatParticipationShape_expandImagesInline,
-                chat-shape:ChatParticipationShape_inlineImageHeight,
-                chat-shape:ChatParticipationShape_newestFirst,
-                chat-shape:ChatParticipationShape_backgroundColor .
+    sh:property chat_shape:ChatParticipationShape_startDate,
+                chat_shape:ChatParticipationShape_participant,
+                chat_shape:ChatParticipationShape_colorizeByAuthor,
+                chat_shape:ChatParticipationShape_expandImagesInline,
+                chat_shape:ChatParticipationShape_inlineImageHeight,
+                chat_shape:ChatParticipationShape_newestFirst,
+                chat_shape:ChatParticipationShape_backgroundColor .
 
-chat-shape:ChatParticipationShape_startDate a sh:PropertyShape ;
+chat_shape:ChatParticipationShape_startDate a sh:PropertyShape ;
     sh:path ical:dtstart ;
     sh:datatype xsd:dateTime ;
     sh:minCount 1 ;
@@ -161,7 +161,7 @@ chat-shape:ChatParticipationShape_startDate a sh:PropertyShape ;
     sh:description "The date and time when the participation started." ;
     sh:codeIdentifier "startDate" .
 
-chat-shape:ChatParticipationShape_participant a sh:PropertyShape ;
+chat_shape:ChatParticipationShape_participant a sh:PropertyShape ;
     sh:path flow:participant ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -169,7 +169,7 @@ chat-shape:ChatParticipationShape_participant a sh:PropertyShape ;
     sh:description "The agent or person participating in the chat." ;
     sh:codeIdentifier "participant" .
 
-chat-shape:ChatParticipationShape_colorizeByAuthor a sh:PropertyShape ;
+chat_shape:ChatParticipationShape_colorizeByAuthor a sh:PropertyShape ;
     sh:path solid:colorizeByAuthor ;
     sh:datatype xsd:boolean ;
     sh:maxCount 1 ;
@@ -177,7 +177,7 @@ chat-shape:ChatParticipationShape_colorizeByAuthor a sh:PropertyShape ;
     sh:description "Indicates if messages from this participant should be colorized by author." ;
     sh:codeIdentifier "colorizeByAuthor" .
 
-chat-shape:ChatParticipationShape_expandImagesInline a sh:PropertyShape ;
+chat_shape:ChatParticipationShape_expandImagesInline a sh:PropertyShape ;
     sh:path solid:expandImagesInline ;
     sh:datatype xsd:boolean ;
     sh:maxCount 1 ;
@@ -185,7 +185,7 @@ chat-shape:ChatParticipationShape_expandImagesInline a sh:PropertyShape ;
     sh:description "Indicates if images should be displayed inline for this participant." ;
     sh:codeIdentifier "expandImagesInline" .
 
-chat-shape:ChatParticipationShape_inlineImageHeight a sh:PropertyShape ;
+chat_shape:ChatParticipationShape_inlineImageHeight a sh:PropertyShape ;
     sh:path solid:inlineImageHeightEms ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
@@ -193,7 +193,7 @@ chat-shape:ChatParticipationShape_inlineImageHeight a sh:PropertyShape ;
     sh:comment "Preferred height of inline images in em units for this participant." ;
     sh:codeIdentifier "inlineImageHeight" .
 
-chat-shape:ChatParticipationShape_newestFirst a sh:PropertyShape ;
+chat_shape:ChatParticipationShape_newestFirst a sh:PropertyShape ;
     sh:path solid:newestFirst ;
     sh:datatype xsd:boolean ;
     sh:maxCount 1 ;
@@ -201,7 +201,7 @@ chat-shape:ChatParticipationShape_newestFirst a sh:PropertyShape ;
     sh:description "If true, messages are displayed newest first for this participant." ;
     sh:codeIdentifier "newestFirst" .
 
-chat-shape:ChatParticipationShape_backgroundColor a sh:PropertyShape ;
+chat_shape:ChatParticipationShape_backgroundColor a sh:PropertyShape ;
     sh:path ui:backgroundColor ;
     sh:datatype xsd:string ;
     sh:maxCount 1 ;
@@ -212,7 +212,7 @@ chat-shape:ChatParticipationShape_backgroundColor a sh:PropertyShape ;
 
 ##################### Chat Shared Preferences Shape
 
-chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
+chat_shape:ChatSharedPreferencesShape a sh:NodeShape ;
     sh:name "Chat Shared Preferences Shape" ;
     sh:description "NodeShape defining shared UI preferences for chat participants." ;
     sh:targetObjectsOf ui:sharedPreferences ;
@@ -221,11 +221,11 @@ chat-shape:ChatSharedPreferencesShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatSharedPreferences" ;
-    sh:property chat-shape:ChatSharedPreferencesShape_expandImagesInline,
-                chat-shape:ChatSharedPreferencesShape_inlineImageHeight,
-                chat-shape:ChatSharedPreferencesShape_newestFirst .
+    sh:property chat_shape:ChatSharedPreferencesShape_expandImagesInline,
+                chat_shape:ChatSharedPreferencesShape_inlineImageHeight,
+                chat_shape:ChatSharedPreferencesShape_newestFirst .
 
-chat-shape:ChatSharedPreferencesShape_expandImagesInline a sh:PropertyShape ;
+chat_shape:ChatSharedPreferencesShape_expandImagesInline a sh:PropertyShape ;
     sh:path solid:expandImagesInline ;
     sh:datatype xsd:boolean ;
     sh:maxCount 1 ;
@@ -233,7 +233,7 @@ chat-shape:ChatSharedPreferencesShape_expandImagesInline a sh:PropertyShape ;
     sh:description "Indicates whether images should be expanded inline in the chat UI." ;
     sh:codeIdentifier "expandImagesInline" .
 
-chat-shape:ChatSharedPreferencesShape_inlineImageHeight a sh:PropertyShape ;
+chat_shape:ChatSharedPreferencesShape_inlineImageHeight a sh:PropertyShape ;
     sh:path solid:inlineImageHeightEms ;
     sh:datatype xsd:integer ;
     sh:maxCount 1 ;
@@ -241,7 +241,7 @@ chat-shape:ChatSharedPreferencesShape_inlineImageHeight a sh:PropertyShape ;
     sh:description "Preferred height for inline images in em units." ;
     sh:codeIdentifier "inlineImageHeight" .
 
-chat-shape:ChatSharedPreferencesShape_newestFirst a sh:PropertyShape ;
+chat_shape:ChatSharedPreferencesShape_newestFirst a sh:PropertyShape ;
     sh:path solid:newestFirst ;
     sh:datatype xsd:boolean ;
     sh:maxCount 1 ;
@@ -251,7 +251,7 @@ chat-shape:ChatSharedPreferencesShape_newestFirst a sh:PropertyShape ;
 
 ##################### Chat Action Shape
 
-chat-shape:ChatActionShape a sh:NodeShape ;
+chat_shape:ChatActionShape a sh:NodeShape ;
     sh:name "Chat Action Shape" ;
     sh:description "NodeShape defining constraints for actions representing interactions or sentiments in the chat system." ;
     sh:targetClass schema:Action ;
@@ -260,24 +260,24 @@ chat-shape:ChatActionShape a sh:NodeShape ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
     prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;
     sh:codeIdentifier "ChatAction" ;
-    sh:property chat-shape:ChatActionShape_type,
-                chat-shape:ChatActionShape_agent,
-                chat-shape:ChatActionShape_target 
+    sh:property chat_shape:ChatActionShape_type,
+                chat_shape:ChatActionShape_agent,
+                chat_shape:ChatActionShape_target 
                 .
 
-chat-shape:ChatActionShape_type a sh:PropertyShape ;
+chat_shape:ChatActionShape_type a sh:PropertyShape ;
     sh:path rdf:type ;
     sh:minCount 1 ;
     sh:name "Type" ;
     sh:codeIdentifier "type" .
 
-chat-shape:ChatActionShape_agent a sh:PropertyShape ;
+chat_shape:ChatActionShape_agent a sh:PropertyShape ;
     sh:path schema:agent ;
     sh:maxCount 1 ;
     sh:name "Agent" ;
     sh:codeIdentifier "agent" .
 
-chat-shape:ChatActionShape_target a sh:PropertyShape ;
+chat_shape:ChatActionShape_target a sh:PropertyShape ;
     sh:path schema:target ;
     sh:minCount 1 ;
     sh:maxCount 1 ;

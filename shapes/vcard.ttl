@@ -5,9 +5,9 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
-@prefix vcard-shape: <https://solidproject.org/shapes/vcard#> .
+@prefix vcard_shape: <https://solidproject.org/shapes/vcard#> .
 
-vcard-shape:VCardShape
+vcard_shape:VCardShape
     a sh:NodeShape ;
     sh:targetClass vcard:VCard ;
     sh:name "vCard Shape" ;
@@ -30,7 +30,7 @@ vcard-shape:VCardShape
 
     sh:property [
         sh:path vcard:n ;
-        sh:node vcard-shape:NameShape ;
+        sh:node vcard_shape:NameShape ;
         sh:nodeKind sh:BlankNode ;
         sh:name "name";
         sh:codeIdentifier "name";
@@ -53,7 +53,7 @@ vcard-shape:VCardShape
 
     sh:property [
         sh:path vcard:hasAddress ;
-        sh:node vcard-shape:AddressShape ;
+        sh:node vcard_shape:AddressShape ;
         sh:nodeKind sh:BlankNode ;
         sh:name "address";
         sh:codeIdentifier "address";
@@ -74,7 +74,7 @@ vcard-shape:VCardShape
 # Structured Name Shape
 #################################################################
 
-vcard-shape:NameShape
+vcard_shape:NameShape
     a sh:NodeShape ;
     sh:name "vCard Name Shape" ;
     sh:description "SHACL shape representing the structured name of a vCard individual." ;
@@ -140,7 +140,7 @@ vcard-shape:NameShape
 # Address Shape
 #################################################################
 
-vcard-shape:AddressShape
+vcard_shape:AddressShape
     a sh:NodeShape ;
     sh:name "vCard Address Shape" ;
     sh:description "SHACL shape representing the address details of a vCard individual." ;

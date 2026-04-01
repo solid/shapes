@@ -7,9 +7,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix address-book-shape: <https://solidproject.org/shapes/address-book#> .
+@prefix address_book_shape: <https://solidproject.org/shapes/address_book#> .
 
-address-book-shape:AddressBookShape a sh:NodeShape ;
+address_book_shape:AddressBookShape a sh:NodeShape ;
     sh:name "AddressBook";    
     sh:targetClass vcard:AddressBook ;
     sh:description "Represents a collection of vCard people and/or vCard groups" ; 

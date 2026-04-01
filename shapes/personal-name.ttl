@@ -7,11 +7,11 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix personal-name: <https://solidproject.org/shapes/personal-name#> .
+@prefix personal_name: <https://solidproject.org/shapes/personal_name#> .
 
 
 
-personal-name:PersonalNameShape
+personal_name:PersonalNameShape
     a sh:NodeShape ;
     sh:name "Structured Personal Name Shape" ;
     sh:description "Validates components of a person's structured name in VCARD data." ;

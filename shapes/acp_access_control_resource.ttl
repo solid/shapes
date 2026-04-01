@@ -8,11 +8,11 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
-@prefix acp-access-control-shape:  <https://solidproject.org/shapes/acp-access-control#> .
-@prefix acp-access-control-resource-shape: <https://solidproject.org/shapes/acp-access-control-resource#> .
+@prefix acp_access_control_shape:  <https://solidproject.org/shapes/acp_access_control#> .
+@prefix acp_access_control_resource_shape: <https://solidproject.org/shapes/acp_access_control_resource#> .
 
 # Shape for AccessControlResource
-acp-access-control-resource-shape:AcpAccessControlResourceShape a sh:NodeShape ;
+acp_access_control_resource_shape:AcpAccessControlResourceShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/acp/AccessControlResource.ts> ;
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/AccessControlResource.ts> ; 
     sh:codeIdentifier "AccessControlResource";
@@ -23,7 +23,7 @@ acp-access-control-resource-shape:AcpAccessControlResourceShape a sh:NodeShape ;
     # accessControl: multiple AccessControl objects
     sh:property [
         sh:path acp:accessControl ;
-        sh:node acp-access-control-shape:AcpAccessControlShape ;
+        sh:node acp_access_control_shape:AcpAccessControlShape ;
         sh:codeIdentifier "accessControl";
     ] ;
 

@@ -8,11 +8,11 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix group-shape: <https://solidproject.org/shapes/group#> .
+@prefix group_shape: <https://solidproject.org/shapes/group#> .
 
-@prefix issue-tracker-shape:  <https://solidproject.org/shapes/issue-tracker#> .
+@prefix issue_tracker_shape:  <https://solidproject.org/shapes/issue_tracker#> .
 
-issue-tracker-shape:IssueTrackerShape
+issue_tracker_shape:IssueTrackerShape
     a sh:NodeShape ;
     sh:name "Issue Tracker Configuration Shape" ;
     sh:description "Defines data constraints for configuring an issue tracker including title, description, workflow states, classification systems, assignment rules, optional forms, and additional properties." ;
@@ -61,7 +61,7 @@ issue-tracker-shape:IssueTrackerShape
 
         # Nested propertyList
         [ sh:path wf:propertyList ;
-          sh:node issue-tracker-shape:PropertyListShape ;
+          sh:node issue_tracker_shape:PropertyListShape ;
           sh:name "Additional Properties" ;
           sh:description "An ordered list of additional properties to display in table views of issues.";
           sh:codeIdentifier "additionalProperties";
@@ -69,7 +69,7 @@ issue-tracker-shape:IssueTrackerShape
 
         # Nested assignee group
         [ sh:path wf:assigneeGroup ;
-          sh:node group-shape:IssueTrackerAssigneeGroupShape ;
+          sh:node group_shape:IssueTrackerAssigneeGroupShape ;
           sh:name "Assignee Group" ;
           sh:description "The contact group from which issues may be assigned to individuals.";
           sh:codeIdentifier "assigneeGroup";
@@ -81,7 +81,7 @@ issue-tracker-shape:IssueTrackerShape
 # Shape for each property in wf:propertyList
 ################################################################
 
-issue-tracker-shape:PropertyListShape
+issue_tracker_shape:PropertyListShape
     a sh:NodeShape ;
     sh:name "Property List Item Shape" ;
     sh:description "Defines constraints for each property included in the propertyList of an issue tracker." ;

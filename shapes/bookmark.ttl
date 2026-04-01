@@ -7,10 +7,10 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-@prefix bookmark-shape: <https://solidproject.org/shapes/bookmark#> .
+@prefix bookmark_shape: <https://solidproject.org/shapes/bookmark#> .
 
 
-bookmark-shape:BookmarkShape
+bookmark_shape:BookmarkShape
     a sh:NodeShape ;
     sh:targetClass bookmark:Bookmark ;
     sh:name "Bookmark" ;

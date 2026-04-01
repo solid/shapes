@@ -9,13 +9,13 @@
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-@prefix address-shape: <https://solidproject.org/shapes/address#> .
-@prefix email-shape: <https://solidproject.org/shapes/email#> .
-@prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
+@prefix address_shape: <https://solidproject.org/shapes/address#> .
+@prefix email_shape: <https://solidproject.org/shapes/email#> .
+@prefix telephone_shape: <https://solidproject.org/shapes/telephone#> .
 
-@prefix organization-shape: <https://solidproject.org/shapes/organization#> .
+@prefix organization_shape: <https://solidproject.org/shapes/organization#> .
 
-organization-shape:ContactOrganizationShape
+organization_shape:ContactOrganizationShape
     a sh:NodeShape ;
     sh:targetClass vcard:Organization ;
     sh:name "Organization Shape" ;
@@ -68,7 +68,7 @@ organization-shape:ContactOrganizationShape
     ] .
 
 
-organization-shape:ContactDetailsOrganizationShape
+organization_shape:ContactDetailsOrganizationShape
     a sh:NodeShape ;
     sh:targetClass vcard:Organization ;
     sh:name "Organization contact details Shape" ;
@@ -122,7 +122,7 @@ organization-shape:ContactDetailsOrganizationShape
         sh:path vcard:hasAddress ;
         sh:name "Address" ;
         sh:description "Address details" ;
-        sh:node address-shape:AddressShape ;
+        sh:node address_shape:AddressShape ;
         sh:codeIdentifier "hasAddress";
     ] ;
 
@@ -130,7 +130,7 @@ organization-shape:ContactDetailsOrganizationShape
         sh:path vcard:hasEmail ;
         sh:name "Email Addresses" ;
         sh:description "Email addresses." ;
-        sh:node email-shape:EmailWithTypeShape ;
+        sh:node email_shape:EmailWithTypeShape ;
         sh:codeIdentifier "hasEmailAddress";
     ] ;
 
@@ -138,7 +138,7 @@ organization-shape:ContactDetailsOrganizationShape
         sh:path vcard:hasTelephone ;
         sh:name "Telephone Numbers" ;
         sh:description "Telephone numbers associated with the organization." ;
-        sh:node telephone-shape:TelephoneShape ;
+        sh:node telephone_shape:TelephoneShape ;
         sh:codeIdentifier "hasTelephoneNumber";
     ] ;
 

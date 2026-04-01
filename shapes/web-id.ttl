@@ -8,9 +8,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix web-id-shape: <https://solidproject.org/shapes/web-id#> .
+@prefix web_id_shape: <https://solidproject.org/shapes/web_id#> .
 
-web-id-shape:WebIdShape a sh:NodeShape;
+web_id_shape:WebIdShape a sh:NodeShape;
   # A card may have any number of http[s] URLs, with property vcard:url and where the type must be given.
   # so that systems know what they can use the URL for and how to present it.
   # We add vcard:Homepage, vcard:WebId, vcard:PublicId as friendly amendment to https://www.w3.org/TR/vcard-rdf/

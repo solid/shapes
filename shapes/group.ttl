@@ -8,11 +8,11 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix person-shape: <https://solidproject.org/shapes/person#> . 
+@prefix person_shape: <https://solidproject.org/shapes/person#> . 
 
-@prefix group-shape:  <https://solidproject.org/shapes/group#> .
+@prefix group_shape:  <https://solidproject.org/shapes/group#> .
 
-group-shape:GroupShape
+group_shape:GroupShape
     a sh:NodeShape ;
     sh:name "Group Shape" ;
     sh:description "Defines constraints for a vCard Group including its name and members." ;
@@ -35,14 +35,14 @@ group-shape:GroupShape
 
     sh:property [
         sh:path vcard:member ;
-        sh:node person-shape:ContactDetailsPersonShape ;
+        sh:node person_shape:ContactDetailsPersonShape ;
         sh:name "Group Member" ;
         sh:description "A member of the group. When the WebID of an agent is known, it MUST be used as the object of this triple so that ACL systems can grant access correctly. The main local identifier in the address book must be linked indirectly using owl:sameAs via the GroupMemberLocalId shape. Additional identifiers may also be linked using owl:sameAs.";
         sh:codeIdentifier "member";
     ] 
     .
 
-group-shape:GroupMemberLocalIdShape
+group_shape:GroupMemberLocalIdShape
     a sh:NodeShape ;
     sh:name "Group Member Local Identifier Shape" ;
     sh:description "Ensures that a group member's local identifier links to exactly one vCard Individual using owl:sameAs." ;
@@ -66,7 +66,7 @@ group-shape:GroupMemberLocalIdShape
     ] 
     .
 
-group-shape:IssueTrackerAssigneeGroupShape
+group_shape:IssueTrackerAssigneeGroupShape
     a sh:NodeShape ;
     sh:name "Assignee Group Shape" ;
     sh:description "Defines constraints for the vCard Group used as an assignee group for issues." ;
@@ -88,7 +88,7 @@ group-shape:IssueTrackerAssigneeGroupShape
     ] ;
     sh:property [
         sh:path vcard:member ;
-        sh:node person-shape:IssueTrackerPersonShape ;
+        sh:node person_shape:IssueTrackerPersonShape ;
         sh:name "Group Member" ;
         sh:description "Each member of the group represented as a vCard Individual.";
         sh:codeIdentifier "member"; 

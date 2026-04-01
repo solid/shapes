@@ -9,13 +9,13 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix telephone-shape:  <https://solidproject.org/shapes/telephone#> .
-@prefix email-shape:  <https://solidproject.org/shapes/email#> .
-@prefix address-shape:  <https://solidproject.org/shapes/address#> .
+@prefix telephone_shape:  <https://solidproject.org/shapes/telephone#> .
+@prefix email_shape:  <https://solidproject.org/shapes/email#> .
+@prefix address_shape:  <https://solidproject.org/shapes/address#> .
 
-@prefix person-shape:  <https://solidproject.org/shapes/person#> .
+@prefix person_shape:  <https://solidproject.org/shapes/person#> .
 
-person-shape:ContactDetailsPersonShape a sh:NodeShape ;
+person_shape:ContactDetailsPersonShape a sh:NodeShape ;
     sh:name "Person Shape" ;
     sh:description "SHACL shape representing a person" ;
     sh:targetClass vcard:Individual ;  
@@ -53,7 +53,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:hasAddress ;
-        sh:node address-shape:AddressShape;
+        sh:node address_shape:AddressShape;
         sh:name "Address" ;
         sh:description "Address details" ;
         sh:nodeKind sh:BlankNodeOrIRI ;
@@ -62,7 +62,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:hasEmail ;
-        sh:node email-shape:EmailWithTypeShape;
+        sh:node email_shape:EmailWithTypeShape;
         sh:name "Emails" ;
         sh:description "Email addresses of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
@@ -71,7 +71,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:hasTelephone ;
-        sh:node telephone-shape:TelephoneShape ;
+        sh:node telephone_shape:TelephoneShape ;
         sh:name "Telephones" ;
         sh:description "Telephone numbers of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
@@ -97,7 +97,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
     ];
     .
 
-person-shape:IssueTrackerPersonShape
+person_shape:IssueTrackerPersonShape
     a sh:NodeShape ;
     sh:name "Person Shape" ;
     sh:description "Defines constraints for an individual person in a group." ;
@@ -151,7 +151,7 @@ person-shape:IssueTrackerPersonShape
 
 
 
-person-shape:ContactPersonShape a sh:NodeShape ;
+person_shape:ContactPersonShape a sh:NodeShape ;
     sh:name "Person Shape" ;
     sh:description "SHACL shape representing a person" ;
     sh:targetClass vcard:Individual ;  

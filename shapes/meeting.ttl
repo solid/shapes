@@ -7,9 +7,9 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix meeting-shape: <https://solidproject.org/shapes/meeting#> .
+@prefix meeting_shape: <https://solidproject.org/shapes/meeting#> .
 
-meeting-shape:MeetingShape
+meeting_shape:MeetingShape
     a sh:NodeShape ;
     sh:name "Meeting Shape" ;
     sh:description "Defines constraints for meeting instances including title, location, time, comments, and display color." ;

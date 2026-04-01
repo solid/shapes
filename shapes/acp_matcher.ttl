@@ -8,9 +8,9 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 
-@prefix acp-matcher-shape: <https://solidproject.org/shapes/acp-matcher#> .
+@prefix acp_matcher_shape: <https://solidproject.org/shapes/acp_matcher#> .
 
-acp-matcher-shape:AcpMatcherShape a sh:NodeShape ;
+acp_matcher_shape:AcpMatcherShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/acp/Matcher.ts> ; 
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/acp/Matcher.ts> ; 
     sh:codeIdentifier "AcpMatcher";

@@ -7,12 +7,12 @@
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-@prefix resource-shape: <https://solidproject.org/shapes/resource#> .
+@prefix resource_shape: <https://solidproject.org/shapes/resource#> .
 
-@prefix container-shape: <https://solidproject.org/shapes/container#> .
+@prefix container_shape: <https://solidproject.org/shapes/container#> .
 
 
-container-shape:ContainerShape a sh:NodeShape ;
+container_shape:ContainerShape a sh:NodeShape ;
     dc:source <https://github.com/solid/object/blob/main/src/solid/Container.ts> ; 
     prov:wasDerivedFrom <https://github.com/solid/object/blob/main/src/solid/Container.ts> ; 
     sh:name "Container";
@@ -22,6 +22,6 @@ container-shape:ContainerShape a sh:NodeShape ;
 
     sh:property [
         sh:path ldp:contains ;
-        sh:node resource-shape:ResourceShape ;
+        sh:node resource_shape:ResourceShape ;
         sh:codeIdentifier "contains" ;
     ] .
