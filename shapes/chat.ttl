@@ -9,9 +9,11 @@
 @prefix sioc:       <http://rdfs.org/sioc/ns#> .
 @prefix solid:      <http://www.w3.org/ns/solid/terms#> .
 @prefix terms:      <http://purl.org/dc/terms/> .
+@prefix sec:        <https://w3id.org/security#> .
 @prefix ui:         <http://www.w3.org/ns/ui#> .
 @prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema:     <https://schema.org/> .
+@prefix schema_http: <http://schema.org/> .
 @prefix dct:        <http://purl.org/dc/terms/> .
 @prefix vs:         <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix prov:       <http://www.w3.org/ns/prov#> .
@@ -125,13 +127,6 @@ chat_shape:chatmessageshape_content a sh:PropertyShape ;
     sh:name "Message Content" ;
     sh:description "The textual content of the message." ;
     sh:codeIdentifier "content" .
-
-chat_shape:chatmessageshape_relatedchatchannel a sh:PropertyShape ;
-    sh:path [ sh:inversePath flow:message ] ;
-    sh:minCount 1 ;
-    sh:name "Related Chat" ;
-    sh:description "The chat channel or conversation to which this message belongs." ;
-    sh:codeIdentifier "relatedChatChannel" .
 
 ##################### Chat Participation Shape
 
@@ -255,6 +250,9 @@ chat_shape:ChatActionShape a sh:NodeShape ;
     sh:name "Chat Action Shape" ;
     sh:description "NodeShape defining constraints for actions representing interactions or sentiments in the chat system." ;
     sh:targetClass schema:Action ;
+    sh:targetClass schema_http:Action ;
+    sh:targetSubjectsOf schema:target ;
+    sh:targetSubjectsOf schema_http:target ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl> ;  
@@ -262,7 +260,31 @@ chat_shape:ChatActionShape a sh:NodeShape ;
     sh:codeIdentifier "ChatAction" ;
     sh:property chat_shape:chatactionshape_type,
                 chat_shape:chatactionshape_agent,
-                chat_shape:chatactionshape_target 
+                chat_shape:chatactionshape_agent_http,
+                chat_shape:chatactionshape_target,
+                                chat_shape:chatactionshape_target_http ;
+        sh:or (
+                [ sh:property [
+                        sh:path schema:agent ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ;
+                    sh:property [
+                        sh:path schema:target ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ]
+                [ sh:property [
+                        sh:path schema_http:agent ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ;
+                    sh:property [
+                        sh:path schema_http:target ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ]
+        )
                 .
 
 chat_shape:chatactionshape_type a sh:PropertyShape ;
@@ -277,9 +299,259 @@ chat_shape:chatactionshape_agent a sh:PropertyShape ;
     sh:name "Agent" ;
     sh:codeIdentifier "agent" .
 
+chat_shape:chatactionshape_agent_http a sh:PropertyShape ;
+    sh:path schema_http:agent ;
+    sh:maxCount 1 ;
+    sh:name "Agent (Legacy)" ;
+    sh:description "Legacy http://schema.org/ agent predicate accepted for compatibility." ;
+    sh:codeIdentifier "agentLegacy" .
+
 chat_shape:chatactionshape_target a sh:PropertyShape ;
     sh:path schema:target ;
-    sh:minCount 1 ;
     sh:maxCount 1 ;
     sh:name "Target" ;
     sh:codeIdentifier "target" .
+
+chat_shape:chatactionshape_target_http a sh:PropertyShape ;
+    sh:path schema_http:target ;
+    sh:maxCount 1 ;
+    sh:name "Target (Legacy)" ;
+    sh:description "Legacy http://schema.org/ target predicate accepted for compatibility." ;
+    sh:codeIdentifier "targetLegacy" .
+
+##################### Long Chat Semantic Variants
+
+# These additive shapes model the current SolidOS long chat implementation
+# without changing the existing published Chat* shapes above.
+
+##################### Long Chat Channel Shape
+
+chat_shape:LongChatChannelShape a sh:NodeShape ;
+    sh:name "Long Chat Channel Shape" ;
+    sh:description "SHACL NodeShape for signed, append-only, threaded Solid Long Chat channels." ;
+    sh:targetClass mee:LongChat ;
+    dct:created "2026-04-07"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl>,
+                         <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    sh:codeIdentifier "LongChatChannel" ;
+    sh:property chat_shape:chatchannelshape_type,
+                chat_shape:chatchannelshape_author,
+                chat_shape:chatchannelshape_title,
+                chat_shape:chatchannelshape_createddate,
+                chat_shape:chatchannelshape_sharedpreferences,
+                chat_shape:chatchannelshape_participation,
+                chat_shape:longchatchannelshape_message .
+
+chat_shape:longchatchannelshape_message a sh:PropertyShape ;
+    sh:path flow:message ;
+    sh:node chat_shape:LongChatMessageShape ;
+    sh:name "Top-Level Long Chat Message" ;
+    sh:description "Top-level messages linked directly from the long chat channel." ;
+    sh:codeIdentifier "topLevelMessage" .
+
+##################### Long Chat Message Shape
+
+chat_shape:LongChatMessageShape a sh:NodeShape ;
+    sh:name "Long Chat Message Shape" ;
+    sh:description "SHACL NodeShape for signed long chat messages, including replies, replacements, and deletions. In the current implementation, proofValue signs the core message fields id, created, content, and maker, but does not directly sign replacement, thread, or deletion metadata. Both http://schema.org/ and https://schema.org/ deletion predicates are accepted for compatibility." ;
+    sh:targetObjectsOf flow:message ;
+    sh:targetObjectsOf sioc:has_member ;
+    sh:targetObjectsOf dct:isReplacedBy ;
+    dct:created "2026-04-07"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/chat-shapes.ttl>,
+                         <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    sh:codeIdentifier "LongChatMessage" ;
+    sh:property chat_shape:chatmessageshape_createddate,
+                chat_shape:chatmessageshape_author,
+                chat_shape:chatmessageshape_content,
+                chat_shape:longchatmessageshape_proofvalue,
+                chat_shape:longchatmessageshape_replythread,
+                chat_shape:longchatmessageshape_replacedby,
+                chat_shape:longchatmessageshape_datedeleted,
+                                chat_shape:longchatmessageshape_datedeleted_http .
+        # inverse-path containment constraints are intentionally omitted here because
+        # the current shacl-converter object generation only supports NamedNode sh:path values.
+
+chat_shape:longchatmessageshape_proofvalue a sh:PropertyShape ;
+    sh:path sec:proofValue ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:name "Proof Value" ;
+    sh:description "Cryptographic signature or proof for the message." ;
+    sh:codeIdentifier "proofValue" .
+
+chat_shape:longchatmessageshape_replythread a sh:PropertyShape ;
+    sh:path sioc:has_reply ;
+    sh:maxCount 1 ;
+    sh:node chat_shape:LongChatThreadShape ;
+    sh:name "Reply Thread" ;
+    sh:description "Links a thread root message to its thread resource." ;
+    sh:codeIdentifier "replyThread" .
+
+chat_shape:longchatmessageshape_replacedby a sh:PropertyShape ;
+    sh:path dct:isReplacedBy ;
+    sh:maxCount 1 ;
+    sh:node chat_shape:LongChatMessageShape ;
+    sh:name "Is Replaced By" ;
+    sh:description "Append-only link from an earlier message version to its replacement." ;
+    sh:codeIdentifier "isReplacedBy" .
+
+chat_shape:longchatmessageshape_datedeleted a sh:PropertyShape ;
+    sh:path schema:dateDeleted ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1 ;
+    sh:name "Date Deleted" ;
+    sh:description "Deletion marker carried by a replacement message representing a deleted message." ;
+    sh:codeIdentifier "dateDeleted" .
+
+chat_shape:longchatmessageshape_datedeleted_http a sh:PropertyShape ;
+    sh:path schema_http:dateDeleted ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1 ;
+    sh:name "Date Deleted (Legacy)" ;
+    sh:description "Legacy http://schema.org/ deletion marker accepted for compatibility." ;
+    sh:codeIdentifier "dateDeletedLegacy" .
+
+##################### Long Chat Replacement Shape
+
+chat_shape:AppendOnlyMessageVersionShape a sh:NodeShape ;
+    sh:name "Append-Only Message Version Shape" ;
+    sh:description "NodeShape for long chat messages that replace an earlier message version." ;
+    sh:targetSubjectsOf dct:isReplacedBy ;
+    dct:created "2026-04-07"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    sh:codeIdentifier "AppendOnlyMessageVersion" ;
+    sh:property chat_shape:longchatmessageshape_replacedby .
+
+##################### Deleted Long Chat Message Shape
+
+chat_shape:DeletedLongChatMessageShape a sh:NodeShape ;
+    sh:name "Deleted Long Chat Message Shape" ;
+    sh:description "NodeShape for replacement messages that mark a long chat message as deleted. Both http://schema.org/ and https://schema.org/ deletion predicates are accepted for compatibility." ;
+    sh:targetSubjectsOf schema:dateDeleted ;
+    sh:targetSubjectsOf schema_http:dateDeleted ;
+    dct:created "2026-04-07"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    sh:codeIdentifier "DeletedLongChatMessage" ;
+    sh:property chat_shape:longchatmessageshape_datedeleted,
+                chat_shape:longchatmessageshape_datedeleted_http .
+    # previousVersion inverse path is intentionally omitted here because
+    # the current shacl-converter object generation only supports NamedNode sh:path values.
+
+##################### Long Chat Thread Shape
+
+chat_shape:LongChatThreadShape a sh:NodeShape ;
+    sh:name "Long Chat Thread Shape" ;
+    sh:description "NodeShape for thread resources grouping long chat replies." ;
+    sh:targetObjectsOf sioc:has_reply ;
+    sh:targetSubjectsOf sioc:has_member ;
+    dct:created "2026-04-07"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    sh:codeIdentifier "LongChatThread" ;
+    sh:property chat_shape:longchatthreadshape_type,
+                chat_shape:longchatthreadshape_member .
+
+chat_shape:longchatthreadshape_type a sh:PropertyShape ;
+    sh:path rdf:type ;
+    sh:value sioc:Thread ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:name "Type" ;
+    sh:description "Specifies that the node must be of type sioc:Thread." ;
+    sh:codeIdentifier "type" .
+
+chat_shape:longchatthreadshape_member a sh:PropertyShape ;
+    sh:path sioc:has_member ;
+    sh:node chat_shape:LongChatMessageShape ;
+    sh:name "Thread Member" ;
+    sh:description "A reply message belonging to the thread." ;
+    sh:codeIdentifier "member" .
+
+##################### Long Chat Action Shape
+
+chat_shape:LongChatActionShape a sh:NodeShape ;
+    sh:name "Long Chat Action Shape" ;
+    sh:description "NodeShape defining constraints for long chat actions such as reactions or other sentiments. Both http://schema.org/ and https://schema.org/ action terms are accepted for compatibility." ;
+    sh:targetClass schema:Action ;
+    sh:targetClass schema_http:Action ;
+    sh:targetSubjectsOf schema:target ;
+    sh:targetSubjectsOf schema_http:target ;
+    dct:created "2026-04-07"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    prov:wasDerivedFrom <https://github.com/SolidOS/chat-pane/blob/main/shapes/longchat-shapes.ttl> ;
+    sh:codeIdentifier "LongChatAction" ;
+    sh:property chat_shape:longchatactionshape_type,
+                chat_shape:longchatactionshape_agent,
+                chat_shape:longchatactionshape_agent_http,
+                chat_shape:longchatactionshape_target,
+                                chat_shape:longchatactionshape_target_http ;
+        sh:or (
+                [ sh:property [
+                        sh:path schema:agent ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ;
+                    sh:property [
+                        sh:path schema:target ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ]
+                [ sh:property [
+                        sh:path schema_http:agent ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ;
+                    sh:property [
+                        sh:path schema_http:target ;
+                        sh:minCount 1 ;
+                        sh:maxCount 1 ;
+                    ] ]
+        ) .
+
+chat_shape:longchatactionshape_type a sh:PropertyShape ;
+    sh:path rdf:type ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:name "Type" ;
+    sh:description "The action class for the long chat action resource." ;
+    sh:codeIdentifier "type" .
+
+chat_shape:longchatactionshape_agent a sh:PropertyShape ;
+    sh:path schema:agent ;
+    sh:maxCount 1 ;
+    sh:name "Agent" ;
+    sh:description "The agent who performed the long chat action." ;
+    sh:codeIdentifier "agent" .
+
+chat_shape:longchatactionshape_agent_http a sh:PropertyShape ;
+    sh:path schema_http:agent ;
+    sh:maxCount 1 ;
+    sh:name "Agent (Legacy)" ;
+    sh:description "Legacy http://schema.org/ agent predicate accepted for compatibility." ;
+    sh:codeIdentifier "agentLegacy" .
+
+chat_shape:longchatactionshape_target a sh:PropertyShape ;
+    sh:path schema:target ;
+    sh:maxCount 1 ;
+    sh:name "Target" ;
+    sh:description "The long chat resource targeted by the action." ;
+    sh:codeIdentifier "target" .
+
+chat_shape:longchatactionshape_target_http a sh:PropertyShape ;
+    sh:path schema_http:target ;
+    sh:maxCount 1 ;
+    sh:name "Target (Legacy)" ;
+    sh:description "Legacy http://schema.org/ target predicate accepted for compatibility." ;
+    sh:codeIdentifier "targetLegacy" .
