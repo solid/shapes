@@ -19,6 +19,9 @@ container_shape:ContainerShape a sh:NodeShape ;
     sh:codeIdentifier "Container";
     dct:created "2026-03-18"^^xsd:date ;
     vs:term_status "testing";
+    sh:and (
+        resource_shape:ResourceShape
+    ) ;
 
     sh:property [
         sh:path ldp:contains ;
