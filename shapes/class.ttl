@@ -1,0 +1,8 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix class_shape: <https://solidproject.org/shapes/class#> .
+
+class_shape:ClassShape a sh:NodeShape ;
+  sh:targetClass rdfs:Class ;
+  sh:codeIdentifier "Class" ;
+.
