@@ -1,0 +1,15 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+
+@prefix class_shape: <https://solidproject.org/shapes/class#> .
+
+class_shape:ClassShape a sh:NodeShape ;
+  sh:targetClass rdfs:Class ;
+  sh:codeIdentifier "Class" ;
+  dct:created "2024-06-01"^^xsd:date ;
+  vs:term_status "testing" ;
+  sh:name "Class Shape" ;
+  .
