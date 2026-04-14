@@ -4,6 +4,7 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 @prefix vcard_shape: <https://solidproject.org/shapes/vcard#> .
 
@@ -209,4 +210,27 @@ vcard_shape:AddressShape
         sh:description "Country Name";
         sh:codeIdentifier "countryName";
     ] ;
+.
+
+#################################################################
+# Individual Shape
+#################################################################
+
+vcard_shape:VCardIndividualShape
+    a sh:NodeShape ;
+    sh:targetClass vcard:Individual ;
+    sh:name "vCard Individual Shape" ;
+    sh:description "An object representing a single person or entity" ;
+    dct:created "2026-04-13"^^xsd:date ;
+    vs:term_status "testing" ;
+    dct:references <https://www.w3.org/2006/vcard/ns> ;
+    prov:wasDerivedFrom <https://www.w3.org/2006/vcard/ns> ;
+    sh:description "This shape validates vCard Individual data" ;
+    sh:codeIdentifier "Individual";
+    
+    sh:and (
+        vcard_shape:VCardShape
+    )
+
+    
 .
