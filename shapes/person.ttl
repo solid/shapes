@@ -123,7 +123,7 @@ person_shape:IssueTrackerPersonShape
     sh:property [
         sh:path owl:sameAs ;
         sh:maxCount 1 ;
-        sh:class vcard:Individual ;
+        sh:nodeKind sh:IRI ;
         sh:name "Solid ID" ;
         sh:description "The Solid WebID of the person, if available.";
         sh:codeIdentifier "solidId";
