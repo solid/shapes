@@ -8,14 +8,12 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix telephone-shape: <https://solidproject.org/shapes/telephone#> .
+@prefix telephone_shape: <https://solidproject.org/shapes/telephone#> .
 
-
-
-telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
+telephone_shape:TelephoneAsIRIShape a sh:NodeShape;
   sh:targetObjectsOf vcard:hasTelephone;
-  rdfs:label "Telephone Shape (as IRI)" ;
-  rdfs:comment "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they are represented as IRIs with the appropriate 'tel:' scheme." ;
+  sh:name "Telephone Shape (as IRI)" ;
+  sh:description "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they are represented as IRIs with the appropriate 'tel:' scheme." ;
   dct:created "2026-03-12"^^xsd:date ;
   vs:term_status "testing" ;
   dc:source <https://github.com/SolidOS/contacts-pane/blob/main/shapes/contacts-shapes.ttl> ;
@@ -34,11 +32,11 @@ telephone-shape:TelephoneAsIRIShape a sh:NodeShape;
 
 
 
-telephone-shape:TelephoneShape
+telephone_shape:TelephoneShape
     a sh:NodeShape ;
     sh:targetObjectsOf vcard:hasTelephone ;
-    rdfs:label "Telephone Shape" ;
-    rdfs:comment "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;  
+    sh:name "Telephone Shape" ;
+    sh:description "SHACL shape for validating telephone numbers associated with a vCard contact, ensuring they conform to expected patterns and classifications." ;  
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/contacts-pane/blob/main/src/ontology/forms.ttl> ;
@@ -50,8 +48,8 @@ telephone-shape:TelephoneShape
         sh:path rdf:type ;
         sh:maxCount 1 ;
         sh:in ( vcard:Cell vcard:Home vcard:Work ) ;
-        rdfs:label "Phone Type" ;
-        rdfs:comment "The classification of the phone (cell, home, work)." ;
+        sh:name "Phone Type" ;
+        sh:description "The classification of the phone (cell, home, work)." ;
         sh:codeIdentifier "telephoneType";
     ] ;
 
@@ -60,8 +58,8 @@ telephone-shape:TelephoneShape
         sh:path vcard:value ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        rdfs:label "Phone Number" ;
-        rdfs:comment "The telephone number of the contact." ;
+        sh:name "Phone Number" ;
+        sh:description "The telephone number of the contact." ;
         sh:codeIdentifier "telephoneNumber";
     ] .
 

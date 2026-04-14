@@ -3,7 +3,7 @@
 check_metadata_and_immutability.py
 
 Validates SHACL shapes for:
-- Required metadata (rdfs:label, dct:created, vs:term_status)
+- Required metadata (sh:name, dct:created, vs:term_status)
 - Correct metadata formats
 - Status validity
 - Immutability rules (placeholder for future logic)
@@ -12,7 +12,7 @@ Validates SHACL shapes for:
 import sys
 import glob
 from rdflib import Graph, Namespace
-from rdflib.namespace import RDF, RDFS
+from rdflib.namespace import RDF
 
 # Namespaces
 SH = Namespace("http://www.w3.org/ns/shacl#")
@@ -49,18 +49,18 @@ def report_error(file, shape, property_name, message, value=None, expected=None)
 
 def check_shape_metadata(g, file, shape_uri):
 
-    label = g.value(shape_uri, RDFS.label)
+    label = g.value(shape_uri, SH.name)
     created = g.value(shape_uri, DCT.created)
     status = g.value(shape_uri, VS.term_status)
 
-    # rdfs:label
+    # sh:name
     if not label:
         report_error(
             file,
             shape_uri,
-            "rdfs:label",
-            "Missing required label for SHACL NodeShape.",
-            expected="Human readable label e.g. rdfs:label \"Person Shape\""
+            "sh:name",
+            "Missing required name for SHACL NodeShape.",
+            expected="Human readable name e.g. sh:name  \"Person Shape\""
         )
 
     # dct:created

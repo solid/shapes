@@ -9,15 +9,15 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
-@prefix telephone-shape:  <https://solidproject.org/shapes/telephone#> .
-@prefix email-shape:  <https://solidproject.org/shapes/email#> .
-@prefix address-shape:  <https://solidproject.org/shapes/address#> .
+@prefix telephone_shape:  <https://solidproject.org/shapes/telephone#> .
+@prefix email_shape:  <https://solidproject.org/shapes/email#> .
+@prefix address_shape:  <https://solidproject.org/shapes/address#> .
 
-@prefix person-shape:  <https://solidproject.org/shapes/person#> .
+@prefix person_shape:  <https://solidproject.org/shapes/person#> .
 
-person-shape:ContactDetailsPersonShape a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "SHACL shape representing a person" ;
+person_shape:ContactDetailsPersonShape a sh:NodeShape ;
+    sh:name "Person Shape" ;
+    sh:description "SHACL shape representing a person" ;
     sh:targetClass vcard:Individual ;  
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
@@ -27,7 +27,7 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
     
     sh:property [ 
         sh:path vcard:fn ;
-        rdfs:label "Full Name" ;
+        sh:name "Full Name" ;
         sh:datatype xsd:string; 
         sh:codeIdentifier "fullName";
         sh:maxCount 1;
@@ -35,8 +35,8 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:role ;
-        rdfs:label "Role" ;
-        rdfs:comment "The role or job title of the person." ;
+        sh:name "Role" ;
+        sh:description "The role or job title of the person." ;
         sh:datatype xsd:string;
         sh:codeIdentifier "role";
         sh:maxCount 1;
@@ -44,8 +44,8 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:organization-name ;
-        rdfs:label "Organization Name" ;
-        rdfs:comment "The organization the person belongs to.";
+        sh:name "Organization Name" ;
+        sh:description "The organization the person belongs to.";
         sh:datatype xsd:string; 
         sh:codeIdentifier "organizationName";
         sh:maxCount 1;
@@ -53,27 +53,27 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
 
     sh:property [ 
         sh:path vcard:hasAddress ;
-        sh:node address-shape:AddressShape;
-        rdfs:label "Address" ;
-        rdfs:comment "Address details" ;
+        sh:node address_shape:AddressShape;
+        sh:name "Address" ;
+        sh:description "Address details" ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:codeIdentifier "address";
     ];
 
     sh:property [ 
         sh:path vcard:hasEmail ;
-        sh:node email-shape:EmailWithTypeShape;
-        rdfs:label "Emails" ;
-        rdfs:comment "Email addresses of the contact." ;
+        sh:node email_shape:EmailWithTypeShape;
+        sh:name "Emails" ;
+        sh:description "Email addresses of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:codeIdentifier "email";
     ];
 
     sh:property [ 
         sh:path vcard:hasTelephone ;
-        sh:node telephone-shape:TelephoneShape ;
-        rdfs:label "Telephones" ;
-        rdfs:comment "Telephone numbers of the contact." ;
+        sh:node telephone_shape:TelephoneShape ;
+        sh:name "Telephones" ;
+        sh:description "Telephone numbers of the contact." ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:codeIdentifier "telephone";
     ];
@@ -82,31 +82,31 @@ person-shape:ContactDetailsPersonShape a sh:NodeShape ;
         sh:path vcard:bday ;
         sh:maxCount 1 ;
         sh:datatype xsd:date ;
-        rdfs:label "Birthday" ;
-        rdfs:comment "Date of birth" ;
+        sh:name "Birthday" ;
+        sh:description "Date of birth" ;
         sh:codeIdentifier "dateOfBirth";
     ];
 
     sh:property [ 
         sh:path vcard:note ;
         sh:maxCount 1 ;
-        rdfs:label "Notes" ;
-        rdfs:comment "General notes about the contact." ;
+        sh:name "Notes" ;
+        sh:description "General notes about the contact." ;
         sh:datatype xsd:string;
         sh:codeIdentifier "notes";
     ];
     .
 
-person-shape:IssueTrackerPersonShape
+person_shape:IssueTrackerPersonShape
     a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "Defines constraints for an individual person in a group." ;
+    sh:name "Person Shape" ;
+    sh:description "Defines constraints for an individual person in a group." ;
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     prov:wasDerivedFrom <https://github.com/SolidOS/issue-pane/blob/main/src/ontology/trackerSettingsForm.ttl> ;
     dct:referencedBy <https://solidproject.org/shapes/issue-tracker> ;
-    rdfs:comment "Person shape used in issue tracker from core:PersonForm" ;
+    sh:description "Person shape used in issue tracker from core:PersonForm" ;
     sh:codeIdentifier "IssueTrackerPerson";
 
 
@@ -114,8 +114,8 @@ person-shape:IssueTrackerPersonShape
         sh:path vcard:fn ;
         sh:minCount 1 ;
         sh:datatype xsd:string ;
-        rdfs:label "Person Name" ;
-        rdfs:comment "The human-readable name of the person.";
+        sh:name "Person Name" ;
+        sh:description "The human-readable name of the person.";
         sh:codeIdentifier "fullName";
         sh:maxCount 1;
     ] ;
@@ -123,25 +123,25 @@ person-shape:IssueTrackerPersonShape
     sh:property [
         sh:path owl:sameAs ;
         sh:maxCount 1 ;
-        sh:class vcard:Individual ;
-        rdfs:label "Solid ID" ;
-        rdfs:comment "The Solid WebID of the person, if available.";
+        sh:nodeKind sh:IRI ;
+        sh:name "Solid ID" ;
+        sh:description "The Solid WebID of the person, if available.";
         sh:codeIdentifier "solidId";
     ] ;
 
     sh:property [
         sh:path vcard:phone ;
         sh:maxCount 1 ;
-        rdfs:label "Phone" ;
-        rdfs:comment "Telephone number";
+        sh:name "Phone" ;
+        sh:description "Telephone number";
         sh:codeIdentifier "phone";
     ] ;
 
     sh:property [
         sh:path vcard:email ;
         sh:maxCount 1 ;
-        rdfs:label "Email" ;
-        rdfs:comment "Email address";
+        sh:name "Email" ;
+        sh:description "Email address";
         sh:codeIdentifier "emailAddress";
     ] ;
     
@@ -151,9 +151,9 @@ person-shape:IssueTrackerPersonShape
 
 
 
-person-shape:ContactPersonShape a sh:NodeShape ;
-    rdfs:label "Person Shape" ;
-    rdfs:comment "SHACL shape representing a person" ;
+person_shape:ContactPersonShape a sh:NodeShape ;
+    sh:name "Person Shape" ;
+    sh:description "SHACL shape representing a person" ;
     sh:targetClass vcard:Individual ;  
     dct:created "2026-03-12"^^xsd:date ;
     vs:term_status "testing" ;
@@ -172,7 +172,7 @@ person-shape:ContactPersonShape a sh:NodeShape ;
     sh:property [ 
         sh:path vcard:fn ;
         sh:pattern ".* .*" ;
-        rdfs:label "Full Name" ;
+        sh:name "Full Name" ;
         sh:datatype xsd:string; 
         sh:codeIdentifier "fullName";
         sh:minCount 1;
@@ -241,8 +241,8 @@ person-shape:ContactPersonShape a sh:NodeShape ;
         sh:path vcard:role ;
         sh:datatype xsd:string;
         sh:maxCount 1;
-        rdfs:label "Role" ;
-        rdfs:comment "The role or job title of the person." ;
+        sh:name "Role" ;
+        sh:description "The role or job title of the person." ;
         sh:codeIdentifier "role";
     ];
 
