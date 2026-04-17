@@ -33,11 +33,13 @@ jobs:
         run: |
           cp package.template.json objects/package.json
           cp README.md objects/ || true
-          cd objects
 
-          # SAFE VERSION SOURCE (release tag only)
-          npm pkg set version="${{ github.event.release.tag_name }}"
+          VERSION="${{ github.event.release.tag_name }}"
+          VERSION="${VERSION#v}"
+
+          cd objects
+          npm pkg set version="$VERSION"
 
       - name: Publish to npm
         working-directory: objects
-        run: npm publish --provenance --access public
+        run: npm publish --access public --provenance
