@@ -23,9 +23,6 @@ jobs:
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org/
 
-      - name: Install dependencies
-        run: npm ci
-
       - name: Ensure output folder exists
         run: mkdir -p objects
 
@@ -37,7 +34,9 @@ jobs:
           cp package.template.json objects/package.json
           cp README.md objects/ || true
           cd objects
-          npm pkg set version="${GITHUB_REF_NAME#v}"
+
+          # SAFE VERSION SOURCE (release tag only)
+          npm pkg set version="${{ github.event.release.tag_name }}"
 
       - name: Publish to npm
         working-directory: objects
