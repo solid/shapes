@@ -34,11 +34,30 @@ jobs:
           cp package.template.json objects/package.json
           cp README.md objects/ || true
 
-          VERSION="${{ github.event.release.tag_name }}"
-          VERSION="${VERSION#v}"
+          node <<EOF
+          const fs = require('fs');
 
-          cd objects
-          npm pkg set version="$VERSION"
+          let ref = process.env.GITHUB_REF || '';
+          let version = process.env.GITHUB_REF_NAME || '';
+
+          // fallback safety
+          if (!version && ref.startsWith('refs/tags/')) {
+            version = ref.replace('refs/tags/', '');
+          }
+
+          version = version.replace(/^v/, '');
+
+          if (!version) {
+            throw new Error('No version found from GitHub context');
+          }
+
+          const pkgPath = './objects/package.json';
+          const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+
+          pkg.version = version;
+
+          fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+          EOF
 
       - name: Publish to npm
         working-directory: objects
