@@ -1,0 +1,44 @@
+name: Generate TypeScript from SHACL
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ensure output folder exists
+        run: mkdir -p objects
+
+      - name: Generate TypeScript classes
+        run: npx @theodi/shacl-converter shapes objects
+
+      - name: Prepare npm package
+        run: |
+          cp package.template.json objects/package.json
+          cp README.md objects/ || true
+          cd objects
+          npm pkg set version="${GITHUB_REF_NAME#v}"
+
+      - name: Publish to npm
+        working-directory: objects
+        run: npm publish --provenance --access public
