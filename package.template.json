@@ -1,8 +1,35 @@
 {
   "name": "@solid-data/models",
   "version": "0.0.0",
+  "type": "module",
+
   "repository": {
     "type": "git",
     "url": "https://github.com/solid/shapes"
+  },
+
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
     }
+  },
+
+  "files": ["dist"],
+
+  "dependencies": {
+    "@rdfjs/wrapper": "0.34.0"
+  },
+
+  "devDependencies": {
+    "tsup": "^8",
+    "typescript": "^5"
+  },
+  "engines": {
+  "node": ">=24"
+}
 }
