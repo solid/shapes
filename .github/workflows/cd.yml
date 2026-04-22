@@ -34,7 +34,6 @@ jobs:
         run: |
           cp package.template.json objects/package.json
           cp tsconfig.template.json objects/tsconfig.json
-          
           cp README.md objects/ || true
 
           node <<EOF
@@ -62,23 +61,20 @@ jobs:
           fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
           EOF
 
-      - name: Install dependencies
-        working-directory: objects
-        run: npm install
-
       - name: Check generated entry exists
         run: test -f objects/index.ts
-
-      - name: Build package
-        working-directory: objects
-        run: npx tsup index.ts --format esm --dts --out-dir dist
-
-      - name: Verify build output
-        run: ls -R objects/dist
 
       - name: Verify package.json exists
         run: test -f objects/package.json
 
+      - name: Install dependencies
+        working-directory: objects
+        run: npm install
+
+      - name: Compile TypeScript
+        working-directory: objects
+        run: npx tsc
+        
       - name: Publish to npm
         working-directory: objects
         run: npm publish --access public --provenance
