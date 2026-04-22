@@ -1,14 +1,14 @@
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix a: <http://www.w3.org/2000/10/annotation-ns#> .
 @prefix bookmark: <http://www.w3.org/2002/01/bookmark#> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-
 @prefix bookmark_shape: <https://solidproject.org/shapes/bookmark#> .
-
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bookmark_shape:BookmarkShape
     a sh:NodeShape ;
@@ -26,10 +26,10 @@ bookmark_shape:BookmarkShape
 
     # Label property
     sh:property [
-        sh:path sh:name ;
+        sh:path rdfs:label ;
         sh:datatype xsd:string ;
         sh:name "Label" ;
-        sh:name "Label" ;
+        sh:maxCount 1 ;
         sh:description "Human-readable name of the bookmark" ;
         sh:codeIdentifier "label";
     ] ;
@@ -39,7 +39,8 @@ bookmark_shape:BookmarkShape
         sh:path bookmark:recalls ;
         sh:datatype xsd:anyURI ;
         sh:name "URL" ;
-        sh:name "URL" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
         sh:description "The URL that the bookmark points to" ;
         sh:codeIdentifier "url";
     ] ;
@@ -48,18 +49,196 @@ bookmark_shape:BookmarkShape
     sh:property [
         sh:path bookmark:hasTopic ;
         sh:datatype xsd:string ;
-        sh:name "Topic" ;
-        sh:name "Topic" ;
+        sh:name "Topic";
+        sh:maxCount 1 ;
         sh:description "Topic or category of the bookmark" ;
         sh:codeIdentifier "topic";
     ] ;
 
     # Description property
     sh:property [
-        sh:path sh:description ;
+        sh:path rdfs:comment ;
         sh:datatype xsd:string ;
         sh:name "Description" ;
-        sh:name "Description" ;
+        sh:maxCount 1 ;
         sh:description "Optional description of the bookmark" ;
         sh:codeIdentifier "description";
     ] .
+
+
+bookmark_shape:BookmarkAnnoteaShape
+    a sh:NodeShape ;
+    sh:targetClass bookmark:Bookmark ;
+    sh:name "Bookmark" ;
+    sh:description "A Bookmark node with label, URL, topic, description, creator, created date and last modified date" ;
+    dct:created "2026-03-12"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ;
+    prov:wasDerivedFrom <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ;
+    dct:references <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ; # references the Annotea Bookmark schema, which defines the bookmark:Bookmark class and its properties    
+    dct:references <http://www.w3.org/2002/01/bookmark#Bookmark> ; # references the bookmark:Bookmark class in the W3C Bookmark vocabulary (the Annotea Bookmark ontology)  
+    sh:description "This shape does include all properties defined for bookmark:Bookmark in the W3C Bookmark vocabulary (the Annotea Bookmark ontology)" ;
+    sh:codeIdentifier "BookmarkAnnotea";
+
+    # type property
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue bookmark:Bookmark ;
+        sh:name "Type" ;
+        sh:maxCount 1 ;
+        sh:description "The RDF type of the bookmark, which must be bookmark:Bookmark" ;
+        sh:codeIdentifier "type";
+    ] ;
+
+    # Label property
+    sh:property [
+        sh:path dc:title ;
+        sh:datatype xsd:string ;
+        sh:name "Title" ;
+        sh:maxCount 1 ;
+        sh:description "Human-readable name of the bookmark" ;
+        sh:codeIdentifier "title";
+    ] ;
+
+    # URL property
+    sh:property [
+        sh:path bookmark:recalls ;
+        sh:datatype xsd:anyURI ;
+        sh:name "Recalls" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:description "The URL that the bookmark points to" ;
+        sh:codeIdentifier "recalls";
+    ] ;
+
+    # Topic property
+    sh:property [
+        sh:path bookmark:hasTopic ;
+        sh:node bookmark_shape:BookmarkTopicShape ;
+        sh:name "hasTopic" ;
+        sh:description "Topic or category of the bookmark" ;
+        sh:codeIdentifier "hasTopic";
+    ] ;
+
+    # Description property
+    sh:property [
+        sh:path dc:description ;
+        sh:datatype xsd:string ;
+        sh:name "Description" ;
+        sh:maxCount 1 ;
+        sh:description "Optional description of the bookmark" ;
+        sh:codeIdentifier "description";
+    ] ;
+    
+    sh:property [
+        sh:path dc:creator ;
+        sh:nodeKind sh:IRI ;
+        sh:name "Creator" ;
+        sh:maxCount 1 ;
+        sh:description "The name of the creator of the bookmark" ;
+        sh:codeIdentifier "creator";
+    ] ;
+
+    sh:property [
+        sh:path a:created ;
+        sh:datatype xsd:dateTime ;
+        sh:name "Created date" ;
+        sh:maxCount 1 ;
+        sh:description "The date and time on which the bookmark was created" ;
+        sh:codeIdentifier "created";
+    ] ;
+
+    sh:property [
+        sh:path dc:date ;
+        sh:datatype xsd:dateTime ;
+        sh:name "Last modified date" ;
+        sh:maxCount 1 ;
+        sh:description "The date and time on which the bookmark was last modified" ;
+        sh:codeIdentifier "lastModified";
+    ] ;
+
+.
+
+
+bookmark_shape:BookmarkTopicShape
+    a sh:NodeShape ;
+    sh:targetClass bookmark:Topic ;
+    sh:name "Bookmark Topic" ;
+    sh:description "A Bookmark topic" ;
+    dct:created "2026-04-22"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ;
+    prov:wasDerivedFrom <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ;
+    dct:references <https://www.w3.org/2003/07/Annotea/BookmarkSchema-20030707> ; # references the Annotea Bookmark schema, which defines the bookmark:Bookmark class and its properties    
+    dct:references <http://www.w3.org/2002/01/bookmark#Topic> ; # references the bookmark:Topic class in the W3C Bookmark vocabulary (the Annotea Bookmark ontology)  
+    sh:description "Bookmark topic or category, which can be used to group bookmarks by topic" ;
+    sh:codeIdentifier "BookmarkTopic";
+
+    # type property
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue bookmark:Topic ;
+        sh:name "Type" ;
+        sh:maxCount 1 ;
+        sh:description "The RDF type of the topic, which must be bookmark:Topic" ;
+        sh:codeIdentifier "type";
+    ] ;
+
+    # Title property
+    sh:property [
+        sh:path dc:title ;
+        sh:datatype xsd:string ;
+        sh:name "Title" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:description "The title of the topic" ;
+        sh:codeIdentifier "title";
+    ] ;
+
+    # SubTopicOf property
+    sh:property [
+        sh:path bookmark:SubTopicOf ;
+        sh:targetNode bookmark_shape:BookmarkTopicShape ;
+        sh:name "SubTopic Of" ;
+        sh:description "Describes a relationship between topics." ;
+        sh:codeIdentifier "subTopicOf";
+    ] ;
+
+    # Description property
+    sh:property [
+        sh:path dc:description ;
+        sh:datatype xsd:string ;
+        sh:name "Description" ;
+        sh:maxCount 1 ;
+        sh:description "The description of or notes about the topic." ;
+        sh:codeIdentifier "description";
+    ] ;
+
+    sh:property [
+        sh:path dc:creator ;
+        sh:nodeKind sh:IRI ;
+        sh:name "Creator" ;
+        sh:maxCount 1 ;
+        sh:description "The name of the creator of the bookmark" ;
+        sh:codeIdentifier "creator";
+    ] ;
+
+    sh:property [
+        sh:path a:created ;
+        sh:datatype xsd:dateTime ;
+        sh:name "Created date" ;
+        sh:maxCount 1 ;
+        sh:description "The date and time on which the bookmark was created" ;
+        sh:codeIdentifier "created";
+    ] ;
+
+    sh:property [
+        sh:path dc:date ;
+        sh:datatype xsd:dateTime ;
+        sh:name "Last modified date" ;
+        sh:maxCount 1 ;
+        sh:description "The date and time on which the bookmark was last modified" ;
+        sh:codeIdentifier "lastModified";
+    ] ;
+
+     .
