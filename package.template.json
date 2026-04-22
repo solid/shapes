@@ -1,35 +1,39 @@
 {
   "name": "@solid-data/models",
   "version": "0.0.0",
+  "description": "RDF mapping classes for Solid",
   "type": "module",
-
   "repository": {
     "type": "git",
-    "url": "https://github.com/solid/shapes"
+    "url": "git+https://github.com/solid/shapes.git"
   },
-
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.mts"
-    }
+    ".": "./dist/index.js"
   },
-
-  "files": ["dist"],
-
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@rdfjs/wrapper": "0.34.0"
   },
-
   "devDependencies": {
-    "tsup": "^8",
+     "@types/node": "^20",
     "typescript": "^5"
   },
   "engines": {
-  "node": ">=24"
-}
+    "node": ">=24"
+  },
+  "contributors": [
+    "Tanya Gray (https://github.com/tgra)",
+    "Jesse Wright (https://github.com/jeswr)"
+  ],
+  "keywords": [
+    "solid",
+    "rdf",
+    "rdfjs-wrapper",
+    "shacl"
+  ],
+  "license": "MIT"
 }
