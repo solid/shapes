@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0  # needed to compare with origin/main
 
@@ -28,9 +28,11 @@ jobs:
       - name: Determine changed TTL files
         id: changes
         run: |
-          git fetch origin main
-          # Get list of changed TTL files in PR
-          changed_files=$(git diff --name-only origin/main...HEAD -- 'shapes/**/*.ttl' || true)
+          git fetch origin main:main || true
+          BASE=$(git merge-base HEAD main || echo "main")
+
+          changed_files=$(git diff --name-only "$BASE"...HEAD | grep '^shapes/.*\.ttl$' || true)
+
           echo "Changed TTL files:"
           echo "$changed_files"
           # Output to GitHub Actions
@@ -47,7 +49,7 @@ jobs:
           for file in ${{ steps.changes.outputs.changed_files }}; do
             echo "───────────────────────────────"
             echo "Validating $file..."
-            python shapes/scripts/validate-shacl-shapes-file.py "$file" || ok=false
+            python scripts/validate-shacl-shapes-file.py "$file" || ok=false
           done
           $ok || exit 1
 
