@@ -12,7 +12,7 @@ health_measurement_shape:HealthMeasurementShape
     a sh:NodeShape ;
     sh:targetClass schema:Observation ;
     sh:name "Health Measurement Shape" ;
-    sh:description "SHACL shape for a single health or fitness measurement modelled as a Schema.org Observation. Covers the common cases an Apple Health, Google Fit, or Strava export emits — heart rate, steps, sleep duration, body weight, distance, exercise duration, and energy burned." ;
+    sh:description "SHACL shape for a single health or fitness measurement modelled as a Schema.org Observation. The intended representation for the common cases consumer health and fitness exports (Apple Health, Google Fit, Strava) describe — heart rate, steps, sleep duration, body weight, distance, exercise duration, and energy burned. Note: schema:Observation and the schema:observation* properties currently sit in the pending area of Schema.org (https://pending.schema.org/); native exporters typically emit proprietary formats and an importer is expected to map them to this shape." ;
     dct:created "2026-04-23"^^xsd:date ;
     vs:term_status "testing" ;
     dc:source <https://schema.org/Observation> ;
@@ -40,14 +40,11 @@ health_measurement_shape:HealthMeasurementShape
         sh:codeIdentifier "value";
     ] ;
 
-    # Unit of measurement. UN/CEFACT Common Code (3 characters) or any URL
-    # (e.g. a QUDT unit IRI). Per Schema.org, schema:unitCode permits both.
+    # Unit of measurement. Per Schema.org, schema:unitCode is Text or URL,
+    # so accept any IRI or literal (including language-tagged strings).
     sh:property [
         sh:path schema:unitCode ;
-        sh:or (
-            [ sh:datatype xsd:string ]
-            [ sh:nodeKind sh:IRI ]
-        ) ;
+        sh:nodeKind sh:IRIOrLiteral ;
         sh:maxCount 1 ;
         sh:name "Unit Code" ;
         sh:description "Unit of measurement, given as a UN/CEFACT Common Code 3-character string (e.g. \"BPM\" for beats per minute, \"KGM\" for kilograms, \"KMT\" for kilometres) or a URL such as a QUDT unit IRI." ;
@@ -107,10 +104,7 @@ health_measurement_shape:HealthMeasurementShape
     # enumeration value) or a literal label.
     sh:property [
         sh:path schema:measurementMethod ;
-        sh:or (
-            [ sh:nodeKind sh:IRI ]
-            [ sh:nodeKind sh:Literal ]
-        ) ;
+        sh:nodeKind sh:IRIOrLiteral ;
         sh:maxCount 1 ;
         sh:name "Measurement Method" ;
         sh:description "Method or device used to capture the measurement (Schema.org schema:measurementMethod). May be an IRI to a device or enumeration value, or a literal label." ;
