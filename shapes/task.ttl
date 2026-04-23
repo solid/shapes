@@ -2,8 +2,6 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -107,7 +105,7 @@ task_shape:TaskShape
         sh:maxInclusive 100 ;
         sh:maxCount 1 ;
         sh:name "Percent Complete" ;
-        sh:description "Percentage completion of the task as an integer 0-100 (RFC 5545 PERCENT-COMPLETE)." ;
+        sh:description "Percentage completion of the task as an integer 0-100 (RFC 5545 PERCENT-COMPLETE). Per RFC 5545 §3.8.1.11, this property is most meaningful when status is IN-PROCESS, and conventionally 0 when NEEDS-ACTION and 100 when COMPLETED. The shape does not enforce that cross-field relationship." ;
         sh:codeIdentifier "percentComplete";
     ] ;
 
