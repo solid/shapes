@@ -33,12 +33,16 @@ annotation_shape:AnnotationShape
     ] ;
 
     # Inline textual body (for simple comment / note cases).
+    # Per the Web Annotation Data Model (§3.2.4), an annotation SHOULD NOT
+    # have both oa:bodyValue and oa:hasBody. This shape does not enforce
+    # the exclusion (favouring interoperability) but consumers SHOULD
+    # populate only one of the two.
     sh:property [
         sh:path oa:bodyValue ;
         sh:datatype xsd:string ;
         sh:maxCount 1 ;
         sh:name "Body Value" ;
-        sh:description "Textual content of the annotation body, used for plain-text comments or notes (Web Annotation Vocabulary, oa:bodyValue)." ;
+        sh:description "Textual content of the annotation body, used for plain-text comments or notes (Web Annotation Vocabulary, oa:bodyValue). SHOULD NOT be combined with oa:hasBody on the same annotation." ;
         sh:codeIdentifier "bodyValue";
     ] ;
 
@@ -47,7 +51,7 @@ annotation_shape:AnnotationShape
         sh:path oa:hasBody ;
         sh:nodeKind sh:BlankNodeOrIRI ;
         sh:name "Body" ;
-        sh:description "A resource that provides the content of the annotation (Web Annotation Vocabulary, oa:hasBody). May be repeated when an annotation has multiple bodies." ;
+        sh:description "A resource that provides the content of the annotation (Web Annotation Vocabulary, oa:hasBody). May be repeated when an annotation has multiple bodies. SHOULD NOT be combined with oa:bodyValue on the same annotation." ;
         sh:codeIdentifier "hasBody";
     ] ;
 
@@ -76,13 +80,13 @@ annotation_shape:AnnotationShape
 
     # Creator. Permits a WebID IRI or an embedded agent description, matching
     # the Web Annotation Data Model which allows the creator to be referenced
-    # or described inline.
+    # or described inline. Cardinality is left open as the data model permits
+    # multiple creators (co-creation).
     sh:property [
         sh:path dct:creator ;
         sh:nodeKind sh:BlankNodeOrIRI ;
-        sh:maxCount 1 ;
         sh:name "Creator" ;
-        sh:description "The agent that created the annotation. Typically a WebID IRI in Solid, but the Web Annotation Data Model also permits an embedded agent description." ;
+        sh:description "The agent that created the annotation. Typically a WebID IRI in Solid, but the Web Annotation Data Model also permits an embedded agent description and multiple creators." ;
         sh:codeIdentifier "creator";
     ] ;
 
