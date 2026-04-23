@@ -1,0 +1,106 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix annotation_shape: <https://solidproject.org/shapes/annotation#> .
+
+annotation_shape:AnnotationShape
+    a sh:NodeShape ;
+    sh:targetClass oa:Annotation ;
+    sh:name "Annotation Shape" ;
+    sh:description "SHACL shape describing a Web Annotation covering common note, bookmark, comment, and highlight cases." ;
+    dct:created "2026-04-23"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://www.w3.org/TR/annotation-vocab/> ;
+    prov:wasDerivedFrom <https://www.w3.org/TR/annotation-vocab/> ;
+    dct:references <http://www.w3.org/ns/oa#Annotation> ; # references the oa:Annotation class from the W3C Web Annotation Vocabulary, which is the expected type of an annotation node, together with the oa:hasBody, oa:hasTarget, oa:bodyValue, and oa:motivatedBy properties used to relate an annotation to its body, target, textual body content, and motivation respectively.
+    dct:references <https://www.w3.org/TR/annotation-model/> ; # references the W3C Web Annotation Data Model recommendation which defines the conceptual model used by the Web Annotation Vocabulary.
+    sh:codeIdentifier "Annotation";
+
+    # Type: an annotation should be typed as oa:Annotation.
+    sh:property [
+        sh:path rdf:type ;
+        sh:hasValue oa:Annotation ;
+        sh:name "Type" ;
+        sh:description "The RDF type of the annotation, which must include oa:Annotation." ;
+        sh:codeIdentifier "type";
+    ] ;
+
+    # Inline textual body (for simple comment / note cases).
+    sh:property [
+        sh:path oa:bodyValue ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Body Value" ;
+        sh:description "Textual content of the annotation body, used for plain-text comments or notes (Web Annotation Vocabulary, oa:bodyValue)." ;
+        sh:codeIdentifier "bodyValue";
+    ] ;
+
+    # External or embedded body resource(s) (for richer body cases).
+    sh:property [
+        sh:path oa:hasBody ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:name "Body" ;
+        sh:description "A resource that provides the content of the annotation (Web Annotation Vocabulary, oa:hasBody). May be repeated when an annotation has multiple bodies." ;
+        sh:codeIdentifier "hasBody";
+    ] ;
+
+    # Target(s) the annotation is about. Required for an annotation to be meaningful.
+    sh:property [
+        sh:path oa:hasTarget ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:minCount 1 ;
+        sh:name "Target" ;
+        sh:description "The resource (or specific resource) that the annotation is about (Web Annotation Vocabulary, oa:hasTarget)." ;
+        sh:codeIdentifier "hasTarget";
+    ] ;
+
+    # Motivation. Constrained to the common note / bookmark / highlight / comment values.
+    sh:property [
+        sh:path oa:motivatedBy ;
+        sh:nodeKind sh:IRI ;
+        sh:in (
+            oa:bookmarking
+            oa:commenting
+            oa:highlighting
+        ) ;
+        sh:name "Motivation" ;
+        sh:description "Why the annotation was created. Limited here to the common note-taking subset: bookmarking, commenting, and highlighting (Web Annotation Vocabulary, oa:Motivation)." ;
+        sh:codeIdentifier "motivatedBy";
+    ] ;
+
+    # Creator (typically a WebID for Solid use).
+    sh:property [
+        sh:path dct:creator ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+        sh:name "Creator" ;
+        sh:description "The agent that created the annotation, typically referenced as a WebID." ;
+        sh:codeIdentifier "creator";
+    ] ;
+
+    # Created date.
+    sh:property [
+        sh:path dct:created ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+        sh:name "Created" ;
+        sh:description "The date and time at which the annotation was created." ;
+        sh:codeIdentifier "created";
+    ] ;
+
+    # Last modified date.
+    sh:property [
+        sh:path dct:modified ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+        sh:name "Modified" ;
+        sh:description "The date and time at which the annotation was last modified." ;
+        sh:codeIdentifier "modified";
+    ] .
