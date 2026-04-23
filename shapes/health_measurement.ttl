@@ -1,0 +1,99 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix health_measurement_shape: <https://solidproject.org/shapes/health_measurement#> .
+
+health_measurement_shape:HealthMeasurementShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Observation ;
+    sh:name "Health Measurement Shape" ;
+    sh:description "SHACL shape for a single health or fitness measurement modelled as a Schema.org Observation. Covers the common cases an Apple Health, Google Fit, or Strava export emits — heart rate, steps, sleep duration, body weight, distance, exercise duration, and energy burned." ;
+    dct:created "2026-04-23"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://schema.org/Observation> ;
+    prov:wasDerivedFrom <https://schema.org/Observation> ;
+    dct:references <https://schema.org/Observation> ; # references the schema:Observation class (currently in https://pending.schema.org/) which the Schema.org Health-Lifesci extension and broader Schema.org community use to describe a single point measurement, together with schema:value, schema:unitCode, schema:observationDate, schema:observationAbout, and schema:measuredProperty.
+    dct:references <https://health-lifesci.schema.org/> ; # references the Schema.org Health-Lifesci hosted extension which defines health-specific vocabulary (e.g. schema:ExerciseAction usage, body-weight terms) reused alongside the core Observation pattern.
+    dct:references <https://www.hl7.org/fhir/observation.html> ; # references HL7 FHIR Observation as a heavier-duty alternative model used by clinical systems; this shape does not depend on FHIR but acknowledges the conceptual mapping.
+    sh:codeIdentifier "HealthMeasurement";
+
+    # Numeric value of the measurement.
+    sh:property [
+        sh:path schema:value ;
+        sh:datatype xsd:decimal ;
+        sh:maxCount 1 ;
+        sh:name "Value" ;
+        sh:description "Numeric value of the measurement (e.g., 72 for a heart-rate reading, 8500 for a step count, 5.2 for a kilometre distance)." ;
+        sh:codeIdentifier "value";
+    ] ;
+
+    # Unit of measurement. UN/CEFACT Common Code (3 characters) or any URL
+    # (e.g. a QUDT unit IRI). Per Schema.org, schema:unitCode permits both.
+    sh:property [
+        sh:path schema:unitCode ;
+        sh:or (
+            [ sh:datatype xsd:string ]
+            [ sh:nodeKind sh:IRI ]
+        ) ;
+        sh:maxCount 1 ;
+        sh:name "Unit Code" ;
+        sh:description "Unit of measurement, given as a UN/CEFACT Common Code 3-character string (e.g. \"BPM\" for beats per minute, \"KGM\" for kilograms, \"KMT\" for kilometres) or a URL such as a QUDT unit IRI." ;
+        sh:codeIdentifier "unitCode";
+    ] ;
+
+    # Optional human-readable unit text (Schema.org provides schema:unitText).
+    sh:property [
+        sh:path schema:unitText ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Unit Text" ;
+        sh:description "Optional human-readable string for the unit of measurement, used when no UN/CEFACT or URL code is available (e.g. \"steps\", \"hours\")." ;
+        sh:codeIdentifier "unitText";
+    ] ;
+
+    # Date and time at which the observation was made.
+    sh:property [
+        sh:path schema:observationDate ;
+        sh:datatype xsd:dateTime ;
+        sh:maxCount 1 ;
+        sh:name "Observation Date" ;
+        sh:description "Date and time at which the measurement was taken (Schema.org schema:observationDate)." ;
+        sh:codeIdentifier "observationDate";
+    ] ;
+
+    # The entity the observation is about. For self-reported health and
+    # fitness data this is the user's WebID.
+    sh:property [
+        sh:path schema:observationAbout ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+        sh:name "Observation About" ;
+        sh:description "The entity the observation is about. For personal health and fitness data this is typically the user's WebID (Schema.org schema:observationAbout)." ;
+        sh:codeIdentifier "observationAbout";
+    ] ;
+
+    # What property is being measured. Left open to any IRI so that apps can
+    # use either Schema.org properties (e.g. schema:weight) or vocabulary from
+    # other systems (HL7 FHIR, LOINC, QUDT, Wikidata, Data Commons).
+    sh:property [
+        sh:path schema:measuredProperty ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+        sh:name "Measured Property" ;
+        sh:description "The property being measured, identified by IRI. Apps may use Schema.org properties (e.g. schema:weight), Health-Lifesci terms, or external vocabularies such as HL7 FHIR, LOINC, or QUDT (Schema.org schema:measuredProperty)." ;
+        sh:codeIdentifier "measuredProperty";
+    ] ;
+
+    # Optional method/device used to capture the measurement (e.g. a smart
+    # watch, a manual entry, an exercise activity).
+    sh:property [
+        sh:path schema:measurementMethod ;
+        sh:name "Measurement Method" ;
+        sh:description "Method or device used to capture the measurement (Schema.org schema:measurementMethod). Free-form: may be an IRI to a device, an enumeration value, or a literal label." ;
+        sh:codeIdentifier "measurementMethod";
+    ] .
