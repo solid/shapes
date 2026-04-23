@@ -1,0 +1,120 @@
+@prefix cal: <http://www.w3.org/2002/12/cal/ical#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix task_shape: <https://solidproject.org/shapes/task#> .
+
+task_shape:TaskShape
+    a sh:NodeShape ;
+    sh:targetClass cal:Vtodo ;
+    sh:name "Task Shape" ;
+    sh:description "SHACL shape for a TODO/task item, based on RFC 5545 iCalendar VTODO as exposed in the W3C iCalendar in RDF vocabulary." ;
+    dct:created "2026-04-23"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://www.w3.org/2002/12/cal/ical> ;
+    prov:wasDerivedFrom <https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.2> ;
+    dct:references <http://www.w3.org/2002/12/cal/ical#Vtodo> ; # references the cal:Vtodo class from the W3C iCalendar in RDF vocabulary, together with the cal:summary, cal:description, cal:dtstart, cal:due, cal:status, cal:priority, cal:percentComplete, and cal:categories properties used to model a task or TODO item.
+    dct:references <https://datatracker.ietf.org/doc/html/rfc5545#section-3.6.2> ; # references RFC 5545 §3.6.2 (VTODO Calendar Component) which defines the iCalendar TODO component that the W3C iCalendar in RDF vocabulary mirrors.
+    sh:codeIdentifier "Task";
+
+    # Short title for the task.
+    sh:property [
+        sh:path cal:summary ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Title" ;
+        sh:description "Short summary or title of the task (RFC 5545 SUMMARY)." ;
+        sh:codeIdentifier "summary";
+    ] ;
+
+    # Longer description.
+    sh:property [
+        sh:path cal:description ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:name "Description" ;
+        sh:description "Longer textual description of the task (RFC 5545 DESCRIPTION)." ;
+        sh:codeIdentifier "description";
+    ] ;
+
+    # Start date or date-time.
+    sh:property [
+        sh:path cal:dtstart ;
+        sh:or (
+            [ sh:datatype xsd:date ]
+            [ sh:datatype xsd:dateTime ]
+        ) ;
+        sh:maxCount 1 ;
+        sh:name "Start" ;
+        sh:description "Date or date-time at which work on the task begins (RFC 5545 DTSTART)." ;
+        sh:codeIdentifier "start";
+    ] ;
+
+    # Due date or date-time.
+    sh:property [
+        sh:path cal:due ;
+        sh:or (
+            [ sh:datatype xsd:date ]
+            [ sh:datatype xsd:dateTime ]
+        ) ;
+        sh:maxCount 1 ;
+        sh:name "Due" ;
+        sh:description "Date or date-time by which the task is due to be completed (RFC 5545 DUE)." ;
+        sh:codeIdentifier "due";
+    ] ;
+
+    # Status. RFC 5545 §3.8.1.11 defines the VTODO status values as
+    # NEEDS-ACTION, IN-PROCESS, COMPLETED, and CANCELLED.
+    sh:property [
+        sh:path cal:status ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:in (
+            "NEEDS-ACTION"
+            "IN-PROCESS"
+            "COMPLETED"
+            "CANCELLED"
+        ) ;
+        sh:name "Status" ;
+        sh:description "Overall status of the task (RFC 5545 STATUS for VTODO): NEEDS-ACTION, IN-PROCESS, COMPLETED, or CANCELLED." ;
+        sh:codeIdentifier "status";
+    ] ;
+
+    # Priority. RFC 5545 §3.8.1.9 defines an integer 0-9 (0 = undefined,
+    # 1 = highest, 9 = lowest).
+    sh:property [
+        sh:path cal:priority ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 9 ;
+        sh:maxCount 1 ;
+        sh:name "Priority" ;
+        sh:description "Relative priority of the task (RFC 5545 PRIORITY): integer 0-9 where 0 is undefined, 1 is highest and 9 is lowest." ;
+        sh:codeIdentifier "priority";
+    ] ;
+
+    # Percent complete (0-100).
+    sh:property [
+        sh:path cal:percentComplete ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:maxCount 1 ;
+        sh:name "Percent Complete" ;
+        sh:description "Percentage completion of the task as an integer 0-100 (RFC 5545 PERCENT-COMPLETE). Per RFC 5545 §3.8.1.11, this property is most meaningful when status is IN-PROCESS, and conventionally 0 when NEEDS-ACTION and 100 when COMPLETED. The shape does not enforce that cross-field relationship." ;
+        sh:codeIdentifier "percentComplete";
+    ] ;
+
+    # Categories. RFC 5545 allows a comma-separated TEXT list; in RDF this is
+    # commonly serialised as one literal per cal:categories triple.
+    sh:property [
+        sh:path cal:categories ;
+        sh:datatype xsd:string ;
+        sh:name "Categories" ;
+        sh:description "Categories or tags assigned to the task (RFC 5545 CATEGORIES). May be repeated to assign multiple categories." ;
+        sh:codeIdentifier "categories";
+    ] .
