@@ -22,13 +22,21 @@ health_measurement_shape:HealthMeasurementShape
     dct:references <https://www.hl7.org/fhir/observation.html> ; # references HL7 FHIR Observation as a heavier-duty alternative model used by clinical systems; this shape does not depend on FHIR but acknowledges the conceptual mapping.
     sh:codeIdentifier "HealthMeasurement";
 
-    # Numeric value of the measurement.
+    # Numeric value of the measurement. Accepts the common XSD numeric
+    # datatypes since SHACL sh:datatype matches exactly (no XSD subtype
+    # widening), and exporters emit any of decimal, integer, double, or
+    # float depending on the metric.
     sh:property [
         sh:path schema:value ;
-        sh:datatype xsd:decimal ;
+        sh:or (
+            [ sh:datatype xsd:decimal ]
+            [ sh:datatype xsd:integer ]
+            [ sh:datatype xsd:double ]
+            [ sh:datatype xsd:float ]
+        ) ;
         sh:maxCount 1 ;
         sh:name "Value" ;
-        sh:description "Numeric value of the measurement (e.g., 72 for a heart-rate reading, 8500 for a step count, 5.2 for a kilometre distance)." ;
+        sh:description "Numeric value of the measurement (e.g., 72 for a heart-rate reading, 8500 for a step count, 5.2 for a kilometre distance). May be xsd:decimal, xsd:integer, xsd:double, or xsd:float." ;
         sh:codeIdentifier "value";
     ] ;
 
@@ -56,13 +64,18 @@ health_measurement_shape:HealthMeasurementShape
         sh:codeIdentifier "unitText";
     ] ;
 
-    # Date and time at which the observation was made.
+    # Date or date-time at which the observation was made. Schema.org's
+    # observationDate range is Date or DateTime; daily metrics (e.g. weight,
+    # daily step total) are typically stored at date granularity.
     sh:property [
         sh:path schema:observationDate ;
-        sh:datatype xsd:dateTime ;
+        sh:or (
+            [ sh:datatype xsd:dateTime ]
+            [ sh:datatype xsd:date ]
+        ) ;
         sh:maxCount 1 ;
         sh:name "Observation Date" ;
-        sh:description "Date and time at which the measurement was taken (Schema.org schema:observationDate)." ;
+        sh:description "Date or date-time at which the measurement was taken (Schema.org schema:observationDate). Use xsd:dateTime for instantaneous readings (heart rate, exercise samples) and xsd:date for daily aggregates." ;
         sh:codeIdentifier "observationDate";
     ] ;
 
@@ -90,10 +103,16 @@ health_measurement_shape:HealthMeasurementShape
     ] ;
 
     # Optional method/device used to capture the measurement (e.g. a smart
-    # watch, a manual entry, an exercise activity).
+    # watch, a manual entry, an exercise activity). May be an IRI (device or
+    # enumeration value) or a literal label.
     sh:property [
         sh:path schema:measurementMethod ;
+        sh:or (
+            [ sh:nodeKind sh:IRI ]
+            [ sh:nodeKind sh:Literal ]
+        ) ;
+        sh:maxCount 1 ;
         sh:name "Measurement Method" ;
-        sh:description "Method or device used to capture the measurement (Schema.org schema:measurementMethod). Free-form: may be an IRI to a device, an enumeration value, or a literal label." ;
+        sh:description "Method or device used to capture the measurement (Schema.org schema:measurementMethod). May be an IRI to a device or enumeration value, or a literal label." ;
         sh:codeIdentifier "measurementMethod";
     ] .
