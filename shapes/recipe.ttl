@@ -1,4 +1,3 @@
-@prefix : <http://example.com/shapes#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -6,8 +5,9 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix recipe_shape: <https://solidproject.org/shapes/recipe#> .
 
-:RecipeShape
+recipe_shape:RecipeShape
     a sh:NodeShape ;
     sh:targetClass schema:Recipe ;
     sh:name "Recipe" ;
@@ -163,7 +163,7 @@
 
     sh:property [
         sh:path schema:recipeInstructions ;
-        sh:node :HowToStepShape ;
+        sh:node recipe_shape:HowToStepShape ;
         sh:name "Instructions" ;
         sh:description "Preparation instructions for the recipe" ;
         sh:codeIdentifier "recipeInstructions" ;
@@ -188,13 +188,13 @@
 
     sh:property [
         sh:path schema:nutrition ;
-        sh:node :NutritionInformationShape ;
+        sh:node recipe_shape:NutritionInformationShape ;
         sh:name "Nutrition" ;
         sh:description "Nutritional information for the recipe" ;
         sh:codeIdentifier "nutrition" ;
     ] .
 
-:HowToStepShape
+recipe_shape:HowToStepShape
     a sh:NodeShape ;
     sh:name "How To Step" ;
     sh:description "Single instructional step in a recipe" ;
@@ -235,7 +235,7 @@
         sh:codeIdentifier "url" ;
     ] .
 
-:NutritionInformationShape
+recipe_shape:NutritionInformationShape
     a sh:NodeShape ;
     sh:name "Nutrition Information" ;
     sh:description "Nutritional values associated with a recipe" ;
