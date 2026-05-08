@@ -199,6 +199,8 @@ recipe_shape:HowToStepShape
     sh:name "How To Step" ;
     sh:description "Single instructional step in a recipe" ;
     sh:codeIdentifier "HowToStep" ;
+    dct:created "2026-05-08"^^xsd:date ;
+    vs:term_status "testing" ;
 
     sh:property [
         sh:path schema:position ;
@@ -240,6 +242,8 @@ recipe_shape:NutritionInformationShape
     sh:name "Nutrition Information" ;
     sh:description "Nutritional values associated with a recipe" ;
     sh:codeIdentifier "NutritionInformation" ;
+    dct:created "2026-05-08"^^xsd:date ;
+    vs:term_status "testing" ;
 
     sh:property [
         sh:path schema:calories ;
