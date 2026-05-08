@@ -20,8 +20,7 @@ When contributing:
 ## Pull Request Process
 
 * Create branch 
-* Ensure the shape validates before opening a PR
-    * [validation scripts](./scripts) are available 
+* Ensure the shape validates before opening a PR — run `npm test` locally (see [Validation](#validation) below)
 * Open a PR and complete the questions in the PR template provided
 * Respond to review feedback and iterate as needed
 
@@ -62,7 +61,7 @@ address-shape:AddressMinimalShape
 
 
 
-Shape names should use PascalCase abd end with `Shape`, e.g.:
+Shape names should use PascalCase and end with `Shape`, e.g.:
 
 ```
 address-shape:AddressShape
@@ -70,6 +69,24 @@ address-shape:AddressShape
 
 
 
+
+## Validation
+
+Run validation locally before opening a PR:
+
+```bash
+npm install
+npm test
+```
+
+This checks all shapes in the `shapes/` directory for:
+
+- **Turtle syntax** — the file parses as valid RDF
+- **Required metadata** — each `sh:NodeShape` must have `sh:name`, `dct:created` (ISO 8601 date), and `vs:term_status` (one of `unstable`, `testing`, `stable`, `archaic`)
+- **Namespace conventions** — shape URIs must use `https://solidproject.org/shapes/` and end with `Shape` in PascalCase
+- **Prefix conventions** — prefix labels must be lowercase and contain only `[a-z0-9-_]`
+
+The same checks run automatically in CI on every PR and push to `main`.
 
 ## Validation Rules
 A goal of solid/shapes is to support interoperability in the Solid ecosystem, and with this in mind, it is recommended that shapes should have constraints that maximise their potential reuse. 

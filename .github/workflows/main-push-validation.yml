@@ -6,39 +6,29 @@ on:
       - main
     paths:
       - 'shapes/**/*.ttl'
-  workflow_dispatch:  # allows manual triggering
+  workflow_dispatch:
 
 jobs:
-  main-push-validation:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0  # needed to compare with origin/main
 
       - name: Skip validation for Dependabot
         if: github.actor == 'dependabot[bot]'
         run: echo "Skipping SHACL validation for Dependabot PR"
 
-      - name: Set up Python
+      - name: Setup Node.js
         if: github.actor != 'dependabot[bot]'
-        uses: actions/setup-python@v5
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.11'
+          node-version-file: .nvmrc
 
       - name: Install dependencies
         if: github.actor != 'dependabot[bot]'
-        run: pip install pyshacl rdflib rich
+        run: npm install
 
-      - name: Validate all TTL files
+      - name: Run tests
         if: github.actor != 'dependabot[bot]'
-        run: bash scripts/validate-shacl-shapes-dir.sh
-
-      - name: Metadata & immutability checks
-        if: github.actor != 'dependabot[bot]'
-        run: python scripts/check-metadata-and-immutability-dir.py
-
-      - name: Namespace & naming checks
-        if: github.actor != 'dependabot[bot]'
-        run: python scripts/check-namespaces-and-names-dir.py
+        run: npm test

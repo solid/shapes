@@ -1,0 +1,11 @@
+{
+  "description": "SHACL shapes for Solid",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "n3": "^1.23.1"
+  },
+  "license": "MIT"
+}
