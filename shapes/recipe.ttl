@@ -1,0 +1,302 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix recipe_shape: <https://solidproject.org/shapes/recipe#> .
+
+recipe_shape:RecipeShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Recipe ;
+    sh:name "Recipe" ;
+    sh:description "A Schema.org Recipe with ingredients, instructions, timing, nutrition, and metadata" ;
+    sh:codeIdentifier "Recipe" ;
+    dct:created "2026-05-08"^^xsd:date ;
+    vs:term_status "testing" ;
+    dc:source <https://schema.org/Recipe> ;
+    prov:wasDerivedFrom <https://schema.org/Recipe> ;
+
+    sh:property [
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:name "Name" ;
+        sh:description "Human-readable title of the recipe" ;
+        sh:codeIdentifier "name" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:description ;
+        sh:datatype xsd:string ;
+        sh:name "Description" ;
+        sh:description "Short summary describing the recipe" ;
+        sh:codeIdentifier "description" ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:image ;
+        sh:nodeKind sh:IRI ;
+        sh:name "Image" ;
+        sh:description "Image representing the recipe" ;
+        sh:codeIdentifier "image" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:url ;
+        sh:nodeKind sh:IRI ;
+        sh:name "URL" ;
+        sh:description "Canonical URL for the recipe" ;
+        sh:codeIdentifier "url" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:name "Same As" ;
+        sh:description "Reference URL for the recipe" ;
+        sh:codeIdentifier "sameAs" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:author ;
+        sh:nodeKind sh:BlankNodeOrIRI ;
+        sh:name "Author" ;
+        sh:description "Author of the recipe" ;
+        sh:codeIdentifier "author" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:datePublished ;
+        sh:datatype xsd:date ;
+        sh:name "Date Published" ;
+        sh:description "Publication date of the recipe" ;
+        sh:codeIdentifier "datePublished" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:prepTime ;
+        sh:datatype xsd:string ;
+        sh:name "Preparation Time" ;
+        sh:description "Preparation time in ISO 8601 duration format" ;
+        sh:codeIdentifier "prepTime" ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:cookTime ;
+        sh:datatype xsd:string ;
+        sh:name "Cook Time" ;
+        sh:description "Cooking time in ISO 8601 duration format" ;
+        sh:codeIdentifier "cookTime" ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:totalTime ;
+        sh:datatype xsd:string ;
+        sh:name "Total Time" ;
+        sh:description "Total time required in ISO 8601 duration format" ;
+        sh:codeIdentifier "totalTime" ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:recipeYield ;
+        sh:datatype xsd:string ;
+        sh:name "Yield" ;
+        sh:description "Quantity produced by the recipe" ;
+        sh:codeIdentifier "recipeYield" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:recipeCategory ;
+        sh:datatype xsd:string ;
+        sh:name "Recipe Category" ;
+        sh:description "Category of the recipe such as dessert or main course" ;
+        sh:codeIdentifier "recipeCategory" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:recipeCuisine ;
+        sh:datatype xsd:string ;
+        sh:name "Cuisine" ;
+        sh:description "Cuisine associated with the recipe" ;
+        sh:codeIdentifier "recipeCuisine" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:keywords ;
+        sh:datatype xsd:string ;
+        sh:name "Keywords" ;
+        sh:description "Keywords associated with the recipe" ;
+        sh:codeIdentifier "keywords" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:cookingMethod ;
+        sh:datatype xsd:string ;
+        sh:name "Cooking Method" ;
+        sh:description "Technique used to prepare the recipe" ;
+        sh:codeIdentifier "cookingMethod" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:suitableForDiet ;
+        sh:nodeKind sh:IRI ;
+        sh:name "Suitable Diet" ;
+        sh:description "Dietary suitability classification" ;
+        sh:codeIdentifier "suitableForDiet" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:recipeIngredient ;
+        sh:datatype xsd:string ;
+        sh:name "Ingredient" ;
+        sh:description "Ingredient required for the recipe" ;
+        sh:codeIdentifier "recipeIngredient" ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:recipeInstructions ;
+        sh:node recipe_shape:HowToStepShape ;
+        sh:name "Instructions" ;
+        sh:description "Preparation instructions for the recipe" ;
+        sh:codeIdentifier "recipeInstructions" ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:tool ;
+        sh:datatype xsd:string ;
+        sh:name "Tool" ;
+        sh:description "Tool used to prepare the recipe" ;
+        sh:codeIdentifier "tool" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:supply ;
+        sh:datatype xsd:string ;
+        sh:name "Supply" ;
+        sh:description "Supply needed for preparation" ;
+        sh:codeIdentifier "supply" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:nutrition ;
+        sh:node recipe_shape:NutritionInformationShape ;
+        sh:name "Nutrition" ;
+        sh:description "Nutritional information for the recipe" ;
+        sh:codeIdentifier "nutrition" ;
+    ] .
+
+recipe_shape:HowToStepShape
+    a sh:NodeShape ;
+    sh:name "How To Step" ;
+    sh:description "Single instructional step in a recipe" ;
+    sh:codeIdentifier "HowToStep" ;
+    dct:created "2026-05-08"^^xsd:date ;
+    vs:term_status "testing" ;
+
+    sh:property [
+        sh:path schema:position ;
+        sh:datatype xsd:integer ;
+        sh:name "Position" ;
+        sh:description "Step order in the instructions" ;
+        sh:codeIdentifier "position" ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:text ;
+        sh:datatype xsd:string ;
+        sh:name "Text" ;
+        sh:description "Instructional text for the step" ;
+        sh:codeIdentifier "text" ;
+        sh:minCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path schema:name ;
+        sh:datatype xsd:string ;
+        sh:name "Step Name" ;
+        sh:description "Optional title for the instruction step" ;
+        sh:codeIdentifier "name" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:url ;
+        sh:nodeKind sh:IRI ;
+        sh:name "Step URL" ;
+        sh:description "URL for the instruction step" ;
+        sh:codeIdentifier "url" ;
+    ] .
+
+recipe_shape:NutritionInformationShape
+    a sh:NodeShape ;
+    sh:name "Nutrition Information" ;
+    sh:description "Nutritional values associated with a recipe" ;
+    sh:codeIdentifier "NutritionInformation" ;
+    dct:created "2026-05-08"^^xsd:date ;
+    vs:term_status "testing" ;
+
+    sh:property [
+        sh:path schema:calories ;
+        sh:datatype xsd:string ;
+        sh:name "Calories" ;
+        sh:description "Calories in the recipe" ;
+        sh:codeIdentifier "calories" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:fatContent ;
+        sh:datatype xsd:string ;
+        sh:name "Fat Content" ;
+        sh:description "Amount of fat in the recipe" ;
+        sh:codeIdentifier "fatContent" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:proteinContent ;
+        sh:datatype xsd:string ;
+        sh:name "Protein Content" ;
+        sh:description "Amount of protein in the recipe" ;
+        sh:codeIdentifier "proteinContent" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:carbohydrateContent ;
+        sh:datatype xsd:string ;
+        sh:name "Carbohydrate Content" ;
+        sh:description "Amount of carbohydrates in the recipe" ;
+        sh:codeIdentifier "carbohydrateContent" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:fiberContent ;
+        sh:datatype xsd:string ;
+        sh:name "Fiber Content" ;
+        sh:description "Amount of fiber in the recipe" ;
+        sh:codeIdentifier "fiberContent" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:sugarContent ;
+        sh:datatype xsd:string ;
+        sh:name "Sugar Content" ;
+        sh:description "Amount of sugar in the recipe" ;
+        sh:codeIdentifier "sugarContent" ;
+    ] ;
+
+    sh:property [
+        sh:path schema:sodiumContent ;
+        sh:datatype xsd:string ;
+        sh:name "Sodium Content" ;
+        sh:description "Amount of sodium in the recipe" ;
+        sh:codeIdentifier "sodiumContent" ;
+    ] .
